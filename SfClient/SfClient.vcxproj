@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}</ProjectGuid>
+    <RootNamespace>SfClient</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;" Label="Configuration">
+    <OutputDirectory>..\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>SfClient</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;" Label="Configuration">
+    <OutputDirectory>..\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>SfClient</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">..\bin\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">SfClient</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</IgnoreImportLibrary>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">..\bin\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">SfClient</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>&quot;..\..\..\..\qt4.8.7\include\QtCore&quot;;&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot;;&quot;..\..\..\..\qt4.8.7\include\QtGui&quot;;&quot;..\..\..\..\qt4.8.7\include&quot;;&quot;..\common\include&quot;;&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot;;&quot;debug&quot;;..\..\..\..\qt4.8.7\mkspecs\default;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>f:\qt4.8.7\lib\qtmaind.lib;f:\qt4.8.7\lib\QtGuid4.lib;f:\qt4.8.7\lib\QtNetworkd4.lib;f:\qt4.8.7\lib\QtCored4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>f:\qt4.8.7\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\SfClient.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>&quot;..\..\..\..\qt4.8.7\include\QtCore&quot;;&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot;;&quot;..\..\..\..\qt4.8.7\include\QtGui&quot;;&quot;..\..\..\..\qt4.8.7\include&quot;;&quot;..\common\include&quot;;&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot;;&quot;release&quot;;..\..\..\..\qt4.8.7\mkspecs\default;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>f:\qt4.8.7\lib\qtmain.lib;f:\qt4.8.7\lib\QtGui4.lib;f:\qt4.8.7\lib\QtNetwork4.lib;f:\qt4.8.7\lib\QtCore4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>f:\qt4.8.7\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\SfClient.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="configer.cpp" />
+    <ClCompile Include="gocontroller.cpp" />
+    <ClCompile Include="..\common\include\jsoncpp\json_reader.cpp" />
+    <ClCompile Include="..\common\include\jsoncpp\json_value.cpp" />
+    <ClCompile Include="..\common\include\jsoncpp\json_writer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="qhttpnetwork.cpp" />
+    <ClCompile Include="titlewidget.cpp" />
+    <ClCompile Include="topwidget.cpp" />
+    <ClCompile Include="userlogindlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\include\jsoncpp\autolink.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="..\common\include\jsoncpp\config.h" />
+    <ClInclude Include="configer.h" />
+    <ClInclude Include="..\common\include\jsoncpp\features.h" />
+    <ClInclude Include="..\common\include\jsoncpp\forwards.h" />
+    <ClInclude Include="gocontroller.h" />
+    <ClInclude Include="..\common\include\jsoncpp\json.h" />
+    <ClInclude Include="..\common\include\jsoncpp\json_batchallocator.h" />
+    <CustomBuild Include="mainwindow.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_mainwindow.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;debug&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o debug\moc_mainwindow.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC mainwindow.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_mainwindow.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_mainwindow.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;release&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o release\moc_mainwindow.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC mainwindow.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="qhttpnetwork.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;qhttpnetwork.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;debug&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 qhttpnetwork.h -o debug\moc_qhttpnetwork.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC qhttpnetwork.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem;qhttpnetwork.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;release&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 qhttpnetwork.h -o release\moc_qhttpnetwork.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC qhttpnetwork.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="..\common\include\jsoncpp\reader.h" />
+    <CustomBuild Include="titlewidget.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_titlewidget.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;debug&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o debug\moc_titlewidget.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC titlewidget.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_titlewidget.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_titlewidget.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;release&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o release\moc_titlewidget.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC titlewidget.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_titlewidget.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="topwidget.h" />
+    <CustomBuild Include="userlogindlg.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;userlogindlg.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_userlogindlg.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;debug&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 userlogindlg.h -o debug\moc_userlogindlg.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC userlogindlg.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_userlogindlg.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem;userlogindlg.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_userlogindlg.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; F:\qt4.8.7\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;..\..\..\..\qt4.8.7\include\QtCore&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtNetwork&quot; -I&quot;..\..\..\..\qt4.8.7\include\QtGui&quot; -I&quot;..\..\..\..\qt4.8.7\include&quot; -I&quot;..\common\include&quot; -I&quot;..\..\..\..\qt4.8.7\include\ActiveQt&quot; -I&quot;release&quot; -I..\..\..\..\qt4.8.7\mkspecs\default -D_MSC_VER=1600 -DWIN32 userlogindlg.h -o release\moc_userlogindlg.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC userlogindlg.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_userlogindlg.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="..\common\include\jsoncpp\value.h" />
+    <ClInclude Include="..\common\include\jsoncpp\writer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_qhttpnetwork.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_qhttpnetwork.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_titlewidget.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_titlewidget.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_userlogindlg.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_userlogindlg.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\qrc_sfclient.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\qrc_sfclient.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\btn.png" />
+    <None Include="images\close.png" />
+    <None Include="images\exit.png" />
+    <None Include="images\file.png" />
+    <None Include="images\help.png" />
+    <None Include="images\login.png" />
+    <None Include="images\logo.ico" />
+    <None Include="images\online.png" />
+    <None Include="images\pro.png" />
+    <None Include="images\pwd.png" />
+    <CustomBuild Include="sfclient.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">F:\qt4.8.7\bin\rcc.exe;images\btn.png;images\close.png;images\exit.png;images\file.png;images\help.png;images\login.png;images\logo.ico;images\online.png;images\pro.png;images\pwd.png;images\title.png;images\top.png;images\tray.png;images\upload.png;images\user.png;sfclient.qrc;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">F:\qt4.8.7\bin\rcc.exe -name sfclient sfclient.qrc -o debug\qrc_sfclient.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">RCC sfclient.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\qrc_sfclient.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">F:\qt4.8.7\bin\rcc.exe;images\btn.png;images\close.png;images\exit.png;images\file.png;images\help.png;images\login.png;images\logo.ico;images\online.png;images\pro.png;images\pwd.png;images\title.png;images\top.png;images\tray.png;images\upload.png;images\user.png;sfclient.qrc;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">F:\qt4.8.7\bin\rcc.exe -name sfclient sfclient.qrc -o release\qrc_sfclient.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">RCC sfclient.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\qrc_sfclient.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="images\title.png" />
+    <None Include="images\top.png" />
+    <None Include="images\tray.png" />
+    <None Include="images\upload.png" />
+    <None Include="images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="sfclient.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

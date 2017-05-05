@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SfClient", "SfClient\SfClient.vcxproj", "{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "updater", "Updater\updater.vcxproj", "{9ACE915E-C8B5-3F2D-9428-B557AA016ACF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "telhelper", "Telhelper\telhelper.vcxproj", "{71769144-091F-35BD-B1C0-04618C4A3D6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}.Debug|Win32.Build.0 = Debug|Win32
+		{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}.Release|Win32.ActiveCfg = Release|Win32
+		{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}.Release|Win32.Build.0 = Release|Win32
+		{9ACE915E-C8B5-3F2D-9428-B557AA016ACF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9ACE915E-C8B5-3F2D-9428-B557AA016ACF}.Debug|Win32.Build.0 = Debug|Win32
+		{9ACE915E-C8B5-3F2D-9428-B557AA016ACF}.Release|Win32.ActiveCfg = Release|Win32
+		{9ACE915E-C8B5-3F2D-9428-B557AA016ACF}.Release|Win32.Build.0 = Release|Win32
+		{71769144-091F-35BD-B1C0-04618C4A3D6E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{71769144-091F-35BD-B1C0-04618C4A3D6E}.Debug|Win32.Build.0 = Debug|Win32
+		{71769144-091F-35BD-B1C0-04618C4A3D6E}.Release|Win32.ActiveCfg = Release|Win32
+		{71769144-091F-35BD-B1C0-04618C4A3D6E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

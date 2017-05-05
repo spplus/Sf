@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/file.png</file>
+		<file>images/tray.png</file>
+		<file>images/help.png</file>
+		<file>images/upload.png</file>
+		<file>images/exit.png</file>
+		<file>images/online.png</file>
+		<file>images/pro.png</file>
+		<file>images/user.png</file>
+		<file>images/pwd.png</file>
+		<file>images/top.png</file>
+		<file>images/title.png</file>
+        <file>images/login.png</file>  
+		<file>images/close.png</file>
+		<file>images/btn.png</file>
+		<file>images/logo.ico</file>
+    </qresource>
+</RCC>
