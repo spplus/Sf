@@ -34,6 +34,8 @@ int main(int argc, char *argv[])
 	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 #endif
 
+	a.setStyle(new QPlastiqueStyle);
+
 	QString appDirPath = QApplication::applicationDirPath();
 	
 	//	汉字的转换器
@@ -50,7 +52,7 @@ int main(int argc, char *argv[])
 			a.installTranslator(translator);
 	}
 
-	QFile qss(QCoreApplication::applicationDirPath()+"/style.qss");
+	QFile qss(appDirPath+"/style.qss");
 	qss.open(QFile::ReadOnly);
 	a.setStyleSheet(qss.readAll());
 	qss.close();
@@ -62,6 +64,7 @@ int main(int argc, char *argv[])
 	// 判断是否需要登录
 	QString usr = Configer::instance()->getUser();
 	QString pwd = Configer::instance()->getPwd();
+
 	if (usr.length()>0 && pwd.length()>0)
 	{
 		// 自动登录
@@ -78,14 +81,6 @@ int main(int argc, char *argv[])
 	if (isok)
 	{
 		goto run;
-
-		//// 启动go
-		//GoController::instance()->goRun();
-
-		//win.setVendorData(dlg.m_vendorList);
-		//win.initList();
-		//win.show();
-		
 	}
 	else
 	{
@@ -102,8 +97,8 @@ run:
 	win.setVendorData(dlg.m_vendorList);
 	win.initList();
 	win.show();
+	win.close();
 
-	a.setStyle(new QPlastiqueStyle);
 
     return a.exec();
 }

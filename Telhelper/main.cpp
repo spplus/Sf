@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 			a.installTranslator(translator);
 	}
 
-	QFile qss(QCoreApplication::applicationDirPath()+"/style.qss");
+	QFile qss(appDirPath+"/style.qss");
 	qss.open(QFile::ReadOnly);
 	a.setStyleSheet(qss.readAll());
 	qss.close();

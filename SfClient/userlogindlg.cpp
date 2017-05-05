@@ -113,6 +113,7 @@ void UserLogindlg::closeWin()
 void UserLogindlg::doLogin(QString usr,QString pwd)
 {
 	m_md5pwd = pwd;
+	m_usrAcc = usr;
 
 	QString url = Configer::instance()->getUrl(); 
 	if (url.isEmpty())
@@ -238,7 +239,7 @@ void UserLogindlg::loginResp(QByteArray resp)
 
 		// 保存用户名密码
 		Configer::instance()->setPwd(m_md5pwd);
-		Configer::instance()->setUser(m_userAccount->text());
+		Configer::instance()->setUser(m_usrAcc);
 
 		// 检查是否需要更新
 		if (versionCheck(version.c_str()))

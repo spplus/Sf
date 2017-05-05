@@ -1,10 +1,10 @@
 #include "configer.h"
-
+#include <QCoreApplication>
 Configer* Configer::m_inst = NULL;
 
 Configer::Configer()
 {
-	m_setting = new QSettings("conf.ini", QSettings::IniFormat);
+	m_setting = new QSettings(QCoreApplication::applicationDirPath()+"/conf.ini", QSettings::IniFormat);
 	m_url= m_setting->value("SF/url").toString();
 	m_user = m_setting->value("SF/usr").toString();
 	m_pwd = m_setting->value("SF/pwd").toString();

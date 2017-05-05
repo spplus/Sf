@@ -42,6 +42,7 @@ protected:
 private:
 	bool					m_loginOk;
 	QString					m_md5pwd;
+	QString					m_usrAcc;
 	QPoint					move_point;								//移动的距离
 	bool					mouse_press;								//按下鼠标左键
 	QLineEdit*				m_userAccount;
