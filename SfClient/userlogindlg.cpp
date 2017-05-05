@@ -1,7 +1,7 @@
 ﻿#include <string>
 
 #include "userlogindlg.h"
-#include "qhttpnetwork.h"
+#include "qhttp/qhttpnetwork.h"
 #include "jsoncpp/json.h"
 #include "configer.h"
 #include "topwidget.h"

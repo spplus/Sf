@@ -58,7 +58,7 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="qhttpnetwork.cpp">
+    <ClCompile Include="..\common\include\qhttp\qhttpnetwork.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="titlewidget.cpp">
@@ -102,7 +102,7 @@
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="qhttpnetwork.h">
+    <CustomBuild Include="..\common\include\qhttp\qhttpnetwork.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="..\common\include\jsoncpp\reader.h">

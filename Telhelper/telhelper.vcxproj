@@ -133,15 +133,25 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\include\jsoncpp\json_reader.cpp" />
+    <ClCompile Include="..\common\include\jsoncpp\json_value.cpp" />
+    <ClCompile Include="..\common\include\jsoncpp\json_writer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="mypushbutton.cpp" />
+    <ClCompile Include="..\common\include\qhttp\qhttpnetwork.cpp" />
     <ClCompile Include="titlewidget.cpp" />
     <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\include\bri\BriChipErr.h" />
     <ClInclude Include="..\common\include\bri\BriSDKLib.h" />
+    <ClInclude Include="..\common\include\jsoncpp\autolink.h" />
+    <ClInclude Include="..\common\include\jsoncpp\config.h" />
+    <ClInclude Include="..\common\include\jsoncpp\features.h" />
+    <ClInclude Include="..\common\include\jsoncpp\forwards.h" />
+    <ClInclude Include="..\common\include\jsoncpp\json.h" />
+    <ClInclude Include="..\common\include\jsoncpp\json_batchallocator.h" />
     <CustomBuild Include="mainwindow.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_mainwindow.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;debug&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o debug\moc_mainwindow.cpp</Command>
@@ -162,7 +172,18 @@
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC mypushbutton.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_mypushbutton.cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="..\common\include\qhttp\qhttpnetwork.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">..\common\include\qhttp\qhttpnetwork.h;Rem;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;debug&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o debug\moc_qhttpnetwork.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC ..\common\include\qhttp\qhttpnetwork.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">..\common\include\qhttp\qhttpnetwork.h;Rem;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;release&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o release\moc_qhttpnetwork.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC ..\common\include\qhttp\qhttpnetwork.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="..\common\include\bri\quviccub.h" />
+    <ClInclude Include="..\common\include\jsoncpp\reader.h" />
     <CustomBuild Include="titlewidget.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_titlewidget.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;debug&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o debug\moc_titlewidget.cpp</Command>
@@ -173,6 +194,7 @@
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC titlewidget.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_titlewidget.cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="..\common\include\jsoncpp\value.h" />
     <CustomBuild Include="widget.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;widget.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_widget.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;debug&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 widget.h -o debug\moc_widget.cpp</Command>
@@ -183,6 +205,7 @@
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC widget.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_widget.cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="..\common\include\jsoncpp\writer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug\moc_mainwindow.cpp">
@@ -195,6 +218,12 @@
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="release\moc_mypushbutton.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_qhttpnetwork.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_qhttpnetwork.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="debug\moc_titlewidget.cpp">

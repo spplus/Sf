@@ -1,5 +1,5 @@
 #include "titlewidget.h"
-#include "QhttpNetwork.h"
+#include "qhttp/QhttpNetwork.h"
 #include "gocontroller.h"
 TitleWidget::TitleWidget(QWidget* parent):QDialog(parent)
 {

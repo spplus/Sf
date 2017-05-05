@@ -28,7 +28,14 @@ SOURCES += main.cpp\
     mainwindow.cpp \
 	mypushbutton.cpp \
 	titlewidget.cpp \
-	widget.cpp
+	widget.cpp \
+	../common/include/qhttp/qhttpnetwork.cpp \
+	../common/include/jsoncpp/json_internalarray.inl \
+	../common/include/jsoncpp/json_internalmap.inl \
+	../common/include/jsoncpp/json_reader.cpp \
+	../common/include/jsoncpp/json_value.cpp \
+	../common/include/jsoncpp/json_valueiterator.inl \
+	../common/include/jsoncpp/json_writer.cpp
 	
 HEADERS  += mainwindow.h \
 			../common/include/bri/BriSDKLib.h \
@@ -36,6 +43,16 @@ HEADERS  += mainwindow.h \
 			../common/include/bri/quviccub.h \
 			mypushbutton.h \
 			titlewidget.h \
-			widget.h
+			widget.h \
+			../common/include/qhttp/qhttpnetwork.h \
+			../common/include/jsoncpp/autolink.h \
+			../common/include/jsoncpp/config.h \
+			../common/include/jsoncpp/features.h \
+			../common/include/jsoncpp/forwards.h \
+			../common/include/jsoncpp/json.h \
+			../common/include/jsoncpp/json_batchallocator.h \
+			../common/include/jsoncpp/reader.h \
+			../common/include/jsoncpp/value.h \
+			../common/include/jsoncpp/writer.h
 
 

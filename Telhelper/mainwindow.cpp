@@ -7,13 +7,16 @@
 #include <QCoreApplication>
 #include <QTextCodec>
 #include <QSettings>
-
+#include <QUrl>
+#include "qhttp/qhttpnetwork.h"
+#include "jsoncpp/json.h"
 
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 	m_title = "思方电话助手";
+
 	initWidget();
 	initTray();
 	autoRun();
@@ -27,7 +30,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	setWindowTitle(m_title+"-v"+QCoreApplication::applicationVersion());
 
 	connect(this,SIGNAL(telephoneIn(QString)),this,SLOT(dealIn(QString)));
+	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 
+	m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
 }
 
 
@@ -129,11 +134,59 @@ void MainWindow::dealIn(QString telnum)
 	int idx = telnum.lastIndexOf("=");
 	telnum = telnum.right(telnum.length()-idx-1);
 
-	QString content = "连电号码:"+telnum;
+	m_telnum = telnum;
+
+	QString url = QString("%1tel=%2&serialNo=%3").arg(m_queryUrl).arg(telnum).arg(m_devnum);
+	
+	QString json = QString("{\"tel\":\"%1\",\"serialNo\":\"%2\"}")
+		.arg(telnum)
+		.arg(m_devnum);
+	QByteArray req ;
+	req.append(json);
+	QhttpNetwork::instance()->post(m_queryUrl,req);
+	
+
+	/*QString content = "连电号码:"+telnum;
 
 	QString url = "http://www.baidu.com";
 	m_popuWin.setMsg(m_title,content,url);
-	m_popuWin.showAsQQ();
+	m_popuWin.showAsQQ();*/
+
+
+}
+
+
+void MainWindow::replyData(QByteArray data)
+{
+	QString msg = QString::fromUtf8(data.data());
+	qDebug("%s",msg);
+
+	Json::Reader reader;
+	Json::Value value;
+
+	if(reader.parse(msg.toStdString(),value))
+	{
+
+		string success = value["result"].asString();
+
+		// 判断是否有关联工单
+		if (atoi(success.c_str())>0)
+		{
+			string detailUrl = value["p"].asString();
+			QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
+
+			return;
+		}
+		else
+		{
+			QString content = QString("未查询到连电号码:%1相关工单").arg(m_telnum);
+
+			QString url = "http://www.baidu.com";
+			m_popuWin.setMsg(m_title,content,url);
+			m_popuWin.showAsQQ();
+		}
+
+	}
 }
 
 

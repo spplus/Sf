@@ -7,7 +7,7 @@
 #include <QCoreApplication>
 #include <QTextCodec>
 #include <QSettings>
-#include "QhttpNetwork.h"
+#include "qhttp/QhttpNetwork.h"
 #include "jsoncpp/json.h"
 #include "gocontroller.h"
 #include "titlewidget.h"

@@ -24,7 +24,7 @@ RESOURCES = sfclient.qrc
 RC_FILE=sfclient.rc
 SOURCES += main.cpp\
     mainwindow.cpp \
-	qhttpnetwork.cpp \
+	../common/include/qhttp/qhttpnetwork.cpp \
 	userlogindlg.cpp \
 	configer.cpp \
 	gocontroller.cpp \
@@ -40,7 +40,7 @@ SOURCES += main.cpp\
 
     
 HEADERS  += mainwindow.h \
-			qhttpnetwork.h \
+			../common/include/qhttp/qhttpnetwork.h \
 			userlogindlg.h \
 			common.h \	
 			configer.h \

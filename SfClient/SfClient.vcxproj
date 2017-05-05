@@ -140,7 +140,7 @@
     <ClCompile Include="..\common\include\jsoncpp\json_writer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
-    <ClCompile Include="qhttpnetwork.cpp" />
+    <ClCompile Include="..\common\include\qhttp\qhttpnetwork.cpp" />
     <ClCompile Include="titlewidget.cpp" />
     <ClCompile Include="topwidget.cpp" />
     <ClCompile Include="userlogindlg.cpp" />
@@ -165,14 +165,14 @@
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC mainwindow.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="qhttpnetwork.h">
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem;qhttpnetwork.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;debug&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 qhttpnetwork.h -o debug\moc_qhttpnetwork.cpp</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC qhttpnetwork.h</Message>
+    <CustomBuild Include="..\common\include\qhttp\qhttpnetwork.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">..\common\include\qhttp\qhttpnetwork.h;Rem;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile debug\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;debug&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o debug\moc_qhttpnetwork.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC ..\common\include\qhttp\qhttpnetwork.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem;qhttpnetwork.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;release&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 qhttpnetwork.h -o release\moc_qhttpnetwork.cpp</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC qhttpnetwork.h</Message>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">..\common\include\qhttp\qhttpnetwork.h;Rem;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Rem IncrediBuild_AllowRemote &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; Rem IncrediBuild_OutputFile release\moc_qhttpnetwork.cpp &#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A; $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;..\common\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;release&quot; -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o release\moc_qhttpnetwork.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC ..\common\include\qhttp\qhttpnetwork.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="..\common\include\jsoncpp\reader.h" />

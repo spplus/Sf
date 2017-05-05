@@ -37,6 +37,9 @@ public slots:
 
 	void		sysExit();
 
+	// 数据返回
+	void		replyData(QByteArray data);
+
 	// 处理来电事件
 	void		dealIn(QString telnum);		
 
@@ -56,8 +59,16 @@ private:
 	static BRIINT32	WINAPI ProcEventCallback(BRIINT16 uChannelID,BRIUINT32 dwUserData,BRIINT32	lType,BRIINT32 lHandle,BRIINT32 lResult,BRIINT32 lParam,BRIPCHAR8 pData,BRIPCHAR8 pDataEx);
 
 private:
+
+	// 工单查询URL
+	QString							m_queryUrl;
+
+	// 连电号码
+	QString							m_telnum;
+
 	// 设备序列号
 	BRIINT32						m_devnum;
+
 	Widget							m_popuWin;
 	QString							m_title;
 	QTextEdit*						m_msg;

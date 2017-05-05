@@ -37,6 +37,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\include\jsoncpp\json_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\include\jsoncpp\json_value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\include\jsoncpp\json_writer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,6 +53,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mypushbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\include\qhttp\qhttpnetwork.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="titlewidget.cpp">
@@ -60,21 +72,51 @@
     <ClInclude Include="..\common\include\bri\BriSDKLib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\autolink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\features.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\forwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\json_batchallocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="mypushbutton.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\common\include\qhttp\qhttpnetwork.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="..\common\include\bri\quviccub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\include\jsoncpp\reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="titlewidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="..\common\include\jsoncpp\value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="widget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="..\common\include\jsoncpp\writer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug\moc_mainwindow.cpp">
@@ -87,6 +129,12 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_mypushbutton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_qhttpnetwork.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_qhttpnetwork.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_titlewidget.cpp">
