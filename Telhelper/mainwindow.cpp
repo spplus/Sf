@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(this,SIGNAL(telephoneIn(QString)),this,SLOT(dealIn(QString)));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 
-	m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
+	m_queryUrl = "http://192.168.2.155:8080/a/main/redirect/ajaxTelephoneOrder?";
 }
 
 
@@ -143,7 +143,7 @@ void MainWindow::dealIn(QString telnum)
 		.arg(m_devnum);
 	QByteArray req ;
 	req.append(json);
-	QhttpNetwork::instance()->post(m_queryUrl,req);
+	QhttpNetwork::instance()->post(url,req);
 	
 
 	/*QString content = "连电号码:"+telnum;
@@ -160,17 +160,17 @@ void MainWindow::replyData(QByteArray data)
 {
 	QString msg = QString::fromUtf8(data.data());
 	qDebug("%s",msg);
-
+	//msg = "{\"result\":\"0\"}";
 	Json::Reader reader;
 	Json::Value value;
 
 	if(reader.parse(msg.toStdString(),value))
 	{
 
-		string success = value["result"].asString();
+		int success = value["result"].asInt();
 
 		// 判断是否有关联工单
-		if (atoi(success.c_str())>0)
+		if (success>0)
 		{
 			string detailUrl = value["p"].asString();
 			QDesktopServices::openUrl(QUrl(detailUrl.c_str()));

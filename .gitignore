@@ -53,3 +53,4 @@ Temporary Items
 debug
 release
 *.idb
+*.exe
