@@ -8,6 +8,8 @@ Configer::Configer()
 	m_url= m_setting->value("SF/url").toString();
 	m_user = m_setting->value("SF/usr").toString();
 	m_pwd = m_setting->value("SF/pwd").toString();
+	m_url = "http://sifangerp.com/clsorder/main/redirect/assistantLogin";
+
 }
 
 Configer::~Configer()
