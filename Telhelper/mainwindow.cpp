@@ -20,19 +20,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	initWidget();
 	initTray();
 	autoRun();
-	int w = 800;
-	int h = 500;
+	int w = 300;
+	int h = 200;
 	int x = (QApplication::desktop()->width() - w)/2;
 	int y = (QApplication::desktop()->height() - h)/2;
 	
 	setGeometry(QRect(x,y,w,h));
+	setFixedSize(w,h);
+
 	setWindowIcon(QIcon(":images/tray.png"));
 	setWindowTitle(m_title+"-v"+QCoreApplication::applicationVersion());
 
 	connect(this,SIGNAL(telephoneIn(QString)),this,SLOT(dealIn(QString)));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
-
+	appendInfo("*******欢迎使用"+m_title+"*******");
 	m_queryUrl = "http://192.168.2.155:8080/a/main/redirect/ajaxTelephoneOrder?";
+
+	onOpen();
 }
 
 
@@ -110,7 +114,7 @@ void MainWindow::initWidget()
 
 	m_msg = new QTextEdit;
 	m_msg->setReadOnly(true);
-	vbox->addLayout(hbox);
+	//vbox->addLayout(hbox);
 	vbox->addWidget(m_msg);
 	
 	vbox->setMargin(0);
@@ -145,6 +149,10 @@ void MainWindow::dealIn(QString telnum)
 	req.append(json);
 	QhttpNetwork::instance()->post(url,req);
 	
+	QDateTime dt;
+	QString ctime = dt.currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+	QString msg = QString("[%1]来电号码:%2").arg(ctime).arg(m_telnum);
+	appendInfo(msg);
 
 	/*QString content = "连电号码:"+telnum;
 
@@ -177,14 +185,14 @@ void MainWindow::replyData(QByteArray data)
 
 			return;
 		}
-		else
+		/*else
 		{
 			QString content = QString("未查询到连电号码:%1相关工单").arg(m_telnum);
 
 			QString url = "http://www.baidu.com";
 			m_popuWin.setMsg(m_title,content,url);
 			m_popuWin.showAsQQ();
-		}
+		}*/
 
 	}
 }
@@ -199,12 +207,15 @@ void MainWindow::onOpen()
 	}
 	else if(lRet <= 0 || QNV_DevInfo(0,QNV_DEVINFO_GETCHANNELS) <= 0)
 	{
-		QMessageBox::warning(this,"系统提示","打开设备失败,请检查设备是否已经插入并安装了驱动,并且没有其它程序已经打开设备");
+		appendInfo("打开设备失败,请检查设备是否已经插入并安装了驱动,并且没有其它程序已经打开设备");
+		//QMessageBox::warning(this,"系统提示","打开设备失败,请检查设备是否已经插入并安装了驱动,并且没有其它程序已经打开设备");
 	}
 	else
 	{
 		QString strFileVersion = (char*)QNV_DevInfo(0,QNV_DEVINFO_FILEVERSION);
-		QString strMsg = QString("打开设备成功(2.16/%1) 通道数=%2 设备数=%3").arg(strFileVersion).arg(QNV_DevInfo(0,QNV_DEVINFO_GETCHANNELS)).arg(QNV_DevInfo(0,QNV_DEVINFO_GETCHIPS));
+		//QString strMsg = QString("打开设备成功(2.16/%1) 通道数=%2 设备数=%3").arg(strFileVersion).arg(QNV_DevInfo(0,QNV_DEVINFO_GETCHANNELS)).arg(QNV_DevInfo(0,QNV_DEVINFO_GETCHIPS));
+	
+		QString strMsg = "设备运行正常...";
 		appendInfo(strMsg);
 
 		initDevinfo();
@@ -249,7 +260,7 @@ void MainWindow::initDevinfo()
 			.arg(QNV_DevInfo(i,QNV_DEVINFO_GETCHIPTYPE))
 			.arg(getModule(i));
 			
-		appendInfo(str);
+		//appendInfo(str);
 	}
 }
 
@@ -354,7 +365,7 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 {
 		int m_nChannelID = pEvent->uChannelID;
 
-		QString str,strValue = QString("Handle=%1 Result=%2 Data=%3").arg(pEvent->lEventHandle).arg(pEvent->lResult).arg(pEvent->szData);
+		QString str,err,strValue = QString("Handle=%1 Result=%2 Data=%3").arg(pEvent->lEventHandle).arg(pEvent->lResult).arg(pEvent->szData);
 		switch(pEvent->lEventType)
 		{
 		case BriEvent_PhoneHook:
@@ -403,22 +414,22 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 				
 				if(pEvent->lResult & CHECKLINE_MASK_REV)
 				{
-					str = QString("通道%1: [ok]***线路LINE口/PHONE口未接反***----------------------").arg(m_nChannelID+1);					
+					err = QString("通道%1: [ok]***线路LINE口/PHONE口未接反***----------------------").arg(m_nChannelID+1);					
 				}
 				else
 				{
-					str = QString("通道%1: [err]线路LINE口/PHONE口可能接反了").arg(m_nChannelID+1);
+					err = QString("通道%1: [err]线路LINE口/PHONE口可能接反了").arg(m_nChannelID+1);
 					
 				}
 			}break;
 		case BriEvent_DevErr:
 			{
-				str = QString("通道%1: 设备发生错误！原因=%2(%3/%4) %5").arg(m_nChannelID+1).arg(getDevErrStr(pEvent->lResult)).arg((atol(pEvent->szData)&0xFF00)>>8).arg((atol(pEvent->szData)&0xFF)).arg(strValue);				
+				err = QString("通道%1: 设备发生错误！原因=%2(%3/%4) %5").arg(m_nChannelID+1).arg(getDevErrStr(pEvent->lResult)).arg((atol(pEvent->szData)&0xFF00)>>8).arg((atol(pEvent->szData)&0xFF)).arg(strValue);				
 				
 			}break;
 		case BriEvent_PlugOut:
 			{
-				str = QString("通道%1: 设备被拔掉").arg(m_nChannelID+1);				
+				err = QString("通道%1: 设备被拔掉").arg(m_nChannelID+1);				
 			}break;
 		
 	
@@ -428,9 +439,9 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 				str = QString("通道%1: 其它忽略事件 eventid=%2 lResult=%3 szData=%4").arg(m_nChannelID+1).arg(pEvent->lEventType).arg(pEvent->lResult).arg(pEvent->szData);
 			}break;
 		}
-		if(!str.isEmpty())
+		if(!err.isEmpty())
 		{
-			appendInfo(str);
+			appendInfo(err);
 		}
 		
 		return 1;
