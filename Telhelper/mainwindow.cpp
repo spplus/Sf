@@ -178,11 +178,13 @@ void MainWindow::replyData(QByteArray data)
 		int success = value["result"].asInt();
 
 		// 判断是否有关联工单
-		if (success>0)
+		//if (success>0)
 		{
 			string detailUrl = value["p"].asString();
-			QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
-
+			if (detailUrl.length()>0)
+			{
+				QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
+			}
 			return;
 		}
 		/*else
