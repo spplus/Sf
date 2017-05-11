@@ -20,8 +20,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	initWidget();
 	initTray();
 	autoRun();
-	int w = 550;
-	int h = 600;
+	int w = 450;
+	int h = 380;
 	int x = (QApplication::desktop()->width() - w)/2;
 	int y = (QApplication::desktop()->height() - h)/2;
 	
@@ -118,7 +118,9 @@ void MainWindow::initWidget()
 	QPushButton* closeBtn = new QPushButton("关闭");
 
 	QLabel *bk = new QLabel;
-	bk->setPixmap(QPixmap(":/images/bk.png"));
+	QPixmap* pix = new QPixmap(":/images/bk.png");
+	
+	bk->setPixmap(*pix);
 	//hbox->addWidget(openBtn);
 	//hbox->addWidget(closeBtn);
 	QLabel* webname = new QLabel;
