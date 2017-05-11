@@ -34,7 +34,7 @@ signals:
 public slots:
 	void		onOpen();
 	void		onClose();
-
+	void		openUrl(QString url);
 	void		sysExit();
 
 	// 数据返回

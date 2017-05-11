@@ -15,13 +15,13 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-	m_title = "思方电话助手";
+	m_title = "思方来电助手";
 
 	initWidget();
 	initTray();
 	autoRun();
-	int w = 300;
-	int h = 200;
+	int w = 550;
+	int h = 600;
 	int x = (QApplication::desktop()->width() - w)/2;
 	int y = (QApplication::desktop()->height() - h)/2;
 	
@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	m_queryUrl = "http://192.168.2.155:8080/a/main/redirect/ajaxTelephoneOrder?";
 
 	onOpen();
+	setWindowFlags(Qt::WindowCloseButtonHint);
 }
 
 
@@ -91,7 +92,7 @@ void MainWindow::initTray()
 
 void MainWindow::sysExit()
 {
-	int  ret = QMessageBox::question(this,m_title,"是否确定退出思方电话助手?",QMessageBox::Yes|QMessageBox::No);
+	int  ret = QMessageBox::question(this,m_title,"是否确定退出"+m_title+"?",QMessageBox::Yes|QMessageBox::No);
 	if (ret == QMessageBox::Yes)
 	{
 		onClose();
@@ -103,25 +104,62 @@ void MainWindow::sysExit()
 void MainWindow::initWidget()
 {
 
+	QVBoxLayout* upbox = new QVBoxLayout;
+	QVBoxLayout* downbox = new QVBoxLayout;
+
 	QVBoxLayout* vbox = new QVBoxLayout;
+	QGroupBox* gb = new QGroupBox;
+	
 	QHBoxLayout* hbox = new QHBoxLayout;
+	QHBoxLayout* webhbox = new QHBoxLayout;
+	QHBoxLayout* qqhbox = new QHBoxLayout;
+
 	QPushButton* openBtn = new QPushButton("打开");
 	QPushButton* closeBtn = new QPushButton("关闭");
 
-	hbox->addWidget(openBtn);
-	hbox->addWidget(closeBtn);
+	QLabel *bk = new QLabel;
+	bk->setPixmap(QPixmap(":/images/bk.png"));
+	//hbox->addWidget(openBtn);
+	//hbox->addWidget(closeBtn);
+	QLabel* webname = new QLabel;
+	webname->setText("官网：");
+	QLabel* website = new QLabel;
+	website->setText(QString::fromLocal8Bit("<style> a {text-decoration: none};</style><a style='color: green;' href = www.sifangerp.com>www.sifangerp.com</a>"));
+	
+	QLabel* qq = new QLabel;
+	qq->setText("QQ:387808217 或者 2997231847");
+	qqhbox->addWidget(qq);
+	
 	hbox->addStretch();
+	hbox->addWidget(bk);
+	hbox->addStretch();
+	
+	webhbox->addWidget(webname);
+	webhbox->addWidget(website);
+	webhbox->addStretch();
+	
 
 	m_msg = new QTextEdit;
 	m_msg->setReadOnly(true);
-	//vbox->addLayout(hbox);
-	vbox->addWidget(m_msg);
 	
-	vbox->setMargin(0);
+	upbox->addLayout(hbox);
+	upbox->addLayout(webhbox);
+	upbox->addLayout(qqhbox);
+	gb->setLayout(upbox);
+
+	QGroupBox* devInf = new QGroupBox;
+	devInf->setTitle("设备信息");
+	downbox->addWidget(m_msg);
+	devInf->setLayout(downbox);
+
+	vbox->addWidget(gb);
+	vbox->addWidget(devInf);
+	vbox->setContentsMargins(20,10,20,5);
 	QWidget *centralWidget = new QWidget;
 	centralWidget->setLayout(vbox);
 	setCentralWidget(centralWidget);
 
+	connect(website,SIGNAL(linkActivated(QString)),this,SLOT(openUrl(QString))); 
 	connect(openBtn,SIGNAL(pressed()),this,SLOT(onOpen()));
 	connect(closeBtn,SIGNAL(pressed()),this,SLOT(onClose()));
 }
@@ -131,6 +169,12 @@ void MainWindow::initWidget()
 MainWindow::~MainWindow()
 {
 	onClose();
+}
+
+
+void MainWindow::openUrl(QString url)
+{
+	QDesktopServices::openUrl(QUrl(url));
 }
 
 void MainWindow::dealIn(QString telnum)
