@@ -7,16 +7,24 @@
 #include "userlogindlg.h"
 #include "gocontroller.h"
 #include "configer.h"
+#include <Windows.h>
 
+bool checkOnly();
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+	//检查程序是否 已经启动过  
+	if(checkOnly()==false) 
+	{
+		return 0;  
+	}
+
 	QApplication::addLibraryPath("./plugins");
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion("1.0.5");
+	QCoreApplication::setApplicationVersion("1.0.6");
 
 #ifdef WIN32
 	// 设置编码
@@ -101,4 +109,22 @@ run:
 
 
     return a.exec();
+}
+
+
+
+bool checkOnly()  
+{  
+	//  创建互斥量  
+	HANDLE m_hMutex  =  CreateMutex(NULL, FALSE,  L"sfclient" );  
+	//  检查错误代码  
+	if  (GetLastError()  ==  ERROR_ALREADY_EXISTS)  {  
+		//  如果已有互斥量存在则释放句柄并复位互斥量  
+		CloseHandle(m_hMutex);  
+		m_hMutex  =  NULL;  
+		//  程序退出  
+		return  false;  
+	}  
+	else  
+		return true;  
 }
