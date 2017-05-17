@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	QApplication::addLibraryPath("./plugins");
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion("1.0.6");
+	QCoreApplication::setApplicationVersion("1.0.7");
 
 #ifdef WIN32
 	// 设置编码
