@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	a.setStyle(new QPlastiqueStyle);
 
 	QString appDirPath = QApplication::applicationDirPath();
-	
+
 	//	汉字的转换器
 	QString translatorPath = appDirPath;
 
@@ -100,7 +100,7 @@ go:
 
 run:
 	// 启动go
-	GoController::instance()->goRun();
+	GoController::instance()->goRun(appDirPath);
 
 	win.setVendorData(dlg.m_vendorList);
 	win.initList();
