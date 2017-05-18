@@ -41,6 +41,7 @@ void MainWindow::initWidget()
 	TitleWidget * title = new TitleWidget();
 
 	m_table = new QTableWidget;
+	m_table->setEditTriggers ( QAbstractItemView::NoEditTriggers );
 	m_table->setColumnCount(3);
 	QStringList headers;
 	headers<<"厂家"<<"账号"<<"状态";
