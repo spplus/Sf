@@ -42,6 +42,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.db
+*.exe
 *.lock
 *.log
 *.ilk
@@ -53,4 +54,6 @@ Temporary Items
 debug
 release
 *.idb
+*.exe
+*.exe
 *.exe

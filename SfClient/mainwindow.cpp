@@ -41,6 +41,7 @@ void MainWindow::initWidget()
 	TitleWidget * title = new TitleWidget();
 
 	m_table = new QTableWidget;
+	m_table->setEditTriggers ( QAbstractItemView::NoEditTriggers );
 	m_table->setColumnCount(3);
 	QStringList headers;
 	headers<<"厂家"<<"账号"<<"状态";
@@ -73,7 +74,7 @@ void MainWindow::initList()
 		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorLoginName));
 
 		m_table->setItem(i,col,new QTableWidgetItem("未知"));
-
+		
 		checkLogin(vend);
 	}
 }
@@ -147,13 +148,23 @@ void MainWindow::replyData(QByteArray data)
 			return;
 		}
 
+		QString loginStatus;
+		if (success == "true")
+		{
+			loginStatus = "登录成功";
+		}
+		else
+		{
+			loginStatus = "登录失败";
+		}
+
 		string user = value["user"].asString();
-		updateLoginState(user.c_str());
+		updateLoginState(user.c_str(),loginStatus);
 
 	}
 }
 
-void MainWindow::updateLoginState(QString user)
+void MainWindow::updateLoginState(QString user,QString status)
 {
 	for (int i = 0;i<m_table->rowCount();i++)
 	{
@@ -161,7 +172,7 @@ void MainWindow::updateLoginState(QString user)
 		if (itemUser->text() == user)
 		{
 			QTableWidgetItem* itemState = m_table->item(i,2);
-			itemState->setText("已登录");
+			itemState->setText(status);
 		}
 	}
 }
