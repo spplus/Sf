@@ -47,7 +47,7 @@ private:
 	void		initTray();
 	void		autoRun(bool bAutoRun = true);
 	void		checkLogin(Vendors* vend);
-	void		updateLoginState(QString user);
+	void		updateLoginState(QString user,QString status);
 	QToolButton*	tbFactory(QString btnName);
 private:
 
