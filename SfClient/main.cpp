@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	QApplication::addLibraryPath("./plugins");
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion("1.0.6");
+	QCoreApplication::setApplicationVersion("1.0.7");
 
 #ifdef WIN32
 	// 设置编码
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	a.setStyle(new QPlastiqueStyle);
 
 	QString appDirPath = QApplication::applicationDirPath();
-	
+
 	//	汉字的转换器
 	QString translatorPath = appDirPath;
 
@@ -100,7 +100,7 @@ go:
 
 run:
 	// 启动go
-	GoController::instance()->goRun();
+	GoController::instance()->goRun(appDirPath);
 
 	win.setVendorData(dlg.m_vendorList);
 	win.initList();

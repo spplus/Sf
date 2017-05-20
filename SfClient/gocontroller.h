@@ -7,7 +7,7 @@ class GoController
 {
 public:
 	static GoController*		instance();
-	void						goRun();
+	void						goRun(QString path);
 	void						goExit();
 private:
 	GoController();
