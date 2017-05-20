@@ -148,14 +148,14 @@ void MainWindow::replyData(QByteArray data)
 			return;
 		}
 
-		QString loginStatus;
+		int loginStatus;
 		if (success == "true")
 		{
-			loginStatus = "登录成功";
+			loginStatus = 1;
 		}
 		else
 		{
-			loginStatus = "登录失败";
+			loginStatus = 0;
 		}
 
 		string user = value["user"].asString();
@@ -164,15 +164,28 @@ void MainWindow::replyData(QByteArray data)
 	}
 }
 
-void MainWindow::updateLoginState(QString user,QString status)
+void MainWindow::updateLoginState(QString user,int status)
 {
+
 	for (int i = 0;i<m_table->rowCount();i++)
 	{
 		QTableWidgetItem* itemUser = m_table->item(i,1);
 		if (itemUser->text() == user)
 		{
 			QTableWidgetItem* itemState = m_table->item(i,2);
-			itemState->setText(status);
+			
+			
+			if (status == 1)
+			{
+				itemState->setText("登陆成功");
+				itemState->setTextColor(Qt::green);
+			}
+			else
+			{
+				itemState->setText("登陆失败");
+				itemState->setTextColor(Qt::red);
+			}
+			
 		}
 	}
 }
