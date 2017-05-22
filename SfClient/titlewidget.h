@@ -2,6 +2,9 @@
 #define __TITLEWIDGET_H__
 
 #include <QtGui>
+#include <Phonon/MediaObject>
+#include <Phonon/MediaSource>
+#include <Phonon/AudioOutput>
 
 class TitleWidget	:public QDialog
 {

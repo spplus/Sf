@@ -15,7 +15,7 @@ QMAKE_RCC=$$(QTDIR)/bin/rcc.exe
 
 INCLUDEPATH += ../common/include
 
-QT += core gui widgets network
+QT += core gui widgets network phonon
 #CONFIG += console
 
 TARGET = ../../bin/SfClient

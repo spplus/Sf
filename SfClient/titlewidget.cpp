@@ -90,6 +90,17 @@ void TitleWidget::onlineHelp()
 void TitleWidget::uploadFile()
 {
 
+	Phonon::MediaObject *mediaObject = new Phonon::MediaObject(this);
+	Phonon::AudioOutput *audioOutput =
+		new Phonon::AudioOutput(Phonon::VideoCategory, this);
+	Phonon::createPath(mediaObject, audioOutput);
+	Phonon::MediaSource source("sound/tip.mp3");
+	
+		
+	mediaObject->setCurrentSource(source);
+	mediaObject->play();
+
+	
 }
 
 void TitleWidget::sysExit()
