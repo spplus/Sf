@@ -180,6 +180,8 @@ void UserLogindlg::loginResp(QByteArray resp)
 			return;
 		}
 		string siteId = value["siteId"].asString();
+		Configer::instance()->setSiteId(siteId.c_str());
+
 		string siteName = value["siteName"].asString();
 		status = value["status"].asString();
 		updateurl = value["updateUrl"].asString();

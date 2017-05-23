@@ -55,6 +55,5 @@ debug
 release
 *.idb
 *.exe
-*.exe
-*.exe
-*.exe
+*.settings
+target

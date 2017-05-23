@@ -30,6 +30,7 @@ SOURCES += main.cpp\
 	gocontroller.cpp \
 	topwidget.cpp \
 	titlewidget.cpp \
+	netclient.cpp \
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
 	../common/include/jsoncpp/json_reader.cpp \
@@ -47,6 +48,7 @@ HEADERS  += mainwindow.h \
 			gocontroller.h \
 			topwidget.h \
 			titlewidget.h \
+			netclient.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \
 			../common/include/jsoncpp/features.h \

@@ -11,6 +11,9 @@
 #include "jsoncpp/json.h"
 #include "gocontroller.h"
 #include "titlewidget.h"
+#include "netclient.h"
+#include "configer.h"
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
@@ -19,7 +22,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	
 	initWidget();
 	initTray();
-	
+	initMedia();
+
 	autoRun();
 	int w = 800;
 	int h = 500;
@@ -30,6 +34,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	setWindowIcon(QIcon(":images/tray.png"));
 	setWindowTitle(m_title+"-v"+QCoreApplication::applicationVersion());
 
+	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
+	NetClient::instance()->init();
+
+	
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 }
 
@@ -59,6 +67,13 @@ void MainWindow::initWidget()
 	QWidget *centralWidget = new QWidget;
 	centralWidget->setLayout(vbox);
 	setCentralWidget(centralWidget);
+	m_status = new QLabel;
+	
+	m_status->setFrameStyle( QFrame::NoFrame); // 无边框
+	m_status->setLineWidth(0);
+	m_status->setText("未知");
+	statusBar()->addWidget(m_status);
+	this->statusBar()->show();
 }
 
 void MainWindow::initList()
@@ -105,7 +120,17 @@ void MainWindow::setVendorData(QList<Vendors*> vendorList)
 
 MainWindow::~MainWindow()
 {
-	
+	if (m_mediaObject != NULL)
+	{
+		m_mediaObject->clear();
+		delete m_mediaObject;
+		m_mediaObject = NULL;
+	}
+	if (m_audioOutput != NULL)
+	{
+		delete m_audioOutput;
+		m_audioOutput = NULL;
+	}
 }
 
 
@@ -271,4 +296,57 @@ void MainWindow::autoRun(bool bAutoRun)
 		reg.setValue("sfclient","");
 	}
 
+}
+
+void MainWindow::initMedia()
+{
+	m_mediaObject = new Phonon::MediaObject(this);
+	m_audioOutput =
+		new Phonon::AudioOutput(Phonon::VideoCategory, this);
+	Phonon::createPath(m_mediaObject, m_audioOutput);
+	Phonon::MediaSource source("sound/tip.mp3");
+	m_mediaObject->setCurrentSource(source);
+}
+
+void MainWindow::sendReg()
+{
+	Json::Value root;
+	Json::FastWriter writer;
+	Json::Value person;
+
+	/*
+	{
+	"userName":"abc",
+	"siteId":"abcdefg"
+	}
+	*/
+
+	person["userName"] = Configer::instance()->getUser().toStdString();
+	person["siteId"] = Configer::instance()->getSiteId().toStdString();
+	root.append(person);
+
+	std::string json_file = writer.write(root);
+
+	NetClient::instance()->sendData(SF_CMD_REG,json_file.c_str(),json_file.length());
+}
+
+void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
+{
+	switch (msgtype)
+	{
+	case SF_CMD_CONNECTED:
+		m_status->setText("成功连接服务器");
+		sendReg();
+
+		break;
+	case SF_CMD_DISCONNECTED:
+		m_status->setText("服务器连接中断");
+		break;
+
+	case SF_CMD_PLAY_SOUND:
+		m_mediaObject->play();
+		break;
+	default:
+		break;
+	}
 }

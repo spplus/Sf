@@ -9,6 +9,7 @@
 #include "configer.h"
 #include <Windows.h>
 
+
 bool checkOnly();
 
 int main(int argc, char *argv[])

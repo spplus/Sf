@@ -9,6 +9,10 @@
 #include <QSplitter>
 #include <qtimer.h>
 #include <QtGui>
+#include <Phonon/MediaObject>
+#include <Phonon/MediaSource>
+#include <Phonon/AudioOutput>
+
 #include "common.h"
 
 class MainWindow : public QMainWindow
@@ -35,36 +39,36 @@ public slots:
 	// 数据返回
 	void		replyData(QByteArray data);
 
+
+	// TCP服务器数据返回
+	void		recvdata(int msgtype,const char* msg,int msglength);
+
 	//对托盘图标操作的槽：本代码实现单机图标恢复窗口功能 
 	void		trayIconAction(QSystemTrayIcon::ActivationReason reason);
 private:
 	void		initWidget();
-	//void		initToolBar();
-	
-	//void		initActions();
-	//void		initConnections();
-	//void		initMenu();
 	void		initTray();
+	void		initMedia();
+
+	// 发送注册信息
+	void		sendReg();
 	void		autoRun(bool bAutoRun = true);
 	void		checkLogin(Vendors* vend);
 	void		updateLoginState(QString user,int status);
 	QToolButton*	tbFactory(QString btnName);
 private:
 
+	QLabel*							m_status;
 	QString							m_title;
-	/*QMenu*							m_fileMenu;
-	QMenu*							m_helpMenu;
-    QToolBar*						m_toolBar;
-	QAction*						m_uploadLog;
-	QAction*						m_exitAct;
-	QAction*						m_onlineHelpAct;
-	QAction*						m_authProAct;*/
 	QTableWidget*					m_table;
 	QSystemTrayIcon *				m_tray;		//托盘图标  
 	QMenu *							m_tryMenu;	//托盘菜单  
 	QAction *						m_reset;	//菜单实现功能：恢复窗口  
 	QAction *						m_quit;		//菜单实现功能：退出程序  
 	QList<Vendors*>					m_vendorList;
+
+	Phonon::MediaObject *			m_mediaObject;
+	Phonon::AudioOutput *			m_audioOutput;
 };
 
 #endif // MAINWINDOW_H

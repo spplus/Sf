@@ -50,3 +50,13 @@ void Configer::setUser(QString user)
 {
 	m_setting->setValue("/SF/usr",user);
 }
+
+void Configer::setSiteId(QString siteid)
+{
+	m_setting->setValue("/SF/site",siteid);
+}
+
+QString Configer::getSiteId()
+{
+	return m_setting->value("SF/site").toString();
+}

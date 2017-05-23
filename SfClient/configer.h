@@ -13,6 +13,8 @@ public:
 	QString		getPwd();
 	void		setUser(QString user);
 	void		setPwd(QString pwd);
+	void		setSiteId(QString siteid);
+	QString		getSiteId();
 private:
 	Configer();
 private:
