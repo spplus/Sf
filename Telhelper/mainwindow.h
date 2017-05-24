@@ -73,7 +73,7 @@ private:
 	// 工单查询URL
 	QString							m_queryUrl;
 
-	// 连电号码
+	// 来电号码
 	QString							m_telnum;
 
 	// 设备序列号

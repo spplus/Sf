@@ -581,7 +581,7 @@ void MainWindow::startRecAudio()
 {
 	mkdir();
 
-	QString filename = m_audioDir+"/"+getCurDateTime("yyyyMMddhhmmss")+".wav";
+	QString filename = m_audioDir+"/"+getCurDateTime("yyyyMMddhhmmss")+"-"+m_telnum+".wav";
 
 	DWORD dwMask=0;
 	m_lRecFileHandle = QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_START,BRI_WAV_FORMAT_DEFAULT,dwMask,(char*)(filename.toStdString().c_str()));		
@@ -594,8 +594,6 @@ void MainWindow::startRecAudio()
 		long lVolume=100;//设置音量,默认为100,200表示放大一倍,0表示静音,建议该设备不要跟自动增益控制一起使用
 		QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_SETVOLUME,m_lRecFileHandle,lVolume,NULL);
 		QString str = QString("开始录音...");
-		appendInfo(str);
-		str = QString("生成录音文件:%1").arg(filename);
 		appendInfo(str);
 	}
 }
