@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方来电助手"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "思方软件科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "telhelper.exe"
@@ -20,6 +20,7 @@
 #define ZHCN        "qt_zh_CN.qm"
 #define BRIDGE      "bridge.dll"
 #define QNVICCUB    "qnviccub.dll"
+#define WEBKIT      "QtWebKit4.dll"
 
 
 
@@ -61,6 +62,7 @@ Source: {#APP_PATH}{#CORE}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#GUI}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#NETWORK}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#ZHCN}; DestDir: "{app}"; Flags: ignoreversion
+Source: {#APP_PATH}{#WEBKIT}; DestDir: "{app}"; Flags: ignoreversion
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 
