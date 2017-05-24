@@ -4,6 +4,7 @@
 		<file>images/tray.png</file>
 		<file>images/close.png</file>
 		<file>images/look.png</file>
+		<file>images/open.png</file>
     <file>images/bk.png</file>  
       
     </qresource>

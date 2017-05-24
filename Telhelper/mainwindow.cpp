@@ -36,7 +36,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	appendInfo("*******欢迎使用"+m_title+"*******");
 	m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
 
+	mkdir();
+
 	onOpen();
+	m_webView.setWindowTitle(m_title);
+	m_webView.setWindowIcon(QIcon(":images/tray.png"));
 	setWindowFlags(Qt::WindowCloseButtonHint);
 }
 
@@ -128,9 +132,16 @@ void MainWindow::initWidget()
 	QLabel* website = new QLabel;
 	website->setText(QString::fromLocal8Bit("<style> a {text-decoration: none};</style><a style='color: green;' href = www.sifangerp.com>www.sifangerp.com</a>"));
 	
+	QToolButton * openAudioDirBtn = new QToolButton;
+	openAudioDirBtn->setText("打开录音文件目录");
+	openAudioDirBtn->setIcon(QIcon(":/images/open.png"));
+	openAudioDirBtn->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+	openAudioDirBtn->setAutoRaise(true);
 	QLabel* qq = new QLabel;
 	qq->setText("QQ:387808217 或者 2997231847");
 	qqhbox->addWidget(qq);
+	qqhbox->addStretch();
+	qqhbox->addWidget(openAudioDirBtn);
 	
 	hbox->addStretch();
 	hbox->addWidget(bk);
@@ -164,6 +175,7 @@ void MainWindow::initWidget()
 	connect(website,SIGNAL(linkActivated(QString)),this,SLOT(openUrl(QString))); 
 	connect(openBtn,SIGNAL(pressed()),this,SLOT(onOpen()));
 	connect(closeBtn,SIGNAL(pressed()),this,SLOT(onClose()));
+	connect(openAudioDirBtn,SIGNAL(pressed()),this,SLOT(openAudioDir()));
 }
 
 
@@ -173,12 +185,21 @@ MainWindow::~MainWindow()
 	onClose();
 }
 
+void MainWindow::openAudioDir()
+{
+	QDesktopServices::openUrl(QUrl(m_audioDir, QUrl::TolerantMode));
+}
 
 void MainWindow::openUrl(QString url)
 {
 	QDesktopServices::openUrl(QUrl(url));
 }
-
+QString MainWindow::getCurDateTime(QString fmt/* ="yyyy-MM-dd hh:mm:ss" */)
+{
+	QDateTime dt;
+	QString ctime = dt.currentDateTime().toString(fmt);
+	return ctime;
+}
 void MainWindow::dealIn(QString telnum)
 {
 	int idx = telnum.lastIndexOf("=");
@@ -196,7 +217,7 @@ void MainWindow::dealIn(QString telnum)
 	QhttpNetwork::instance()->post(url,req);
 	
 	QDateTime dt;
-	QString ctime = dt.currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+	QString ctime = getCurDateTime();
 	QString msg = QString("[%1]来电号码:%2").arg(ctime).arg(m_telnum);
 	appendInfo(msg);
 
@@ -229,7 +250,9 @@ void MainWindow::replyData(QByteArray data)
 			string detailUrl = value["p"].asString();
 			if (detailUrl.length()>0)
 			{
-				QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
+				m_webView.load(QUrl(detailUrl.c_str()));
+				m_webView.show();
+				//QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
 			}
 			return;
 		}
@@ -411,7 +434,7 @@ BRIINT32	WINAPI MainWindow::ProcEventCallback(BRIINT16 uChannelID,BRIUINT32 dwUs
 
 long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 {
-		int m_nChannelID = pEvent->uChannelID;
+		m_nChannelID = pEvent->uChannelID;
 
 		QString str,err,strValue = QString("Handle=%1 Result=%2 Data=%3").arg(pEvent->lEventHandle).arg(pEvent->lResult).arg(pEvent->szData);
 		switch(pEvent->lEventType)
@@ -419,10 +442,18 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 		case BriEvent_PhoneHook:
 			{
 				str = QString("通道%1: 电话机摘机").arg(m_nChannelID+1);
+
+				// 开始录音
+				startRecAudio();
+
 			}break;
 		case BriEvent_PhoneHang:
 			{
 				str = QString("通道%1: 电话机挂机").arg(m_nChannelID+1);
+
+				// 停止录音
+				stopRecAudio();
+
 			}break;
 		case BriEvent_CallIn:
 			str = QString("通道%1: 来电响铃 %2").arg(m_nChannelID+1).arg(strValue);
@@ -533,4 +564,57 @@ void MainWindow::autoRun(bool bAutoRun)
 		reg.setValue("telhelper","");
 	}
 
+}
+
+void MainWindow::mkdir()
+{
+	m_audioDir = QCoreApplication::applicationDirPath()+"/recordfile";
+	QDir directory( m_audioDir );
+
+	if( !directory.exists() )//没有此文件夹，则创建
+	{
+		directory.mkpath( m_audioDir );
+	}
+}
+
+void MainWindow::startRecAudio()
+{
+	mkdir();
+
+	QString filename = m_audioDir+"/"+getCurDateTime("yyyyMMddhhmmss")+".wav";
+
+	DWORD dwMask=0;
+	m_lRecFileHandle = QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_START,BRI_WAV_FORMAT_DEFAULT,dwMask,(char*)(filename.toStdString().c_str()));		
+	if(m_lRecFileHandle <= 0)
+	{
+		QString str = QString("录音失败 errid=%1").arg(m_lRecFileHandle);
+		appendInfo(str);
+	}else
+	{
+		long lVolume=100;//设置音量,默认为100,200表示放大一倍,0表示静音,建议该设备不要跟自动增益控制一起使用
+		QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_SETVOLUME,m_lRecFileHandle,lVolume,NULL);
+		QString str = QString("开始录音...");
+		appendInfo(str);
+		str = QString("生成录音文件:%1").arg(filename);
+		appendInfo(str);
+	}
+}
+
+void MainWindow::stopRecAudio()
+{
+	long lElapse=0;
+	if(m_lRecFileHandle > 0)
+	{
+		char szPath[_MAX_PATH]={0};
+		QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_PATH,m_lRecFileHandle,_MAX_PATH,szPath);
+		lElapse = QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_ELAPSE,m_lRecFileHandle,0,NULL);
+		if(QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_STOP,m_lRecFileHandle,0,"") <= 0)//c:\\a.wav//停止录音，并且把文件重新保存到为c:\\a.wav,删除原来路径的文件
+		{
+			appendInfo("停止录音错误");
+		}
+		
+		m_lRecFileHandle = -1;
+		QString str = QString("停止录音 时长=%1秒 路径=%2").arg(lElapse).arg(szPath);
+		appendInfo(str);
+	}
 }

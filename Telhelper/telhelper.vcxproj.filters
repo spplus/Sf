@@ -157,6 +157,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="images\bk.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="images\close.png">
       <Filter>Resource Files</Filter>
     </None>
@@ -164,6 +167,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="images\look.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\open.png">
       <Filter>Resource Files</Filter>
     </None>
     <CustomBuild Include="telhelper.qrc">

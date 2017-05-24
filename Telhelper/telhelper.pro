@@ -17,7 +17,7 @@ LIBS += -lqnviccub -L../common/lib
 
 INCLUDEPATH += ../common/include
 
-QT += core gui widgets network
+QT += core gui widgets network webkit
 #CONFIG += console
 
 TARGET = ../../bin/telhelper

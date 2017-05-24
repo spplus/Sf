@@ -9,6 +9,7 @@
 #include <QSplitter>
 #include <qtimer.h>
 #include <QtGui>
+#include <QWebView>
 #include "widget.h"
 #include "bri/quviccub.h"
 #include "bri/BriChipErr.h"
@@ -37,6 +38,8 @@ public slots:
 	void		openUrl(QString url);
 	void		sysExit();
 
+	void		openAudioDir();
+
 	// 数据返回
 	void		replyData(QByteArray data);
 
@@ -46,12 +49,16 @@ public slots:
 	//对托盘图标操作的槽：本代码实现单机图标恢复窗口功能 
 	void		trayIconAction(QSystemTrayIcon::ActivationReason reason);
 private:
+	void		mkdir();
+	void		startRecAudio();
+	void		stopRecAudio();
 	void		autoRun(bool bAutoRun = true);
 	void		initTray();
 	void		initWidget();
 	void		initDevinfo();
 	void		initChannel(int chID);
 	void		appendInfo(QString msg);
+	QString		getCurDateTime(QString fmt="yyyy-MM-dd hh:mm:ss");
 	QString		getModule(int chID);
 	QString		getDevType(long devtype);
 	QString		getDevErrStr(long lResult);
@@ -59,6 +66,9 @@ private:
 	static BRIINT32	WINAPI ProcEventCallback(BRIINT16 uChannelID,BRIUINT32 dwUserData,BRIINT32	lType,BRIINT32 lHandle,BRIINT32 lResult,BRIINT32 lParam,BRIPCHAR8 pData,BRIPCHAR8 pDataEx);
 
 private:
+
+	// 录音文件目录
+	QString							m_audioDir;
 
 	// 工单查询URL
 	QString							m_queryUrl;
@@ -69,9 +79,16 @@ private:
 	// 设备序列号
 	BRIINT32						m_devnum;
 
+	// 当前通道
+	int								m_nChannelID;
+
+	// 录音文件句柄
+	long							m_lRecFileHandle;
+
 	Widget							m_popuWin;
 	QString							m_title;
 	QTextEdit*						m_msg;
+	QWebView						m_webView;
 
 	QSystemTrayIcon *				m_tray;		//托盘图标  
 	QMenu *							m_tryMenu;	//托盘菜单  
