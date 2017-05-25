@@ -187,6 +187,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::openAudioDir()
 {
+	//m_webView.load(QUrl("http://www.baidu.com"));
+	//m_webView.show();
+
 	QDesktopServices::openUrl(QUrl(m_audioDir, QUrl::TolerantMode));
 }
 

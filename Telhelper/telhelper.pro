@@ -29,6 +29,7 @@ SOURCES += main.cpp\
 	mypushbutton.cpp \
 	titlewidget.cpp \
 	widget.cpp \
+	spwebview.cpp \
 	../common/include/qhttp/qhttpnetwork.cpp \
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
@@ -44,6 +45,7 @@ HEADERS  += mainwindow.h \
 			mypushbutton.h \
 			titlewidget.h \
 			widget.h \
+			spwebview.h \
 			../common/include/qhttp/qhttpnetwork.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \

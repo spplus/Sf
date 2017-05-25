@@ -11,6 +11,7 @@
 #include <QtGui>
 #include <QWebView>
 #include "widget.h"
+#include "spwebview.h"
 #include "bri/quviccub.h"
 #include "bri/BriChipErr.h"
 #include "bri/BriSDKLib.h"
@@ -88,7 +89,7 @@ private:
 	Widget							m_popuWin;
 	QString							m_title;
 	QTextEdit*						m_msg;
-	QWebView						m_webView;
+	SpWebView						m_webView;
 
 	QSystemTrayIcon *				m_tray;		//托盘图标  
 	QMenu *							m_tryMenu;	//托盘菜单  
