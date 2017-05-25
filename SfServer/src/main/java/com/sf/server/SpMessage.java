@@ -1,16 +1,19 @@
 package com.sf.server;
 
+import com.sf.util.ConstDef;
+
 public class SpMessage {  
     
-	private int length;  
-    private short msghead;
-	private int msgtype;
-	private short msgtail;
-    private String content;  
+	private int 		length;  
+    private short 		msghead;
+	private int 		msgtype;
+	private short 		msgtail;
+    private String 		content;  
+    private Long		connectId;
       
     public SpMessage(){  
-          msghead = 8888;
-          msgtail = 5555;
+          msghead = ConstDef.PACKET_HEAD;
+          msgtail = ConstDef.PACKET_TAIL;
           
     }  
       
@@ -22,16 +25,6 @@ public class SpMessage {
         this.length=len;  
     }  
       
-    public SpMessage(byte[] bs){  
-       
-    	/*
-    	if(bs!=null && bs.length>=5){  
-            length=GFCommon.bytes2int(GFCommon.bytesCopy(bs, 0, 4));  
-            flag=bs[4];  
-            content=new String(GFCommon.bytesCopy(bs, 5, length-5));  
-        } 
-        */ 
-    }  
       
     public int getLength() {  
         return length;  
@@ -68,12 +61,25 @@ public class SpMessage {
 	}
 
 	public void setContent(String content) {  
+		
+		/*----------------------------------------------------------------
+		 |包大小(4byes) | 包头(2byes) | 命令(4byes)|  data   | 包结尾(2bytes) |
+		 -----------------------------------------------------------------*/
         this.content = content;  
-        length = content.length()+2+4+2;
+        length = content.length()+ConstDef.PACKET_HEAD_LEN+ConstDef.BUS_CMD_LEN+ConstDef.PACKET_TAIL_LEN;
     }  
       
-    public String toString(){  
+    public Long getConnectId() {
+		return connectId;
+	}
+
+	public void setConnectId(Long connectId) {
+		this.connectId = connectId;
+	}
+
+	public String toString(){  
         StringBuffer sb=new StringBuffer();  
+        sb.append(" connectId:").append(connectId);
         sb.append(" len:").append(length);  
         sb.append(" head:").append(msghead);
         sb.append(" cmd:").append(msgtype);
