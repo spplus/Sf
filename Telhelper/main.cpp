@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 	// 设置程序版本号
 	QCoreApplication::setApplicationVersion("1.0.1");
 
+
 #ifdef WIN32
 	// 设置编码
 	QTextCodec *codec = QTextCodec::codecForName("UTF-8");

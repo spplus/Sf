@@ -245,30 +245,52 @@ void MainWindow::replyData(QByteArray data)
 	if(reader.parse(msg.toStdString(),value))
 	{
 
-		int success = value["result"].asInt();
-
 		// 判断是否有关联工单
-		//if (success>0)
+		string detailUrl = value["p"].asString();
+		if (detailUrl.length()>0)
 		{
-			string detailUrl = value["p"].asString();
-			if (detailUrl.length()>0)
-			{
-				m_webView.load(QUrl(detailUrl.c_str()));
-				m_webView.show();
-				//QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
-			}
+			m_webView.load(QUrl(detailUrl.c_str()));
+			m_webView.show();
+			//QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
 			return;
 		}
-		/*else
+
+		// 解析升级信息
+
+		string filenames;
+		string updateurl = value["updateUrl"].asString();
+		string  version = value["version"].asString();
+		
+		// 组成完整的updateurl
+		const Json::Value arrayFiles = value["updateFiles"];
+		if (arrayFiles.size()>0)
 		{
-			QString content = QString("未查询到连电号码:%1相关工单").arg(m_telnum);
+			int idx = 0;
+			string path = arrayFiles[idx]["filePath"].asString();
+			idx = path.find_last_of("/");
+			path = path.substr(0,idx+1);
+			updateurl += path;
+		}
+		for (int i = 0;i<arrayFiles.size();i++)
+		{
 
-			QString url = "http://www.baidu.com";
-			m_popuWin.setMsg(m_title,content,url);
-			m_popuWin.showAsQQ();
-		}*/
+			filenames+=arrayFiles[i]["fileName"].asString();
+			filenames += ",";
+		}
 
+		// 去掉最后一个逗号
+		if (filenames.length()>0)
+		{
+			filenames = filenames.substr(0,filenames.length()-1);
+		}
+
+		if (needUpdate(version.c_str(),updateurl.c_str(),filenames.c_str()))
+		{
+			exit(0);
+		}
 	}
+
+
 }
 
 
@@ -618,4 +640,78 @@ void MainWindow::stopRecAudio()
 		QString str = QString("停止录音 时长=%1秒 路径=%2").arg(lElapse).arg(szPath);
 		appendInfo(str);
 	}
+}
+
+void MainWindow::requestVersion()
+{
+	QString url = "";
+	QString userinfo = QString("?appId=7");
+	url += userinfo;
+
+	QhttpNetwork::instance()->get(url);
+}
+
+bool MainWindow::needUpdate(QString version,QString updateUrl,QString fileList)
+{
+	// 检查是否需要更新
+	if (versionCheck(version))
+	{
+		QMessageBox::information(this,"系统提示","发现新版本，请立即升级");
+
+		// 启动自动升级程序
+		QProcess pro;
+		QString program = "updater.exe";  
+		QString appname = QCoreApplication::applicationName();
+
+		QStringList arguments;  
+		arguments << appname<<updateUrl<<fileList;  
+		pro.start(program, arguments); 
+
+		return true;
+	}
+
+	return false;
+}
+
+bool MainWindow::versionCheck(QString version)
+{
+	QString nowver = QCoreApplication::applicationVersion();
+
+	qDebug("开始版本比较,本地版本:%s,服务器版本:%s",nowver.toStdString().c_str(),version.toStdString().c_str());
+	QStringList sver = version.split(".");
+	QStringList nver = nowver.split(".");
+
+	if (sver.size()<3 || nver.size()<3)
+	{
+		return false;
+	}
+
+	int sv1 = sver[0].toInt();
+	int sv2 = sver[1].toInt();
+	int sv3 = sver[2].toInt();
+
+	int nv1 = nver[0].toInt();
+	int nv2 = nver[1].toInt();
+	int nv3 = nver[2].toInt();
+
+	if (sv1 > nv1)
+	{
+		return true;
+	}
+	else if(sv1 == nv1)
+	{
+		if (sv2>nv2)
+		{
+			return true;
+		}
+		else if (sv2 == nv2)
+		{
+			if (sv3>nv3)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
 }

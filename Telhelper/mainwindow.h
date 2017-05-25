@@ -57,6 +57,9 @@ private:
 	void		initTray();
 	void		initWidget();
 	void		initDevinfo();
+	void		requestVersion();
+	bool		needUpdate(QString version,QString updateUrl,QString fileList);
+	bool		versionCheck(QString version);
 	void		initChannel(int chID);
 	void		appendInfo(QString msg);
 	QString		getCurDateTime(QString fmt="yyyy-MM-dd hh:mm:ss");
