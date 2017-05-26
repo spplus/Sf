@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	appendInfo("*******欢迎使用"+m_title+"*******");
 	m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
 
+	// 请求版本号
+	requestVersion();
+
 	mkdir();
 
 	onOpen();
@@ -644,9 +647,7 @@ void MainWindow::stopRecAudio()
 
 void MainWindow::requestVersion()
 {
-	QString url = "";
-	QString userinfo = QString("?appId=7");
-	url += userinfo;
+	QString url = "http://sifangerp.com/clsorder/main/redirect/assistantLogin?appId=7";
 
 	QhttpNetwork::instance()->get(url);
 }
