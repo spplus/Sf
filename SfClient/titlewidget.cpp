@@ -1,6 +1,11 @@
 #include "titlewidget.h"
 #include "qhttp/QhttpNetwork.h"
 #include "gocontroller.h"
+#include "jsoncpp/json.h"
+#include "netclient.h"
+#include "configer.h"
+#include "common.h"
+
 TitleWidget::TitleWidget(QWidget* parent):QDialog(parent)
 {
 	
@@ -90,15 +95,16 @@ void TitleWidget::onlineHelp()
 void TitleWidget::uploadFile()
 {
 
-	Phonon::MediaObject *mediaObject = new Phonon::MediaObject(this);
-	Phonon::AudioOutput *audioOutput =
-		new Phonon::AudioOutput(Phonon::VideoCategory, this);
-	Phonon::createPath(mediaObject, audioOutput);
-	Phonon::MediaSource source("sound/tip.mp3");
-	
-		
-	mediaObject->setCurrentSource(source);
-	mediaObject->play();
+	Json::Value root;
+	Json::FastWriter writer;
+	Json::Value person;
+
+	person["userName"] = Configer::instance()->getUser().toStdString();
+	person["siteId"] = Configer::instance()->getSiteId().toStdString();
+	root.append(person);
+
+	std::string json_file = writer.write(root);
+	NetClient::instance()->sendData(SF_CMD_REG,json_file.c_str(),json_file.length());
 
 	
 }

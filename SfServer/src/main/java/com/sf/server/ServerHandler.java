@@ -73,7 +73,7 @@ public class ServerHandler extends IoHandlerAdapter {
     public void sessionClosed(IoSession session) throws Exception {  
         // TODO Auto-generated method stub  
         super.sessionClosed(session);  
-        SpLogger.info("客户端与服务端断开连接.....");  
+        SpLogger.info("client disconnected.....");  
         ClientMgr.instance().offLine(session);
     }  
   

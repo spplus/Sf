@@ -70,7 +70,7 @@ public class BusCenter {
 					}
 					
 					try {
-						SpLogger.debug("buscenter is working");
+						//SpLogger.debug("buscenter is working");
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block

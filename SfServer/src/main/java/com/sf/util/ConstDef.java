@@ -21,4 +21,13 @@ public class ConstDef {
 
 	/*-------------------- 命令定义 END-----------------------*/
 	
+	
+	/*-----------------MQ 常量定义BEGIN-----------------------------*/
+	
+	public static final String 	TOPIC_NOTICE = "topic_notice";
+	
+	public static final String TOPIC_NOTICE_TAG = "tag_new_order_message";
+	
+	/*-----------------MQ 常量定义END-----------------------------*/
+	
 }

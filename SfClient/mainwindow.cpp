@@ -13,6 +13,8 @@
 #include "titlewidget.h"
 #include "netclient.h"
 #include "configer.h"
+#include <Windows.h>
+
 
 using namespace std;
 
@@ -326,8 +328,8 @@ void MainWindow::sendReg()
 	root.append(person);
 
 	std::string json_file = writer.write(root);
-
 	NetClient::instance()->sendData(SF_CMD_REG,json_file.c_str(),json_file.length());
+		
 }
 
 void MainWindow::recvdata(int msgtype,const char* msg,int msglength)

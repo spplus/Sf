@@ -124,7 +124,7 @@ int NetClient::sendData(int msgtype,const char* msg,int msglength)
 	QByteArray byteary = pack(msg,msgtype,msglength);
 	
 	length = byteary.length();
-
+	char* data = byteary.data();
 	QString strbyte = tr("%1").arg(byteary.data());
 	QString strbyt = QString::fromAscii(byteary.data());
 	length = m_pTcpScoket->write(byteary);

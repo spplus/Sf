@@ -18,7 +18,7 @@ typedef struct Vendors{
 }Vendors;
 
 
-#define		SF_TCP_SERVER	"192.168.0.231"//"120.210.205.24"
+#define		SF_TCP_SERVER	"127.0.0.1"//"120.210.205.24"
 #define		SF_TCP_PORT		6666
 
 // √¸¡Ó∂®“Â

@@ -96,18 +96,20 @@ public class ClientMgr {
 		
 		// 查找客户端连接
 		for (Entry<Long, IoSession> entry : online.entrySet()) {
-			if(entry.getValue().getAttribute(ConstDef.CLIENT_INFO).equals(siteId)){
+			IoSession io = entry.getValue();
+			ClientBean bean = (ClientBean) io.getAttribute(ConstDef.CLIENT_INFO);
+			if(bean != null && bean.getId().equals(siteId)){
 				ioList.add(entry.getValue());
-				break;
 			}
 		}
 		
 		for(int i = 0;i<ioList.size();i++){
 			IoSession io = ioList.get(i);
+			mb.setConnectId(io.getId());
 			WriteFuture wf = io.write(mb);
 			wf.awaitUninterruptibly(3000);
 			if(wf.isDone()){
-				SpLogger.info("发送消息成功:"+mb.toString());
+				SpLogger.info("send data to cleint:"+mb.toString());
 			}
 		}
 		
