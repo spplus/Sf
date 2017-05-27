@@ -9,9 +9,10 @@ import com.alibaba.rocketmq.common.protocol.heartbeat.MessageModel;
 import com.alibaba.rocketmq.remoting.exception.RemotingException;
 
 
+import com.sf.cnst.ConstDef;
+import com.sf.cnst.SFTopic;
 import com.sf.log.SpLogger;
 import com.sf.util.Config;
-import com.sf.util.ConstDef;
 
 import java.util.Properties;
 
@@ -47,7 +48,7 @@ public class BusConsumer {
     public static void subscribe() throws MQClientException {
 
         consumer = getConsumer();
-        consumer.subscribe(ConstDef.TOPIC_NOTICE, "*");
+        consumer.subscribe(SFTopic.TOPIC_AUDIO, "*");
         consumer.subscribe("CustNotification", "*");
         //广播
         consumer.setMessageModel(MessageModel.BROADCASTING);

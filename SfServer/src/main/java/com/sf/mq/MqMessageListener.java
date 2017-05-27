@@ -6,9 +6,10 @@ import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import com.alibaba.rocketmq.common.message.MessageConst;
 import com.alibaba.rocketmq.common.message.MessageExt;
+import com.sf.cnst.ConstDef;
+import com.sf.cnst.SFTopic;
 import com.sf.log.SpLogger;
 import com.sf.server.ClientMgr;
-import com.sf.util.ConstDef;
 
 import net.sf.json.JSONObject;
 
@@ -82,12 +83,12 @@ public class MqMessageListener implements MessageListenerConcurrently{
         // 频道
         
         
-        if (strTopic.equals(ConstDef.TOPIC_NOTICE)) {
+        if (strTopic.equals(SFTopic.TOPIC_AUDIO)) {
 
-            if (strTag.equals(ConstDef.TOPIC_NOTICE_TAG)) {
+            if (strTag.equals(SFTopic.TAG_DEFAULT_NEW_ORDER_AUDIO)) {
             	
             	String siteId = jb.getString("siteId");
-            	ClientMgr.instance().sendData(siteId, ConstDef.SF_CMD_MESSAGE,"");           	
+            	ClientMgr.instance().sendData(siteId, ConstDef.SF_CMD_MESSAGE,jb.toString());           	
             } 
         }
          

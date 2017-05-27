@@ -9,8 +9,8 @@ import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
 
 import com.sf.bean.ClientBean;
+import com.sf.cnst.ConstDef;
 import com.sf.log.SpLogger;
-import com.sf.util.ConstDef;
 
 /**
  * 

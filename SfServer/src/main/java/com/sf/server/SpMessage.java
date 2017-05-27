@@ -1,6 +1,6 @@
 package com.sf.server;
 
-import com.sf.util.ConstDef;
+import com.sf.cnst.ConstDef;
 
 public class SpMessage {  
     

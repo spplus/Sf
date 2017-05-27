@@ -7,10 +7,10 @@ import java.util.concurrent.Executors;
 import net.sf.json.JSONObject;
 
 import com.sf.bean.ClientBean;
+import com.sf.cnst.ConstDef;
 import com.sf.log.SpLogger;
 import com.sf.server.ClientMgr;
 import com.sf.server.SpMessage;
-import com.sf.util.ConstDef;
 
 /**
  * 业务处理中心.解包后的业务消息，统一投递到业务处理中心进行按类型分拣处理.
