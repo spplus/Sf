@@ -6,6 +6,7 @@
 class SpWebView :public QWebView
 {
 public:
+	SpWebView();
 	void		closeEvent(QCloseEvent *event);
 };
 
