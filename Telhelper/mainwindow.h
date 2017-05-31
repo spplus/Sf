@@ -58,7 +58,7 @@ private:
 	void		initWidget();
 	void		initDevinfo();
 	void		requestVersion();
-	bool		needUpdate(QString version,QString updateUrl,QString fileList);
+	void		needUpdate(QString version,QString updateUrl,QString fileList);
 	bool		versionCheck(QString version);
 	void		initChannel(int chID);
 	void		appendInfo(QString msg);

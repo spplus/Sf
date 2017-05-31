@@ -2,13 +2,15 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方工单助手"
-#define MyAppVersion "1.0.7"
+#define MyAppVersion "1.0.8"
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
 #define APP_PATH "F:\Project\src\Sf\bin\"
 #define DOC_PATH "F:\Project\src\Sf\common\doc\"
 #define OUT_PATH "F:\Project\src\Sf\common\doc"
+
+#define SOUND_DIR "sound\"
 
 #define SFCLIENT    "SfClient.exe"
 #define CONF        "conf.ini"
@@ -22,6 +24,7 @@
 #define NETWORK     "QtNetwork4.dll"
 #define ZHCN        "qt_zh_CN.qm"
 #define PHON        "phonon4.dll"
+#define DEFALT_SOUND  "tip.mp3"
 
 
 
@@ -68,6 +71,7 @@ Source: {#APP_PATH}{#GUI}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#NETWORK}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#ZHCN}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#PHON}; DestDir: "{app}"; Flags: ignoreversion
+Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 

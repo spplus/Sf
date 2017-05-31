@@ -52,7 +52,7 @@ public class ServerHandler extends IoHandlerAdapter {
         SpMessage mb = (SpMessage)message;
         mb.setConnectId(session.getId());
         
-        SpLogger.info("recive:"+mb.toString());  
+        SpLogger.info("recive:"+mb.getContent());  
         
         BusCenter.instance().putq(mb);
         

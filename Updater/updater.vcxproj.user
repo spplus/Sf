@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>../bin</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>SfClient http://120.210.205.24/orderstres/sfAssistant/1.2.5 /bin/conf.ini,/bin/SfClient.exe,/bin/style.qss,/bin/woodpecker_windows_386.exe,</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>telhelper http://120.210.205.24/orderstres/sfTelHelper/1.0.2/ bridge.dll,qnviccub.dll,QtWebKit4.dll,telhelper.exe,</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerWorkingDirectory>../../bin</LocalDebuggerWorkingDirectory>

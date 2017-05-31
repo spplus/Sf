@@ -291,10 +291,8 @@ void MainWindow::replyData(QByteArray data)
 			filenames = filenames.substr(0,filenames.length()-1);
 		}
 
-		if (needUpdate(version.c_str(),updateurl.c_str(),filenames.c_str()))
-		{
-			exit(0);
-		}
+		needUpdate(version.c_str(),updateurl.c_str(),filenames.c_str());
+		
 	}
 
 
@@ -656,7 +654,7 @@ void MainWindow::requestVersion()
 	QhttpNetwork::instance()->get(url);
 }
 
-bool MainWindow::needUpdate(QString version,QString updateUrl,QString fileList)
+void MainWindow::needUpdate(QString version,QString updateUrl,QString fileList)
 {
 	// 检查是否需要更新
 	if (versionCheck(version))
@@ -671,11 +669,9 @@ bool MainWindow::needUpdate(QString version,QString updateUrl,QString fileList)
 		QStringList arguments;  
 		arguments << appname<<updateUrl<<fileList;  
 		pro.start(program, arguments); 
-
-		return true;
+		
+		exit(0);
 	}
-
-	return false;
 }
 
 bool MainWindow::versionCheck(QString version)

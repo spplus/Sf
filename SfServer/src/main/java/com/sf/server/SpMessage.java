@@ -34,7 +34,7 @@ public class SpMessage {
     }  
    
     public String getContent() {  
-        return content;  
+        return content.trim();  
     }  
     public short getMsghead() {
 		return msghead;

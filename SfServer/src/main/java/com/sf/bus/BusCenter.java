@@ -44,13 +44,13 @@ public class BusCenter {
 		
 		msgque.add(mb);
 		
-		SpLogger.debug("new message inqueue:"+mb.toString());
+		SpLogger.debug("new message inqueue:"+mb.getContent());
 	}
 	
 	private SpMessage deque(){
 		SpMessage mb = msgque.poll();
 		if(mb != null){
-			SpLogger.debug("dequeue message:"+mb.toString());
+			SpLogger.debug("dequeue message:"+mb.getContent());
 		}
 		
 		return mb;
@@ -106,11 +106,11 @@ public class BusCenter {
 			
 				
 				// 测试代码 ，向客户端发送业务提醒消息
-				ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_MESSAGE, "hello");
+				//ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_MESSAGE, "hello");
 				
 				break;
 			case ConstDef.SF_CMD_MESSAGE:
-				
+				//ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_MESSAGE, "hello");
 				break;
 				
 			default:
