@@ -5,6 +5,7 @@
 #include "netclient.h"
 #include "mainwindow.h"
 #include "common.h"
+#include "configer.h"
 
 NetClient* NetClient::m_inst = NULL;
 
@@ -43,8 +44,15 @@ bool NetClient::init()
 {
 
 	//赋值
-	m_IP = SF_TCP_SERVER;
-	m_Port = SF_TCP_PORT;
+	m_IP = Configer::instance()->getValue(ADDR_KEY);//SF_TCP_SERVER;
+	m_Port = Configer::instance()->getValue(PORT_KEY).toInt();//SF_TCP_PORT;
+
+	if (m_IP.isEmpty() || m_Port <=0 || m_Port>65535)
+	{
+		QMessageBox::warning(NULL,"系统提示","请配置TCP服务器地址");
+		return false;
+	}
+	
 
 
 	//建立网络连接类与当前类的信号与槽的关系

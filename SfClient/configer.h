@@ -3,6 +3,9 @@
 
 #include <QSettings>
 
+#define  ADDR_KEY "SF/addr"
+#define  PORT_KEY "SF/port"
+
 class Configer
 {
 public:
@@ -15,6 +18,8 @@ public:
 	void		setPwd(QString pwd);
 	void		setSiteId(QString siteid);
 	QString		getSiteId();
+	QString		getValue(QString key);
+	
 private:
 	Configer();
 private:

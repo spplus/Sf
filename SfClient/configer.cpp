@@ -60,3 +60,8 @@ QString Configer::getSiteId()
 {
 	return m_setting->value("SF/site").toString();
 }
+
+QString Configer::getValue(QString key)
+{
+	return m_setting->value(key).toString();
+}
