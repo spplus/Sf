@@ -6,11 +6,12 @@
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
-#define APP_PATH "F:\Project\src\Sf\bin\"
-#define DOC_PATH "F:\Project\src\Sf\common\doc\"
-#define OUT_PATH "F:\Project\src\Sf\common\doc"
-
+#define APP_PATH "D:\work\Sf\bin\"
+#define DOC_PATH "D:\work\Sf\common\doc\"
+#define OUT_PATH "D:\work\Sf\common\doc"
 #define SOUND_DIR "sound\"
+#define PLUGINS_BACKEND "plugins\phonon_backend\"
+#define INSTALL_PATH "D:\Program Files (x86)\"
 
 #define SFCLIENT    "SfClient.exe"
 #define CONF        "conf.ini"
@@ -25,6 +26,7 @@
 #define ZHCN        "qt_zh_CN.qm"
 #define PHON        "phonon4.dll"
 #define DEFALT_SOUND  "tip.mp3"
+#define PHONE_DS94   "phonon_ds94.dll"
 
 
 
@@ -41,7 +43,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\{#MyAppName}
+DefaultDirName={#INSTALL_PATH}{#MyAppName}
 DefaultGroupName={#MyAppName}
 LicenseFile={#DOC_PATH}协议.txt
 OutputDir={#OUT_PATH}
@@ -72,6 +74,7 @@ Source: {#APP_PATH}{#NETWORK}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#ZHCN}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#PHON}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
+Source: {#APP_PATH}{#PLUGINS_BACKEND}{#PHONE_DS94}; DestDir: "{app}\{#PLUGINS_BACKEND}"; Flags: ignoreversion
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 
