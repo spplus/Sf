@@ -67,8 +67,8 @@ private:
 	QAction *						m_quit;		//菜单实现功能：退出程序  
 	QList<Vendors*>					m_vendorList;
 
-	Phonon::MediaObject *			m_mediaObject;
-	Phonon::AudioOutput *			m_audioOutput;
+	Phonon::MediaObject 			m_mediaObject;
+	Phonon::AudioOutput				m_audioOutput;
 };
 
 #endif // MAINWINDOW_H

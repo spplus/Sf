@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	
 	initWidget();
 	initTray();
-	initMedia();
+	//initMedia();
 
 	autoRun();
 	int w = 800;
@@ -122,7 +122,7 @@ void MainWindow::setVendorData(QList<Vendors*> vendorList)
 
 MainWindow::~MainWindow()
 {
-	if (m_mediaObject != NULL)
+	/*if (m_mediaObject != NULL)
 	{
 		m_mediaObject->clear();
 		delete m_mediaObject;
@@ -132,7 +132,7 @@ MainWindow::~MainWindow()
 	{
 		delete m_audioOutput;
 		m_audioOutput = NULL;
-	}
+	}*/
 }
 
 
@@ -302,12 +302,18 @@ void MainWindow::autoRun(bool bAutoRun)
 
 void MainWindow::initMedia()
 {
-	m_mediaObject = new Phonon::MediaObject(this);
-	m_audioOutput =
-		new Phonon::AudioOutput(Phonon::VideoCategory, this);
-	Phonon::createPath(m_mediaObject, m_audioOutput);
+	//m_mediaObject = new Phonon::MediaObject(this);
+	//m_audioOutput =new Phonon::AudioOutput(Phonon::VideoCategory, this);
+	//m_audioOutput.setOutputDevice(Phonon::VideoCategory, this);
+
+	Phonon::createPath(&m_mediaObject, &m_audioOutput);
 	Phonon::MediaSource source("sound/tip.mp3");
-	m_mediaObject->setCurrentSource(source);
+	m_mediaObject.setCurrentSource(source);
+	m_mediaObject.play();
+
+	//delete m_mediaObject;
+	//delete m_audioOutput;
+
 }
 
 void MainWindow::sendReg()
@@ -346,7 +352,8 @@ void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 		break;
 
 	case SF_CMD_PLAY_SOUND:
-		m_mediaObject->play();
+		initMedia();
+		//m_mediaObject->play();
 		break;
 	default:
 		break;
