@@ -5,6 +5,7 @@
 #include "jsoncpp/json.h"
 #include "configer.h"
 #include "topwidget.h"
+#include "netclient.h"
 
 using namespace std;
 
@@ -260,6 +261,7 @@ void UserLogindlg::loginResp(QByteArray resp)
 			exit(0);
 		}
 
+		NetClient::instance()->init();
 
 		break;
 	case 1:

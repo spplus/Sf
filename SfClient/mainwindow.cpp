@@ -37,9 +37,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	setWindowTitle(m_title+"-v"+QCoreApplication::applicationVersion());
 
 	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
-	NetClient::instance()->init();
-
-	
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 }
 
@@ -305,12 +302,10 @@ void MainWindow::initMedia()
 	//m_mediaObject = new Phonon::MediaObject(this);
 	//m_audioOutput =new Phonon::AudioOutput(Phonon::VideoCategory, this);
 	//m_audioOutput.setOutputDevice(Phonon::VideoCategory, this);
-
 	Phonon::createPath(&m_mediaObject, &m_audioOutput);
 	Phonon::MediaSource source("sound/tip.mp3");
 	m_mediaObject.setCurrentSource(source);
 	m_mediaObject.play();
-
 	//delete m_mediaObject;
 	//delete m_audioOutput;
 
