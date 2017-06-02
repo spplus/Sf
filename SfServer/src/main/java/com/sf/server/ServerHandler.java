@@ -1,10 +1,9 @@
 package com.sf.server;
 
-import java.nio.channels.SeekableByteChannel;
-
 import org.apache.mina.core.service.IoHandlerAdapter;  
 import org.apache.mina.core.session.IoSession;  
 
+import com.sf.bean.ClientBean;
 import com.sf.bus.BusCenter;
 import com.sf.log.SpLogger;
   
@@ -56,24 +55,19 @@ public class ServerHandler extends IoHandlerAdapter {
         
         BusCenter.instance().putq(mb);
         
-        /*
-        SpMessage mb = new SpMessage();
-        mb.setMsgtype(1003);
-        mb.setContent("hello");
-        Thread.sleep(5000);
-        
-        
-        session.write(mb);
-        
-        System.out.println("通知客户端响铃");  
-        */
     }  
       
     @Override  
     public void sessionClosed(IoSession session) throws Exception {  
         // TODO Auto-generated method stub  
         super.sessionClosed(session);  
-        SpLogger.info("client disconnected.....");  
+        ClientBean bean = ClientMgr.instance().getClientInfo(session.getId());
+       
+        String clientInfo = "";
+        if(bean != null){
+        	clientInfo = bean.toString();
+        }
+        SpLogger.info("client disconnected --> "+clientInfo);  
         ClientMgr.instance().offLine(session);
     }  
   

@@ -81,6 +81,15 @@ public class ClientMgr {
 		}
 	}
 	
+	public ClientBean getClientInfo(Long connid){
+		IoSession io = getSssion(connid);
+		if(io != null){
+			ClientBean bean = (ClientBean) io.getAttribute(ConstDef.CLIENT_INFO);
+			return bean;
+		}
+		return null;
+	}
+	
 	/**
 	 * 发送消息.
 	 * 

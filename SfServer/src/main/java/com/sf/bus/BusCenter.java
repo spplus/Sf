@@ -11,6 +11,7 @@ import com.sf.cnst.ConstDef;
 import com.sf.log.SpLogger;
 import com.sf.server.ClientMgr;
 import com.sf.server.SpMessage;
+import com.sf.util.DateUtil;
 
 /**
  * 业务处理中心.解包后的业务消息，统一投递到业务处理中心进行按类型分拣处理.
@@ -97,6 +98,7 @@ public class BusCenter {
 					String newcontent = content.substring(1,content.length()-1);
 					JSONObject jsobj = JSONObject.fromObject(newcontent);
 					bean.setId(jsobj.getString("siteId"));
+					bean.setRegTime(DateUtil.formatDataToChinaData(null));
 					ClientMgr.instance().setClientInfo(mb.getConnectId(), bean);
 					
 					SpLogger.info("new client reg:"+bean.getId());

@@ -38,11 +38,10 @@ public class MinaServer {
 		acceptor.getFilterChain().addLast("logger", new LoggingFilter());  
 		
 		acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new SpProtocalCodecFactory(Charset.forName("GBK"))));  
-	    acceptor.getSessionConfig().setReadBufferSize(1024);  
-	    acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);  
 
 		// 设置消息处理类（创建、关闭Session，可读可写等等，继承自接口IoHandler）  
 		acceptor.setHandler(new ServerHandler() );  
+		
 		// 设置接收缓存区大小  
 		acceptor.getSessionConfig().setReadBufferSize(2048);  
 		acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);  
