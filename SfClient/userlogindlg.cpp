@@ -260,7 +260,7 @@ void UserLogindlg::loginResp(QByteArray resp)
 
 			exit(0);
 		}
-
+		// 连接TCP服务器
 		NetClient::instance()->init();
 
 		break;

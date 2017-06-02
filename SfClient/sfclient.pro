@@ -31,6 +31,7 @@ SOURCES += main.cpp\
 	topwidget.cpp \
 	titlewidget.cpp \
 	netclient.cpp \
+	playthread.cpp \
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
 	../common/include/jsoncpp/json_reader.cpp \
@@ -49,6 +50,7 @@ HEADERS  += mainwindow.h \
 			topwidget.h \
 			titlewidget.h \
 			netclient.h \
+			playthread.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \
 			../common/include/jsoncpp/features.h \

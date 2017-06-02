@@ -21,6 +21,7 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 	m_title = "思方工单助手";
+	m_audioOutput = NULL;
 	
 	initWidget();
 	initTray();
@@ -37,7 +38,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
+	connect(&m_mediaObject,SIGNAL(aboutToFinish()),&m_playThread,SLOT(beginPlay()));
+	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
+
+	// 启动语音队列线程
+	m_playThread.start();
+
 }
+
 
 void MainWindow::initWidget()
 {
@@ -124,11 +132,12 @@ MainWindow::~MainWindow()
 		delete m_mediaObject;
 		m_mediaObject = NULL;
 	}
+	*/
 	if (m_audioOutput != NULL)
 	{
 		delete m_audioOutput;
 		m_audioOutput = NULL;
-	}*/
+	}
 }
 
 
@@ -298,80 +307,91 @@ void MainWindow::autoRun(bool bAutoRun)
 
 void MainWindow::playSound(int id)
 {
-	Phonon::createPath(&m_mediaObject, &m_audioOutput);
+	if (m_audioOutput != NULL)
+	{
+		delete m_audioOutput;
+		m_audioOutput = NULL;
+	}
+	
+	m_audioOutput = new Phonon::AudioOutput(Phonon::VideoCategory, this);
+	Phonon::createPath(&m_mediaObject, m_audioOutput);
+	
 	switch (id)
 	{
 	case DEV_TYPE_AIRCONDITIONER:
 		{
 			Phonon::MediaSource source(SOUND_AIRCONDITIONER);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_REFRIGERATOR:
 		{
 			Phonon::MediaSource source(SOUND_REFRIGERATOR);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_HEATER:
 		{
 			Phonon::MediaSource source(SOUND_HEATER);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		break;
 	case DEV_TYPE_TV:
 		{
 			Phonon::MediaSource source(SOUND_TV);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_HOODS:
 		{
 			Phonon::MediaSource source(SOUND_HOODS);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_WASHER:
 		{
 			Phonon::MediaSource source(SOUND_WASHER);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_COOKINGBENCH:
 		{
 			Phonon::MediaSource source(SOUND_COOKINGBENCH);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_MICROWAVEOVEN:
 		{
 			Phonon::MediaSource source(SOUND_MICROWAVEOVEN);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	case DEV_TYPE_SMALL:
 		{
 			Phonon::MediaSource source(SOUND_SMALL);
-			m_mediaObject.enqueue(source);
+			m_mediaObject.setCurrentSource(source);
 		}
 		
 		break;
 	default:
-		{
+		
 			Phonon::MediaSource source(SOUND_DEFALT);
-			m_mediaObject.enqueue(source);
-		}
+			m_mediaObject.setCurrentSource(source);
+		
 		
 		break;
 	}
 	
+	//Phonon::MediaSource source(SOUND_DEFALT);
+	//m_mediaObject.setCurrentSource(source);
+	//m_mediaObject.enqueue(source);
 	m_mediaObject.play();
 
 }
@@ -380,13 +400,6 @@ void MainWindow::sendReg()
 	Json::Value root;
 	Json::FastWriter writer;
 	Json::Value person;
-
-	/*
-	{
-	"userName":"abc",
-	"siteId":"abcdefg"
-	}
-	*/
 
 	person["userName"] = Configer::instance()->getUser().toStdString();
 	person["siteId"] = Configer::instance()->getSiteId().toStdString();
@@ -411,11 +424,24 @@ void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 		break;
 
 	case SF_CMD_PLAY_SOUND:
-		playSound(0);
-		//initMedia();
-		//m_mediaObject->play();
+		parseTcpResponse(msg);
 		break;
 	default:
 		break;
+	}
+}
+
+void MainWindow::parseTcpResponse(const char* msg)
+{
+	Json::Reader reader;
+	Json::Value value;
+	string js;
+	js.append(msg);
+	m_vendorList.clear();
+	if(reader.parse(js,value))
+	{
+		string id  = value["category"].asString();
+		m_playThread.enqueue(atoi(id.c_str()));
+		
 	}
 }

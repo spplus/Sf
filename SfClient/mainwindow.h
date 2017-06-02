@@ -14,6 +14,8 @@
 #include <Phonon/AudioOutput>
 
 #include "common.h"
+#include "playthread.h"
+
 
 class MainWindow : public QMainWindow
 {
@@ -36,6 +38,8 @@ public slots:
 	void		uploadLog();
 	void		sysExit();
 
+	void		playSound(int id);
+
 	// 数据返回
 	void		replyData(QByteArray data);
 
@@ -48,7 +52,7 @@ public slots:
 private:
 	void		initWidget();
 	void		initTray();
-	void		playSound(int id);
+	void		parseTcpResponse(const char* msg);
 
 	// 发送注册信息
 	void		sendReg();
@@ -66,9 +70,9 @@ private:
 	QAction *						m_reset;	//菜单实现功能：恢复窗口  
 	QAction *						m_quit;		//菜单实现功能：退出程序  
 	QList<Vendors*>					m_vendorList;
-
+	PlayThread						m_playThread;
 	Phonon::MediaObject 			m_mediaObject;
-	Phonon::AudioOutput				m_audioOutput;
+	Phonon::AudioOutput*			m_audioOutput;
 };
 
 #endif // MAINWINDOW_H
