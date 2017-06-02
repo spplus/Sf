@@ -48,7 +48,7 @@ public slots:
 private:
 	void		initWidget();
 	void		initTray();
-	void		initMedia();
+	void		playSound(int id);
 
 	// ·¢ËÍ×¢²áĞÅÏ¢
 	void		sendReg();

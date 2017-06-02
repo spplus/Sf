@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	
 	initWidget();
 	initTray();
-	//initMedia();
 
 	autoRun();
 	int w = 800;
@@ -297,20 +296,85 @@ void MainWindow::autoRun(bool bAutoRun)
 
 }
 
-void MainWindow::initMedia()
+void MainWindow::playSound(int id)
 {
-	//m_mediaObject = new Phonon::MediaObject(this);
-	//m_audioOutput =new Phonon::AudioOutput(Phonon::VideoCategory, this);
-	//m_audioOutput.setOutputDevice(Phonon::VideoCategory, this);
 	Phonon::createPath(&m_mediaObject, &m_audioOutput);
-	Phonon::MediaSource source("sound/tip.mp3");
-	m_mediaObject.setCurrentSource(source);
+	switch (id)
+	{
+	case DEV_TYPE_AIRCONDITIONER:
+		{
+			Phonon::MediaSource source(SOUND_AIRCONDITIONER);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_REFRIGERATOR:
+		{
+			Phonon::MediaSource source(SOUND_REFRIGERATOR);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_HEATER:
+		{
+			Phonon::MediaSource source(SOUND_HEATER);
+			m_mediaObject.enqueue(source);
+		}
+		break;
+	case DEV_TYPE_TV:
+		{
+			Phonon::MediaSource source(SOUND_TV);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_HOODS:
+		{
+			Phonon::MediaSource source(SOUND_HOODS);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_WASHER:
+		{
+			Phonon::MediaSource source(SOUND_WASHER);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_COOKINGBENCH:
+		{
+			Phonon::MediaSource source(SOUND_COOKINGBENCH);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_MICROWAVEOVEN:
+		{
+			Phonon::MediaSource source(SOUND_MICROWAVEOVEN);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	case DEV_TYPE_SMALL:
+		{
+			Phonon::MediaSource source(SOUND_SMALL);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	default:
+		{
+			Phonon::MediaSource source(SOUND_DEFALT);
+			m_mediaObject.enqueue(source);
+		}
+		
+		break;
+	}
+	
 	m_mediaObject.play();
-	//delete m_mediaObject;
-	//delete m_audioOutput;
 
 }
-
 void MainWindow::sendReg()
 {
 	Json::Value root;
@@ -347,7 +411,8 @@ void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 		break;
 
 	case SF_CMD_PLAY_SOUND:
-		initMedia();
+		playSound(0);
+		//initMedia();
 		//m_mediaObject->play();
 		break;
 	default:
