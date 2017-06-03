@@ -318,82 +318,9 @@ void MainWindow::playSound(int id)
 	m_audioOutput = new Phonon::AudioOutput(Phonon::VideoCategory, this);
 	Phonon::createPath(&m_mediaObject, m_audioOutput);
 	
-	switch (id)
-	{
-	case DEV_TYPE_AIRCONDITIONER:
-		{
-			Phonon::MediaSource source(SOUND_AIRCONDITIONER);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_REFRIGERATOR:
-		{
-			Phonon::MediaSource source(SOUND_REFRIGERATOR);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_HEATER:
-		{
-			Phonon::MediaSource source(SOUND_HEATER);
-			m_mediaObject.setCurrentSource(source);
-		}
-		break;
-	case DEV_TYPE_TV:
-		{
-			Phonon::MediaSource source(SOUND_TV);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_HOODS:
-		{
-			Phonon::MediaSource source(SOUND_HOODS);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_WASHER:
-		{
-			Phonon::MediaSource source(SOUND_WASHER);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_COOKINGBENCH:
-		{
-			Phonon::MediaSource source(SOUND_COOKINGBENCH);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_MICROWAVEOVEN:
-		{
-			Phonon::MediaSource source(SOUND_MICROWAVEOVEN);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	case DEV_TYPE_SMALL:
-		{
-			Phonon::MediaSource source(SOUND_SMALL);
-			m_mediaObject.setCurrentSource(source);
-		}
-		
-		break;
-	default:
-		
-			Phonon::MediaSource source(SOUND_DEFALT);
-			m_mediaObject.setCurrentSource(source);
-		
-		
-		break;
-	}
-	
-	//Phonon::MediaSource source(SOUND_DEFALT);
-	//m_mediaObject.setCurrentSource(source);
-	//m_mediaObject.enqueue(source);
+	QString sound = QString("sound/tip%1.mp3").arg(id);
+	Phonon::MediaSource source(sound);
+	m_mediaObject.setCurrentSource(source);
 	m_mediaObject.play();
 
 }

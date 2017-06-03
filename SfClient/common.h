@@ -50,15 +50,4 @@ typedef struct Vendors{
 #define 		DEV_TYPE_COOKINGBENCH  		 7	// 灶台
 #define 		DEV_TYPE_MICROWAVEOVEN 		 8	// 微波炉
 #define 		DEV_TYPE_SMALL		  		 9	// 小家电
-
-#define			SOUND_AIRCONDITIONER		"sound/tip1.mp3"
-#define			SOUND_REFRIGERATOR			"sound/tip2.mp3"
-#define			SOUND_HEATER				"sound/tip3.mp3"
-#define			SOUND_TV					"sound/tip4.mp3"
-#define			SOUND_HOODS					"sound/tip5.mp3"
-#define			SOUND_WASHER				"sound/tip6.mp3"
-#define			SOUND_COOKINGBENCH			"sound/tip7.mp3"
-#define			SOUND_MICROWAVEOVEN			"sound/tip8.mp3"
-#define			SOUND_SMALL					"sound/tip9.mp3"
-#define			SOUND_DEFALT				"sound/tip.mp3"
 #endif

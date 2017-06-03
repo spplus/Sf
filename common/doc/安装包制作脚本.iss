@@ -25,7 +25,7 @@
 #define NETWORK     "QtNetwork4.dll"
 #define ZHCN        "qt_zh_CN.qm"
 #define PHON        "phonon4.dll"
-#define DEFALT_SOUND  "tip.mp3"
+#define DEFALT_SOUND0  "tip0.mp3"
 #define DEFALT_SOUND1  "tip1.mp3"
 #define DEFALT_SOUND2  "tip2.mp3"
 #define DEFALT_SOUND3  "tip3.mp3"
@@ -83,7 +83,7 @@ Source: {#APP_PATH}{#GUI}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#NETWORK}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#ZHCN}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#PHON}; DestDir: "{app}"; Flags: ignoreversion
-Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
+Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND0}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND1}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND2}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND3}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
