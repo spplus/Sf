@@ -2,13 +2,13 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方工单助手"
-#define MyAppVersion "1.0.8"
+#define MyAppVersion "1.0.8.3"
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
-#define APP_PATH "F:\Project\src\Sf\bin\"
-#define DOC_PATH "F:\Project\src\Sf\common\doc\"
-#define OUT_PATH "F:\Project\src\Sf\common\doc"
+#define APP_PATH "D:\work\Sf\bin\"
+#define DOC_PATH "D:\work\Sf\common\doc\"
+#define OUT_PATH "D:\work\Sf\common\doc"
 #define SOUND_DIR "sound\"
 #define PLUGINS_BACKEND "plugins\phonon_backend\"
 #define INSTALL_PATH "D:\Program Files (x86)\"
@@ -92,7 +92,7 @@ Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND5}; DestDir: "{app}\{#SOUND_DIR}"; 
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND6}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND7}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND8}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
-Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND8}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
+Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND9}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#PLUGINS_BACKEND}{#PHONE_DS94}; DestDir: "{app}\{#PLUGINS_BACKEND}"; Flags: ignoreversion
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
