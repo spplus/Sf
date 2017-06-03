@@ -88,7 +88,7 @@ private:
 
 	// 录音文件句柄
 	long							m_lRecFileHandle;
-
+	QTimer							m_hartBeatTimer;
 	Widget							m_popuWin;
 	QString							m_title;
 	QTextEdit*						m_msg;

@@ -111,8 +111,10 @@ public class BusCenter {
 				//ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_MESSAGE, "hello");
 				
 				break;
-			case ConstDef.SF_CMD_MESSAGE:
-				//ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_MESSAGE, "hello");
+			case ConstDef.SF_CMD_HEARTBEAT:
+				
+				SpLogger.info("heatbeat:"+mb.getContent());
+				
 				break;
 				
 			default:

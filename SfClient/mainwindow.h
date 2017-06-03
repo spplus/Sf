@@ -43,6 +43,7 @@ public slots:
 	// 数据返回
 	void		replyData(QByteArray data);
 
+	void		sendHearBeat();
 
 	// TCP服务器数据返回
 	void		recvdata(int msgtype,const char* msg,int msglength);
@@ -69,6 +70,7 @@ private:
 	QMenu *							m_tryMenu;	//托盘菜单  
 	QAction *						m_reset;	//菜单实现功能：恢复窗口  
 	QAction *						m_quit;		//菜单实现功能：退出程序  
+	QTimer							m_heartBeatTimer;
 	QList<Vendors*>					m_vendorList;
 	PlayThread						m_playThread;
 	Phonon::MediaObject 			m_mediaObject;

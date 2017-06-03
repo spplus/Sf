@@ -254,11 +254,11 @@ void MainWindow::replyData(QByteArray data)
 		{
 			SpWebView* spview = new SpWebView;
 			spview->load(QUrl(detailUrl.c_str()));
-			spview->show();
-			spview->activateWindow();
-			//m_webView.load(QUrl(detailUrl.c_str()));
-			//m_webView.show();
-			//QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
+			spview->showWindow();
+			/*spview->show();
+			spview->activateWindow();*/
+
+			
 			return;
 		}
 

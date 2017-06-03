@@ -60,13 +60,13 @@ bool NetClient::init()
 
 	//定时器
 	m_pTimer = new QTimer(this);
-	m_pTimer->setInterval(1);
+	m_pTimer->setInterval(1000);
 
 	connect(m_pTimer,SIGNAL(timeout()),this,SLOT(checkConnect()));
 
 	//连接指定IP和端口的服务器
 	connectToServer(m_IP,m_Port);
-	m_pTcpScoket->waitForConnected();
+	
 
 	if (!m_netflag)
 	{
@@ -108,6 +108,7 @@ bool NetClient::connectToServer(const QString srvName,quint16 port)
 
 	//连接服务器
 	m_pTcpScoket->connectToHost(srvName,port);
+	m_pTcpScoket->waitForConnected();
 
 	return true;
 

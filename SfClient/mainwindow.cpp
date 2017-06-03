@@ -22,7 +22,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 	m_title = "思方工单助手";
 	m_audioOutput = NULL;
-	
+
+	// 一分钟一次心跳
+	m_heartBeatTimer.setInterval(SF_HEARTBEAT_INTERVAL);
 	initWidget();
 	initTray();
 
@@ -40,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 	connect(&m_mediaObject,SIGNAL(aboutToFinish()),&m_playThread,SLOT(beginPlay()));
 	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
-
+	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
 	// 启动语音队列线程
 	m_playThread.start();
 
@@ -395,6 +397,20 @@ void MainWindow::playSound(int id)
 	m_mediaObject.play();
 
 }
+void MainWindow::sendHearBeat()
+{
+	Json::Value root;
+	Json::FastWriter writer;
+	Json::Value person;
+
+	person["userName"] = Configer::instance()->getUser().toStdString();
+	person["siteId"] = Configer::instance()->getSiteId().toStdString();
+	root.append(person);
+
+	std::string json_file = writer.write(root);
+	NetClient::instance()->sendData(SF_CMD_HEARTBEAT,json_file.c_str(),json_file.length());
+}
+
 void MainWindow::sendReg()
 {
 	Json::Value root;
@@ -417,7 +433,7 @@ void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 	case SF_CMD_CONNECTED:
 		m_status->setText("成功连接服务器");
 		sendReg();
-
+		m_heartBeatTimer.start();
 		break;
 	case SF_CMD_DISCONNECTED:
 		m_status->setText("服务器连接中断");

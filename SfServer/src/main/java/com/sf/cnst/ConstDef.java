@@ -18,6 +18,9 @@ public class ConstDef {
 
 	// 业务提醒
 	public static  final int		SF_CMD_MESSAGE			= 1003;
+	
+	// 心跳消息
+	public static final int 		SF_CMD_HEARTBEAT		= 1111;
 
 	/*-------------------- 命令定义 END-----------------------*/
 	

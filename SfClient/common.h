@@ -35,6 +35,12 @@ typedef struct Vendors{
 // 播放语音文件
 #define		SF_CMD_PLAY_SOUND			1003
 
+// 心跳
+#define		SF_CMD_HEARTBEAT			1111
+
+// 心跳周期
+#define		SF_HEARTBEAT_INTERVAL		1000*60
+
 #define			DEV_TYPE_AIRCONDITIONER		 1	// 空调
 #define 		DEV_TYPE_REFRIGERATOR  		 2	// 冰箱
 #define 		DEV_TYPE_HEATER		 		 3	// 热水器
