@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 	connect(&m_mediaObject,SIGNAL(aboutToFinish()),&m_playThread,SLOT(beginPlay()));
+	connect(this,SIGNAL(finishPlay()),&m_playThread,SLOT(beginPlay()));
 	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
 	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
 	// 启动语音队列线程
@@ -309,6 +310,18 @@ void MainWindow::autoRun(bool bAutoRun)
 
 void MainWindow::playSound(int id)
 {
+	QString sound = QString("sound/tip%1.wav").arg(id);
+	m_sound = new QSound(sound);
+	if (m_sound->isAvailable())
+	{
+		m_sound->play();
+	}
+	
+	Sleep(6000);
+	emit finishPlay();
+	
+
+	/*
 	if (m_audioOutput != NULL)
 	{
 		delete m_audioOutput;
@@ -322,7 +335,7 @@ void MainWindow::playSound(int id)
 	Phonon::MediaSource source(sound);
 	m_mediaObject.setCurrentSource(source);
 	m_mediaObject.play();
-
+	*/
 }
 void MainWindow::sendHearBeat()
 {
@@ -368,6 +381,7 @@ void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 
 	case SF_CMD_PLAY_SOUND:
 		parseTcpResponse(msg);
+		qDebug(msg);
 		break;
 	default:
 		break;

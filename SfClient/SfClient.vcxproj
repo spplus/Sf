@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F6483CA6-9C9A-39CA-9EBD-A8B721661F54}</ProjectGuid>
+    <ProjectGuid>{BDF6B29A-740B-327F-B610-804B31B0F4D1}</ProjectGuid>
     <RootNamespace>SfClient</RootNamespace>
     <Keyword>Qt4VSv1.0</Keyword>
   </PropertyGroup>

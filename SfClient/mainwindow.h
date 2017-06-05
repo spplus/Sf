@@ -9,6 +9,7 @@
 #include <QSplitter>
 #include <qtimer.h>
 #include <QtGui>
+#include <QSound>
 #include <Phonon/MediaObject>
 #include <Phonon/MediaSource>
 #include <Phonon/AudioOutput>
@@ -33,6 +34,9 @@ public:
 
 	void		closeEvent(QCloseEvent *event);
 	void		setVendorData(QList<Vendors*> vendorList);
+
+signals:
+	void		finishPlay();
 public slots:
 
 	void		uploadLog();
@@ -63,6 +67,7 @@ private:
 	QToolButton*	tbFactory(QString btnName);
 private:
 
+	QSound*							m_sound;
 	QLabel*							m_status;
 	QString							m_title;
 	QTableWidget*					m_table;

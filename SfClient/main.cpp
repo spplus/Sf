@@ -3,6 +3,7 @@
 #include <QTextCodec>
 #include <QCoreApplication>
 #include <QPlastiqueStyle>
+#include <QPluginLoader>
 #include "mainwindow.h"
 #include "userlogindlg.h"
 #include "gocontroller.h"
@@ -21,11 +22,11 @@ int main(int argc, char *argv[])
 	{
 		return 0;  
 	}
-
 	QApplication::addLibraryPath("./plugins");
+	QString appDirPath = QApplication::applicationDirPath();
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion("1.0.8.3");
+	QCoreApplication::setApplicationVersion("1.0.8.4");
 
 #ifdef WIN32
 	// 设置编码
@@ -44,8 +45,6 @@ int main(int argc, char *argv[])
 #endif
 
 	a.setStyle(new QPlastiqueStyle);
-
-	QString appDirPath = QApplication::applicationDirPath();
 
 	//	汉字的转换器
 	QString translatorPath = appDirPath;
