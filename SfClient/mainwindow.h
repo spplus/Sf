@@ -10,9 +10,9 @@
 #include <qtimer.h>
 #include <QtGui>
 #include <QSound>
-#include <Phonon/MediaObject>
-#include <Phonon/MediaSource>
-#include <Phonon/AudioOutput>
+//#include <Phonon/MediaObject>
+//#include <Phonon/MediaSource>
+//#include <Phonon/AudioOutput>
 
 #include "common.h"
 #include "playthread.h"
@@ -78,8 +78,8 @@ private:
 	QTimer							m_heartBeatTimer;
 	QList<Vendors*>					m_vendorList;
 	PlayThread						m_playThread;
-	Phonon::MediaObject 			m_mediaObject;
-	Phonon::AudioOutput*			m_audioOutput;
+	//Phonon::MediaObject 			m_mediaObject;
+	//Phonon::AudioOutput*			m_audioOutput;
 };
 
 #endif // MAINWINDOW_H

@@ -21,7 +21,8 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 	m_title = "思方工单助手";
-	m_audioOutput = NULL;
+	//m_audioOutput = NULL;
+	m_sound = NULL;
 
 	// 一分钟一次心跳
 	m_heartBeatTimer.setInterval(SF_HEARTBEAT_INTERVAL);
@@ -40,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
-	connect(&m_mediaObject,SIGNAL(aboutToFinish()),&m_playThread,SLOT(beginPlay()));
+	//connect(&m_mediaObject,SIGNAL(aboutToFinish()),&m_playThread,SLOT(beginPlay()));
 	connect(this,SIGNAL(finishPlay()),&m_playThread,SLOT(beginPlay()));
 	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
 	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
@@ -129,18 +130,7 @@ void MainWindow::setVendorData(QList<Vendors*> vendorList)
 
 MainWindow::~MainWindow()
 {
-	/*if (m_mediaObject != NULL)
-	{
-		m_mediaObject->clear();
-		delete m_mediaObject;
-		m_mediaObject = NULL;
-	}
-	*/
-	if (m_audioOutput != NULL)
-	{
-		delete m_audioOutput;
-		m_audioOutput = NULL;
-	}
+	
 }
 
 
@@ -311,6 +301,11 @@ void MainWindow::autoRun(bool bAutoRun)
 void MainWindow::playSound(int id)
 {
 	QString sound = QString("sound/tip%1.wav").arg(id);
+	if (m_sound != NULL)
+	{
+		delete m_sound;
+		m_sound = NULL;
+	}
 	m_sound = new QSound(sound);
 	if (m_sound->isAvailable())
 	{

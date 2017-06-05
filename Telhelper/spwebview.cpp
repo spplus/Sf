@@ -7,6 +7,7 @@ SpWebView::SpWebView()
 {
 	setWindowIcon(QIcon(":images/tray.png"));
 	setWindowTitle("思方来电助手");
+	setMinimumWidth(800);
 }
 
 void SpWebView::closeEvent(QCloseEvent *event)
