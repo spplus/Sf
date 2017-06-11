@@ -541,8 +541,13 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 				err = QString("通道%1: 设备被拔掉").arg(m_nChannelID+1);				
 			}break;
 		
+		case BriEvent_PhoneDial:
+			//str.Format("通道%d: 电话机拨号 %s",m_nChannelID+1,strValue);
+			break;
 	
-	
+		case BriEvent_RingBack:
+			//	str.Format("通道%d: 拨号后接收到回铃音 %s",m_nChannelID+1,strValue);
+			break;
 		default:
 			{
 				str = QString("通道%1: 其它忽略事件 eventid=%2 lResult=%3 szData=%4").arg(m_nChannelID+1).arg(pEvent->lEventType).arg(pEvent->lResult).arg(pEvent->szData);

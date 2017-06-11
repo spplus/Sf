@@ -19,7 +19,7 @@ typedef struct Vendors{
 
 
 #define		SF_TCP_SERVER	"120.210.205.24"//"120.210.205.24"
-#define		SF_TCP_PORT		6666
+#define		SF_TCP_PORT		42710
 
 // 命令定义
 
@@ -50,4 +50,8 @@ typedef struct Vendors{
 #define 		DEV_TYPE_COOKINGBENCH  		 7	// 灶台
 #define 		DEV_TYPE_MICROWAVEOVEN 		 8	// 微波炉
 #define 		DEV_TYPE_SMALL		  		 9	// 小家电
+
+
+#define			FACTORY_MEDIA		"midea"
+
 #endif

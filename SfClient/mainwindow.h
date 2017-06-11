@@ -10,9 +10,6 @@
 #include <qtimer.h>
 #include <QtGui>
 #include <QSound>
-//#include <Phonon/MediaObject>
-//#include <Phonon/MediaSource>
-//#include <Phonon/AudioOutput>
 
 #include "common.h"
 #include "playthread.h"
@@ -41,7 +38,7 @@ public slots:
 
 	void		uploadLog();
 	void		sysExit();
-
+	void		onLogin();
 	void		playSound(int id);
 
 	// Êý¾Ý·µ»Ø

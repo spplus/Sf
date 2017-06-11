@@ -108,7 +108,7 @@ public class BusCenter {
 			
 				
 				// 测试代码 ，向客户端发送业务提醒消息
-				//ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_MESSAGE, "hello");
+				ClientMgr.instance().sendData(bean.getId(), ConstDef.SF_CMD_REG, "hello");
 				
 				break;
 			case ConstDef.SF_CMD_HEARTBEAT:

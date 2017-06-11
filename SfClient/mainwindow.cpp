@@ -13,6 +13,7 @@
 #include "titlewidget.h"
 #include "netclient.h"
 #include "configer.h"
+#include "factorylogin.h"
 #include <Windows.h>
 
 
@@ -60,9 +61,9 @@ void MainWindow::initWidget()
 
 	m_table = new QTableWidget;
 	m_table->setEditTriggers ( QAbstractItemView::NoEditTriggers );
-	m_table->setColumnCount(3);
+	m_table->setColumnCount(4);
 	QStringList headers;
-	headers<<"厂家"<<"账号"<<"状态";
+	headers<<"厂家"<<"账号"<<"状态"<<"操作";
 	m_table->setHorizontalHeaderLabels(headers);
 	m_table->setFrameShape(QFrame::NoFrame);
 	m_table->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -98,10 +99,29 @@ void MainWindow::initList()
 		
 		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorLoginName));
 
-		m_table->setItem(i,col,new QTableWidgetItem("未知"));
+		m_table->setItem(i,col++,new QTableWidgetItem("未知"));
 		
-		checkLogin(vend);
+		// 美的厂家，手动登陆
+		if (vend->vendorFactory == FACTORY_MEDIA)
+		{
+			QPushButton *btn = new QPushButton();
+			btn->setText("登陆");
+			m_table->setCellWidget(i,col,btn);
+			connect(btn,SIGNAL(pressed()),this,SLOT(onLogin()));
+		}
+		else
+		{
+			checkLogin(vend);
+		}
+		
 	}
+}
+
+void MainWindow::onLogin()
+{
+	FactoryLogin* flogin = new FactoryLogin(this);
+	//flogin.exec();
+	//QMessageBox::information(this,"dd","dd");
 }
 
 void MainWindow::checkLogin(Vendors* vend)
@@ -130,7 +150,7 @@ void MainWindow::setVendorData(QList<Vendors*> vendorList)
 
 MainWindow::~MainWindow()
 {
-	
+	NetClient::instance()->close();
 }
 
 
@@ -226,6 +246,7 @@ void MainWindow::sysExit()
 	int  ret = QMessageBox::question(this,"思方工单助手","是否确定退出思方工单助手?",QMessageBox::Yes|QMessageBox::No);
 	if (ret == QMessageBox::Yes)
 	{
+		NetClient::instance()->close();
 		GoController::instance()->goExit();
 		exit(0);
 	}
@@ -363,6 +384,7 @@ void MainWindow::sendReg()
 
 void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 {
+
 	switch (msgtype)
 	{
 	case SF_CMD_CONNECTED:
@@ -378,6 +400,9 @@ void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 		parseTcpResponse(msg);
 		qDebug(msg);
 		break;
+	case SF_CMD_REG:
+		m_status->setText("注册成功");
+		break;
 	default:
 		break;
 	}
@@ -389,7 +414,6 @@ void MainWindow::parseTcpResponse(const char* msg)
 	Json::Value value;
 	string js;
 	js.append(msg);
-	m_vendorList.clear();
 	if(reader.parse(js,value))
 	{
 		string id  = value["category"].asString();

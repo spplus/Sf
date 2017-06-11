@@ -15,7 +15,7 @@ QMAKE_RCC=$$(QTDIR)/bin/rcc.exe
 
 INCLUDEPATH += ../common/include
 
-QT += core gui widgets network phonon
+QT += core gui widgets network 
 #CONFIG += console
 
 TARGET = ../../bin/SfClient
@@ -32,6 +32,7 @@ SOURCES += main.cpp\
 	titlewidget.cpp \
 	netclient.cpp \
 	playthread.cpp \
+	factorylogin.cpp \
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
 	../common/include/jsoncpp/json_reader.cpp \
@@ -51,6 +52,7 @@ HEADERS  += mainwindow.h \
 			titlewidget.h \
 			netclient.h \
 			playthread.h \
+			factorylogin.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \
 			../common/include/jsoncpp/features.h \

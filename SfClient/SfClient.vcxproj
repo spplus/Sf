@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>"$(QTDIR)\include\QtCore";"$(QTDIR)\include\QtNetwork";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\phonon";"$(QTDIR)\include";"..\common\include";"$(QTDIR)\include\ActiveQt";"$(QTDIR)\include\phonon_compat";"debug";$(QTDIR)\mkspecs\default;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\$(QTDIR)\include\QtCore";"..\$(QTDIR)\include\QtNetwork";"..\$(QTDIR)\include\QtGui";"..\$(QTDIR)\include";"..\common\include";"..\$(QTDIR)\include\ActiveQt";"debug";..\$(QTDIR)\mkspecs\default;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -62,7 +62,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>debug\</ObjectFileName>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_PHONON_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -72,7 +72,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;$(QTDIR)\lib\phonond4.lib;$(QTDIR)\lib\QtGuid4.lib;$(QTDIR)\lib\QtNetworkd4.lib;$(QTDIR)\lib\QtCored4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;$(QTDIR)\lib\QtGuid4.lib;$(QTDIR)\lib\QtNetworkd4.lib;$(QTDIR)\lib\QtCored4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -89,19 +89,19 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_PHONON_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>"$(QTDIR)\include\QtCore";"$(QTDIR)\include\QtNetwork";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\phonon";"$(QTDIR)\include";"..\common\include";"$(QTDIR)\include\ActiveQt";"$(QTDIR)\include\phonon_compat";"release";$(QTDIR)\mkspecs\default;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\$(QTDIR)\include\QtCore";"..\$(QTDIR)\include\QtNetwork";"..\$(QTDIR)\include\QtGui";"..\$(QTDIR)\include";"..\common\include";"..\$(QTDIR)\include\ActiveQt";"release";..\$(QTDIR)\mkspecs\default;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>release\</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_NO_DEBUG;QT_PHONON_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -111,7 +111,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\phonon4.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtCore4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtCore4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -129,11 +129,12 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_NO_DEBUG;QT_PHONON_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="configer.cpp" />
+    <ClCompile Include="factorylogin.cpp" />
     <ClCompile Include="gocontroller.cpp" />
     <ClCompile Include="..\common\include\jsoncpp\json_reader.cpp" />
     <ClCompile Include="..\common\include\jsoncpp\json_value.cpp" />
@@ -152,118 +153,80 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="..\common\include\jsoncpp\config.h" />
     <ClInclude Include="configer.h" />
+    <CustomBuild Include="factorylogin.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;factorylogin.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 factorylogin.h -o debug\moc_factorylogin.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC factorylogin.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_factorylogin.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;factorylogin.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 factorylogin.h -o release\moc_factorylogin.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC factorylogin.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_factorylogin.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="..\common\include\jsoncpp\features.h" />
     <ClInclude Include="..\common\include\jsoncpp\forwards.h" />
     <ClInclude Include="gocontroller.h" />
     <ClInclude Include="..\common\include\jsoncpp\json.h" />
     <ClInclude Include="..\common\include\jsoncpp\json_batchallocator.h" />
     <CustomBuild Include="mainwindow.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile debug\moc_mainwindow.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"debug" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o debug\moc_mainwindow.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o debug\moc_mainwindow.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC mainwindow.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_mainwindow.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile release\moc_mainwindow.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"release" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o release\moc_mainwindow.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;mainwindow.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 mainwindow.h -o release\moc_mainwindow.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC mainwindow.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="netclient.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem;netclient.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile debug\moc_netclient.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"debug" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 netclient.h -o debug\moc_netclient.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;netclient.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 netclient.h -o debug\moc_netclient.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC netclient.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_netclient.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem;netclient.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile release\moc_netclient.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"release" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 netclient.h -o release\moc_netclient.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;netclient.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 netclient.h -o release\moc_netclient.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC netclient.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_netclient.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="playthread.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem;playthread.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile debug\moc_playthread.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"debug" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 playthread.h -o debug\moc_playthread.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;playthread.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 playthread.h -o debug\moc_playthread.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC playthread.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_playthread.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem;playthread.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile release\moc_playthread.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"release" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 playthread.h -o release\moc_playthread.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;playthread.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 playthread.h -o release\moc_playthread.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC playthread.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_playthread.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\common\include\qhttp\qhttpnetwork.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\common\include\qhttp\qhttpnetwork.h;Rem;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile debug\moc_qhttpnetwork.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"debug" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o debug\moc_qhttpnetwork.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\common\include\qhttp\qhttpnetwork.h;$(QTDIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o debug\moc_qhttpnetwork.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC ..\common\include\qhttp\qhttpnetwork.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\common\include\qhttp\qhttpnetwork.h;Rem;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile release\moc_qhttpnetwork.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"release" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o release\moc_qhttpnetwork.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\common\include\qhttp\qhttpnetwork.h;$(QTDIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 ..\common\include\qhttp\qhttpnetwork.h -o release\moc_qhttpnetwork.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC ..\common\include\qhttp\qhttpnetwork.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_qhttpnetwork.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="..\common\include\jsoncpp\reader.h" />
     <CustomBuild Include="titlewidget.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile debug\moc_titlewidget.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"debug" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o debug\moc_titlewidget.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o debug\moc_titlewidget.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC titlewidget.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_titlewidget.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile release\moc_titlewidget.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"release" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o release\moc_titlewidget.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;titlewidget.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 titlewidget.h -o release\moc_titlewidget.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC titlewidget.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_titlewidget.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="topwidget.h" />
     <CustomBuild Include="userlogindlg.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem;userlogindlg.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile debug\moc_userlogindlg.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"debug" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 userlogindlg.h -o debug\moc_userlogindlg.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;userlogindlg.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"debug" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 userlogindlg.h -o debug\moc_userlogindlg.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC userlogindlg.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_userlogindlg.cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem;userlogindlg.h;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rem IncrediBuild_AllowRemote 
-if errorlevel 1 goto VCEnd
- Rem IncrediBuild_OutputFile release\moc_userlogindlg.cpp 
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_PHONON_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtNetwork" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\phonon" -I"$(QTDIR)\include" -I"..\common\include" -I"$(QTDIR)\include\ActiveQt" -I"$(QTDIR)\include\phonon_compat" -I"release" -I$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 userlogindlg.h -o release\moc_userlogindlg.cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;userlogindlg.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"..\$(QTDIR)\include\QtCore" -I"..\$(QTDIR)\include\QtNetwork" -I"..\$(QTDIR)\include\QtGui" -I"..\$(QTDIR)\include" -I"..\common\include" -I"..\$(QTDIR)\include\ActiveQt" -I"release" -I..\$(QTDIR)\mkspecs\default -D_MSC_VER=1600 -DWIN32 userlogindlg.h -o release\moc_userlogindlg.cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC userlogindlg.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_userlogindlg.cpp;%(Outputs)</Outputs>
     </CustomBuild>
@@ -271,6 +234,12 @@ if errorlevel 1 goto VCEnd
     <ClInclude Include="..\common\include\jsoncpp\writer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_factorylogin.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_factorylogin.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>

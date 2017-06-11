@@ -40,6 +40,9 @@
     <ClCompile Include="configer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="factorylogin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="gocontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,6 +93,9 @@
     <ClInclude Include="configer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="factorylogin.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="..\common\include\jsoncpp\features.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -137,6 +143,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_factorylogin.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_factorylogin.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="debug\moc_mainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>

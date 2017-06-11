@@ -20,7 +20,7 @@ GoController* GoController::instance()
 
 void GoController::goRun(QString path)
 {
-	QString program = "woodpeckerd.exe";   
+	QString program = "woodpeckerdn.exe";   
 	QStringList arguments;  
 	arguments << "debug"<<path;  
 	m_pro.start(program, arguments);  

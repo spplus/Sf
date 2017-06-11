@@ -81,6 +81,10 @@ public class ClientMgr {
 		}
 	}
 	
+	public int getClientSize(){
+		return online.size();
+	}
+	
 	public ClientBean getClientInfo(Long connid){
 		IoSession io = getSssion(connid);
 		if(io != null){

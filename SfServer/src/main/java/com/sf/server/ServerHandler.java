@@ -36,7 +36,15 @@ public class ServerHandler extends IoHandlerAdapter {
 	@Override  
     public void exceptionCaught(IoSession session, Throwable cause)  
             throws Exception {  
-        cause.printStackTrace();  
+        //cause.printStackTrace();  
+        ClientBean bean = ClientMgr.instance().getClientInfo(session.getId());
+        
+        String clientInfo = "";
+        if(bean != null){
+        	clientInfo = bean.toString();
+        }
+        SpLogger.info(" exceptionCaught --> "+clientInfo);  
+        ClientMgr.instance().offLine(session);
     }  
   
     /* 
@@ -67,8 +75,11 @@ public class ServerHandler extends IoHandlerAdapter {
         if(bean != null){
         	clientInfo = bean.toString();
         }
-        SpLogger.info("client disconnected --> "+clientInfo);  
+        SpLogger.info("client disconnected --> "+clientInfo); 
+        
         ClientMgr.instance().offLine(session);
+        
+        SpLogger.info("online size --> "+ClientMgr.instance().getClientSize()); 
     }  
   
 }  

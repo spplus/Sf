@@ -95,17 +95,7 @@ void TitleWidget::onlineHelp()
 void TitleWidget::uploadFile()
 {
 
-	Json::Value root;
-	Json::FastWriter writer;
-	Json::Value person;
-
-	person["userName"] = Configer::instance()->getUser().toStdString();
-	person["siteId"] = Configer::instance()->getSiteId().toStdString();
-	root.append(person);
-
-	std::string json_file = writer.write(root);
-	NetClient::instance()->sendData(SF_CMD_REG,json_file.c_str(),json_file.length());
-
+	NetClient::instance()->close();
 	
 }
 
@@ -114,6 +104,7 @@ void TitleWidget::sysExit()
 	int  ret = QMessageBox::question(this,"思方工单助手","是否确定退出思方工单助手?",QMessageBox::Yes|QMessageBox::No);
 	if (ret == QMessageBox::Yes)
 	{
+		NetClient::instance()->close();
 		GoController::instance()->goExit();
 		exit(0);
 	}

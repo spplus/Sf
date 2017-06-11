@@ -60,7 +60,7 @@ bool NetClient::init()
 
 	//定时器
 	m_pTimer = new QTimer(this);
-	m_pTimer->setInterval(1000);
+	m_pTimer->setInterval(3000);
 
 	connect(m_pTimer,SIGNAL(timeout()),this,SLOT(checkConnect()));
 
@@ -108,7 +108,7 @@ bool NetClient::connectToServer(const QString srvName,quint16 port)
 
 	//连接服务器
 	m_pTcpScoket->connectToHost(srvName,port);
-	m_pTcpScoket->waitForConnected();
+	//m_pTcpScoket->waitForConnected();
 
 	return true;
 
@@ -119,7 +119,8 @@ bool NetClient::connectToServer(const QString srvName,quint16 port)
 void NetClient::close()
 {
 	m_pTcpScoket->disconnectFromHost();
-	if (!m_pTcpScoket->waitForDisconnected(1000))
+
+	if (!m_pTcpScoket->waitForDisconnected())
 	{
 		qDebug("客户端断开服务器失败");
 	}
