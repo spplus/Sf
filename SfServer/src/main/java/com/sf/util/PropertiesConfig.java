@@ -13,9 +13,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 
-/**
- * @author liuqing
- */
+
 public abstract class PropertiesConfig implements Configurable {
 
 	protected Properties prop=new Properties();
