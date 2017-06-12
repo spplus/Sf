@@ -34,7 +34,6 @@ void FactoryLogin::loadImg()
 	QNetworkRequest request;
 
 	// 发送https请求前准备工作;
-	QSslConfiguration::defaultConfiguration();
 	//QSslConfiguration conf = request.sslConfiguration();
 	/*QSslConfiguration conf = request.sslConfiguration();
 	conf.setPeerVerifyMode(QSslSocket::VerifyNone);

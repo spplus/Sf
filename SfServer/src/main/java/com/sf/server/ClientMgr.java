@@ -66,7 +66,8 @@ public class ClientMgr {
 	private IoSession getSssion(Long connid){
 		
 		for (Entry<Long, IoSession> entry : online.entrySet()) {
-			if(entry.getKey() == connid){
+			Long key = entry.getKey();
+			if(key.equals(connid)){
 				return entry.getValue();
 			}
 		}
@@ -118,7 +119,7 @@ public class ClientMgr {
 		
 		for(int i = 0;i<ioList.size();i++){
 			IoSession io = ioList.get(i);
-			mb.setConnectId(io.getId());
+			mb.setConnectId(io.getId()); 
 			WriteFuture wf = io.write(mb);
 			wf.awaitUninterruptibly(3000);
 			if(wf.isDone()){
