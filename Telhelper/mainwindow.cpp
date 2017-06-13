@@ -15,6 +15,9 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
+	// 默认去电状态
+	m_telType = 2;
+
 	m_title = "思方来电助手";
 
 	initWidget();
@@ -206,8 +209,18 @@ QString MainWindow::getCurDateTime(QString fmt/* ="yyyy-MM-dd hh:mm:ss" */)
 	QString ctime = dt.currentDateTime().toString(fmt);
 	return ctime;
 }
+
+void MainWindow::telOut(QString svalue)
+{
+	int idx = svalue.lastIndexOf("=");
+	m_telnum = svalue.right(svalue.length()-idx-1);
+}
+
 void MainWindow::dealIn(QString telnum)
 {
+	// 通话类型设置为来电
+	m_telType = 1;
+
 	int idx = telnum.lastIndexOf("=");
 	telnum = telnum.right(telnum.length()-idx-1);
 
@@ -505,10 +518,13 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 					//QNV_SetDevCtrl(m_nChannelID,QNV_CTRL_DOHOOK,0);//电话机已经拿着可以考虑自动软挂机,避免3方通话状态，话机里有背景音出现
 				}
 				str = QString("通道%1: 拨号结束 %2").arg(m_nChannelID+1).arg(strValue);
-			}break;
+				appendInfo(str);
+			}
+			break;
 		
 		case BriEvent_RefuseEnd:
-			str = QString("通道%1: 拒接来电完成 %2").arg(m_nChannelID+1).arg(strValue);break;	
+			str = QString("通道%1: 拒接来电完成 %2").arg(m_nChannelID+1).arg(strValue);
+			break;	
 		
 		case BriEvent_CheckLine:
 			{
@@ -542,11 +558,15 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 			}break;
 		
 		case BriEvent_PhoneDial:
-			//str.Format("通道%d: 电话机拨号 %s",m_nChannelID+1,strValue);
+			//str = QString("通道%1: 电话机拨号 %2").arg(m_nChannelID+1).arg(strValue);
+			//appendInfo(str);
+			telOut(strValue);
 			break;
 	
 		case BriEvent_RingBack:
-			//	str.Format("通道%d: 拨号后接收到回铃音 %s",m_nChannelID+1,strValue);
+			str = QString("通道%1: 拨号后接收到回铃音 %2").arg(m_nChannelID+1).arg(strValue);
+			appendInfo(str);
+
 			break;
 		default:
 			{
@@ -614,12 +634,13 @@ void MainWindow::mkdir()
 
 void MainWindow::startRecAudio()
 {
+	
 	mkdir();
 
-	QString filename = m_audioDir+"/"+getCurDateTime("yyyyMMddhhmmss")+"-"+m_telnum+".wav";
+	m_audioName = m_audioDir+"/"+getCurDateTime("yyyyMMddhhmmss")+"-"+m_telnum+".wav";
 
 	DWORD dwMask=0;
-	m_lRecFileHandle = QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_START,BRI_WAV_FORMAT_DEFAULT,dwMask,(char*)(filename.toStdString().c_str()));		
+	m_lRecFileHandle = QNV_RecordFile(m_nChannelID,QNV_RECORD_FILE_START,BRI_WAV_FORMAT_DEFAULT,dwMask,(char*)(m_audioName.toStdString().c_str()));		
 	if(m_lRecFileHandle <= 0)
 	{
 		QString str = QString("录音失败 errid=%1").arg(m_lRecFileHandle);
@@ -635,6 +656,20 @@ void MainWindow::startRecAudio()
 
 void MainWindow::stopRecAudio()
 {
+
+	// 重命名文件
+	QString typeName = "in";
+	if (m_telType == 1)
+	{
+		typeName = "in";
+	}
+	else
+	{
+		typeName = "out";
+	}
+
+	QString newName = m_audioDir+"/"+getCurDateTime("yyyyMMddhhmmss")+"-"+m_telnum+"-"+typeName+".wav";
+
 	long lElapse=0;
 	if(m_lRecFileHandle > 0)
 	{
@@ -647,9 +682,21 @@ void MainWindow::stopRecAudio()
 		}
 		
 		m_lRecFileHandle = -1;
-		QString str = QString("停止录音 时长=%1秒 路径=%2").arg(lElapse).arg(szPath);
+		QString str = QString("停止录音 时长=%1秒 路径=%2").arg(lElapse).arg(newName);
 		appendInfo(str);
 	}
+
+	if(!QFile::rename(m_audioName,newName))
+	{
+		appendInfo("重命名录音文件失败:"+newName);
+	}
+
+	// 清空上一个来电号码
+	m_telnum = "";
+
+	// 恢复通话类型为拨号
+	m_telType = 2;
+
 }
 
 void MainWindow::requestVersion()

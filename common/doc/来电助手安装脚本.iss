@@ -2,13 +2,14 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方来电助手"
-#define MyAppVersion "1.0.3.1"
+#define MyAppVersion "1.0.3.2"
 #define MyAppPublisher "思方软件科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "telhelper.exe"
 #define APP_PATH "F:\Project\src\Sf\bin\"
 #define DOC_PATH "F:\Project\src\Sf\common\doc\"
 #define OUT_PATH "F:\Project\src\Sf\common\doc"
+#define INSTALL_PATH "D:\Program Files (x86)\"
 
 #define MAINAPP     "telhelper.exe"
 #define STYLE       "style.qss"
@@ -36,7 +37,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\{#MyAppName}
+DefaultDirName={#INSTALL_PATH}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 OutputDir={#OUT_PATH}
 OutputBaseFilename={#MyAppName}-v{#MyAppVersion}

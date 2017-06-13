@@ -51,6 +51,7 @@ public slots:
 	void		trayIconAction(QSystemTrayIcon::ActivationReason reason);
 private:
 	void		mkdir();
+	void		telOut(QString svalue);
 	void		startRecAudio();
 	void		stopRecAudio();
 	void		autoRun(bool bAutoRun = true);
@@ -71,6 +72,9 @@ private:
 
 private:
 
+	// 通话类型 1来电，2 去电
+	int								m_telType;
+
 	// 录音文件目录
 	QString							m_audioDir;
 
@@ -85,6 +89,9 @@ private:
 
 	// 当前通道
 	int								m_nChannelID;
+
+	// 录音文件名称
+	QString							m_audioName;
 
 	// 录音文件句柄
 	long							m_lRecFileHandle;
