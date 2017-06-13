@@ -53,5 +53,20 @@ typedef struct Vendors{
 
 
 #define			FACTORY_MEDIA		"midea"
+#define			KEY_FACTORY			"factory"
+
+
+// URL定义
+
+// 图片验证码请求地址
+#define			URL_CAPTCHA				"http://localhost:8000/captcha"
+
+// 厂家登录接口
+#define			URL_FACTORY_LONGIN		"http://localhost:8000/login"
+
+// 业务服务器地址
+#define			URL_MAIN_SERVER			"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
+
+#define			URL_REPT				"http://local.b"
 
 #endif

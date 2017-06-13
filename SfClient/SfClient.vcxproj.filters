@@ -37,6 +37,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="captlabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="configer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,6 +87,9 @@
     <ClInclude Include="..\common\include\jsoncpp\autolink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="captlabel.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -143,6 +149,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_captlabel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_captlabel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="debug\moc_factorylogin.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>

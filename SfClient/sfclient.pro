@@ -33,6 +33,7 @@ SOURCES += main.cpp\
 	netclient.cpp \
 	playthread.cpp \
 	factorylogin.cpp \
+	captlabel.cpp \
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
 	../common/include/jsoncpp/json_reader.cpp \
@@ -53,6 +54,7 @@ HEADERS  += mainwindow.h \
 			netclient.h \
 			playthread.h \
 			factorylogin.h \
+			captlabel.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \
 			../common/include/jsoncpp/features.h \

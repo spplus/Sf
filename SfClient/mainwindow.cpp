@@ -105,6 +105,7 @@ void MainWindow::initList()
 		if (vend->vendorFactory == FACTORY_MEDIA)
 		{
 			QPushButton *btn = new QPushButton();
+			
 			btn->setText("登陆");
 			m_table->setCellWidget(i,col,btn);
 			connect(btn,SIGNAL(pressed()),this,SLOT(onLogin()));
@@ -119,27 +120,25 @@ void MainWindow::initList()
 
 void MainWindow::onLogin()
 {
-	FactoryLogin* flogin = new FactoryLogin(this);
-	//flogin.exec();
-	//QMessageBox::information(this,"dd","dd");
+	FactoryLogin flogin(this);
+	flogin.exec();
 }
 
 void MainWindow::checkLogin(Vendors* vend)
 {
-	QString mainUrl = "http://www.sifangerp.com/mainserver/sfm/main/receiveOrders";
-	QString reptUrl = "http://local.b";
+	//QString mainUrl = "http://www.sifangerp.com/mainserver/sfm/main/receiveOrders";
+	//QString reptUrl = "http://local.b";
 
-	//QString url = "http://2ddeb837.ngrok.io/login";
-	QString url = "http://localhost:8000/login";
+	//QString url = "http://localhost:8000/login";
 	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"mainServerHost\":\"%4\",\"statusReportHost\":\"%5\"}")
 		.arg(vend->vendorLoginName)
 		.arg(vend->vendorPassword)
 		.arg(vend->vendorFactory)
-		.arg(mainUrl)
-		.arg(reptUrl);
+		.arg(URL_MAIN_SERVER)
+		.arg(URL_REPT);
 	QByteArray req ;
 	req.append(json);
-	QhttpNetwork::instance()->post(url,req);
+	QhttpNetwork::instance()->post(URL_FACTORY_LONGIN,req);
 }
 
 void MainWindow::setVendorData(QList<Vendors*> vendorList)
@@ -336,22 +335,6 @@ void MainWindow::playSound(int id)
 	Sleep(6000);
 	emit finishPlay();
 	
-
-	/*
-	if (m_audioOutput != NULL)
-	{
-		delete m_audioOutput;
-		m_audioOutput = NULL;
-	}
-	
-	m_audioOutput = new Phonon::AudioOutput(Phonon::VideoCategory, this);
-	Phonon::createPath(&m_mediaObject, m_audioOutput);
-	
-	QString sound = QString("sound/tip%1.mp3").arg(id);
-	Phonon::MediaSource source(sound);
-	m_mediaObject.setCurrentSource(source);
-	m_mediaObject.play();
-	*/
 }
 void MainWindow::sendHearBeat()
 {
