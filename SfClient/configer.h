@@ -19,6 +19,7 @@ public:
 	void		setSiteId(QString siteid);
 	QString		getSiteId();
 	QString		getValue(QString key);
+	void		setValue(QString key,QString val);
 	
 private:
 	Configer();

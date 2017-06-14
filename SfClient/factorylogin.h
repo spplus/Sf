@@ -11,6 +11,10 @@ class FactoryLogin	:public QDialog
 public:
 	FactoryLogin(QWidget* parent);
 	void	showDlg();
+	void	setContext(int row,QString factory,QString user,QString pwd);
+
+signals:
+	void	loginResp(int row,Json::Value &jvalue);	
 public slots:
 	void	replyFinished(QNetworkReply *reply);
 
@@ -18,10 +22,17 @@ public slots:
 	void	longin();
 
 private:
+	void		initUi();
 	void		parseCaptResp(Json::Value &jvalue);
 	void		pareLoginResp(Json::Value& jvalue);
 
 private:
+
+	int				m_rownum;
+	QTimer			m_captTimer;
+	QString			m_factory;
+	QString			m_user;
+	QString			m_pwd;
 	QLineEdit*		m_capt;
 	QString			m_sessionId;
 	QString			m_timeStamp;

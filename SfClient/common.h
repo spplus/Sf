@@ -8,7 +8,7 @@ typedef struct Vendors{
 	QString vendorLoginName;
 	QString	vendorFactory;
 	Vendors()
-	{
+	{	
 		vendorUrl = "";
 		vendorName = "";
 		vendorPassword = "";
@@ -41,6 +41,12 @@ typedef struct Vendors{
 // 心跳周期
 #define		SF_HEARTBEAT_INTERVAL		1000*60
 
+// 缓存检查周期
+#define		SF_SESSIONCHER_INTERVAL		1000
+
+// 验证码刷新间隔
+#define		SF_CAPTCHA_INTERVAL			1000*100
+
 #define			DEV_TYPE_AIRCONDITIONER		 1	// 空调
 #define 		DEV_TYPE_REFRIGERATOR  		 2	// 冰箱
 #define 		DEV_TYPE_HEATER		 		 3	// 热水器
@@ -53,8 +59,13 @@ typedef struct Vendors{
 
 
 #define			FACTORY_MEDIA		"midea"
-#define			KEY_FACTORY			"factory"
+#define			KEY_FACTORY			"/SF/factory"
+#define			PROPERTY_ROWNUM		"rownum"
+#define			PROPERTY_FACTORY	"factory"
+#define			PROPERTY_USER		"user"
+#define			PROPERTY_PWD		"pwd"
 
+#define			RESULT_TRUE			"true"
 
 // URL定义
 
@@ -68,5 +79,7 @@ typedef struct Vendors{
 #define			URL_MAIN_SERVER			"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
 
 #define			URL_REPT				"http://local.b"
+
+#define			URL_SESSION_CHECK		"http://localhost:8000/sessionValid"
 
 #endif

@@ -13,13 +13,13 @@
 #include "titlewidget.h"
 #include "netclient.h"
 #include "configer.h"
-#include "factorylogin.h"
+
 #include <Windows.h>
 
 
 using namespace std;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),m_flogin(this)
 {
 	m_title = "思方工单助手";
 	//m_audioOutput = NULL;
@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	// 一分钟一次心跳
 	m_heartBeatTimer.setInterval(SF_HEARTBEAT_INTERVAL);
+
+	m_sesstionChecker.setInterval(SF_SESSIONCHER_INTERVAL);
+
 	initWidget();
 	initTray();
 
@@ -42,10 +45,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
-	//connect(&m_mediaObject,SIGNAL(aboutToFinish()),&m_playThread,SLOT(beginPlay()));
 	connect(this,SIGNAL(finishPlay()),&m_playThread,SLOT(beginPlay()));
 	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
 	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
+	connect(&m_sesstionChecker,SIGNAL(timeout()),this,SLOT(sesstionChecker()));
+	connect(&m_flogin,SIGNAL(loginResp(int,Json::Value&)),this,SLOT(loginResp(int,Json::Value&)));
+
 	// 启动语音队列线程
 	m_playThread.start();
 
@@ -99,13 +104,17 @@ void MainWindow::initList()
 		
 		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorLoginName));
 
-		m_table->setItem(i,col++,new QTableWidgetItem("未知"));
+		m_table->setItem(i,col++,new QTableWidgetItem(""));
 		
 		// 美的厂家，手动登陆
 		if (vend->vendorFactory == FACTORY_MEDIA)
 		{
 			QPushButton *btn = new QPushButton();
-			
+			btn->setProperty(PROPERTY_ROWNUM,i);
+			btn->setProperty(PROPERTY_FACTORY,vend->vendorFactory);
+			btn->setProperty(PROPERTY_USER,vend->vendorLoginName);
+			btn->setProperty(PROPERTY_PWD,vend->vendorPassword);
+
 			btn->setText("登陆");
 			m_table->setCellWidget(i,col,btn);
 			connect(btn,SIGNAL(pressed()),this,SLOT(onLogin()));
@@ -120,16 +129,22 @@ void MainWindow::initList()
 
 void MainWindow::onLogin()
 {
-	FactoryLogin flogin(this);
-	flogin.exec();
+	QObject* obj = sender();
+	if (obj != NULL)
+	{
+		int row = obj->property(PROPERTY_ROWNUM).toInt();
+		QString factory = obj->property(PROPERTY_FACTORY).toString();
+		QString user = obj->property(PROPERTY_USER).toString();
+		QString pwd = obj->property(PROPERTY_PWD).toString();
+		m_flogin.setContext(row,factory,user,pwd);
+	}
+	
+	m_flogin.showDlg();
+	//m_flogin.exec();
 }
 
 void MainWindow::checkLogin(Vendors* vend)
 {
-	//QString mainUrl = "http://www.sifangerp.com/mainserver/sfm/main/receiveOrders";
-	//QString reptUrl = "http://local.b";
-
-	//QString url = "http://localhost:8000/login";
 	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"mainServerHost\":\"%4\",\"statusReportHost\":\"%5\"}")
 		.arg(vend->vendorLoginName)
 		.arg(vend->vendorPassword)
@@ -185,7 +200,12 @@ void MainWindow::replyData(QByteArray data)
 	{
 		
 		string success = value["success"].asString();
+		string status = value["status"].asString();
 		
+		if (status.length()>1)
+		{
+			parserSession(value);
+		}
 		// 过滤非本类型消息
 		if (success.length()<=0)
 		{
@@ -308,7 +328,6 @@ void MainWindow::autoRun(bool bAutoRun)
 	if (bAutoRun)
 	{
 		QString strAppPath=QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
-		//strAppPath.replace(QChar('/'),QChar('\\'),Qt::CaseInsensitive);
 		reg.setValue("sfclient",strAppPath);
 	}
 	else
@@ -365,6 +384,54 @@ void MainWindow::sendReg()
 		
 }
 
+void MainWindow::loginResp(int row,Json::Value& jvalue)
+{
+	QTableWidgetItem* item = m_table->item(row,2);
+	if (item == NULL)
+	{
+		return;
+	}
+	QWidget* btn = m_table->cellWidget(row,3);
+	string sucess = jvalue["success"].asString();
+	if (sucess == RESULT_TRUE)
+	{
+		// 登录成功
+		
+		item->setText("登录成功");
+		item->setTextColor(Qt::green);
+		
+		// 启动sestion过期检查
+		m_sesstionChecker.start();
+
+		if (btn != NULL)
+		{
+			btn->setEnabled(false);
+		}
+	}
+	else
+	{
+		string code = jvalue["code"].asString();
+		if (code == "c4")
+		{
+			item->setText("用户名或者密码错误");
+		}
+		else if (code == "m3")
+		{
+			item->setText("验证码过期");
+		}
+		else if (code == "m4")
+		{
+			item->setText(" 验证码输入错误");
+		}
+		else
+		{
+			item->setText("登录失败");
+		}
+		item->setTextColor(Qt::red);
+
+	}
+}
+
 void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 {
 
@@ -403,4 +470,50 @@ void MainWindow::parseTcpResponse(const char* msg)
 		m_playThread.enqueue(atoi(id.c_str()));
 		
 	}
+}
+
+void MainWindow::sesstionChecker()
+{
+	for (int i = 0;i<m_vendorList.size();i++)
+	{
+		Vendors * vend = m_vendorList.at(i);
+		if (vend->vendorFactory == FACTORY_MEDIA)
+		{
+			sendSessionChecker(vend);
+		}
+	}
+}
+
+void MainWindow::parserSession(Json::Value & jvalue)
+{
+	string status = jvalue["status"].asString();
+	if (!(status == RESULT_TRUE))
+	{
+		string user = jvalue["user"].asString();
+		string factory = jvalue["factory"].asString();
+		int row = m_table->rowCount();
+		for (int i = 0;i<row;i++)
+		{
+			QTableWidgetItem* itemFactory = m_table->item(i,0);
+			QTableWidgetItem* itemUser = m_table->item(i,1);
+			if (itemUser->text().toStdString() == user && itemFactory->text().toStdString() == factory)
+			{
+				QTableWidgetItem* itemStatus = m_table->item(i,2);
+				itemStatus->setText("会话过期，请重新登录");
+				itemStatus->setBackgroundColor(Qt::red);
+				m_table->cellWidget(i,3)->setEnabled(true);
+			}
+		}
+	}
+
+}
+
+void MainWindow::sendSessionChecker(Vendors *vender)
+{
+	QString json = QString("{\"user\":\"%1\",\"factory\":\"%2\"}")
+		.arg(vender->vendorLoginName)
+		.arg(vender->vendorFactory);
+	QByteArray req ;
+	req.append(json);
+	QhttpNetwork::instance()->post(URL_SESSION_CHECK,req);
 }

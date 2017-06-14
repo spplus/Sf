@@ -65,3 +65,8 @@ QString Configer::getValue(QString key)
 {
 	return m_setting->value(key).toString();
 }
+
+void Configer::setValue(QString key,QString val)
+{
+	m_setting->setValue(key,val);
+}

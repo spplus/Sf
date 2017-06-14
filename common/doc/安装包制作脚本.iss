@@ -2,15 +2,14 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方工单助手"
-#define MyAppVersion "1.0.10"
+#define MyAppVersion "1.0.10.1"
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
-#define APP_PATH "D:\work\Sf\bin\"
-#define DOC_PATH "D:\work\Sf\common\doc\"
-#define OUT_PATH "D:\work\Sf\common\doc"
+#define APP_PATH "F:\Project\src\Sf\bin\"
+#define DOC_PATH "F:\Project\src\Sf\common\doc\"
+#define OUT_PATH "F:\Project\src\Sf\common\doc"
 #define SOUND_DIR "sound\"
-;#define PLUGINS_BACKEND "plugins\phonon_backend\"
 #define INSTALL_PATH "D:\Program Files (x86)\"
 
 #define SFCLIENT    "SfClient.exe"
@@ -24,7 +23,6 @@
 #define GUI         "QtGui4.dll"
 #define NETWORK     "QtNetwork4.dll"
 #define ZHCN        "qt_zh_CN.qm"
-;#define PHON        "phonon4.dll"
 #define DEFALT_SOUND0  "tip0.wav"
 #define DEFALT_SOUND1  "tip1.wav"
 #define DEFALT_SOUND2  "tip2.wav"
@@ -35,10 +33,6 @@
 #define DEFALT_SOUND7  "tip7.wav"
 #define DEFALT_SOUND8  "tip8.wav"
 #define DEFALT_SOUND9  "tip9.wav"
-
-;#define PHONE_DS94   "phonon_ds94.dll"
-
-
 
 
 [Setup]
@@ -82,7 +76,6 @@ Source: {#APP_PATH}{#CORE}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#GUI}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#NETWORK}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#ZHCN}; DestDir: "{app}"; Flags: ignoreversion
-;Source: {#APP_PATH}{#PHON}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND0}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND1}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND2}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
@@ -93,7 +86,7 @@ Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND6}; DestDir: "{app}\{#SOUND_DIR}"; 
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND7}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND8}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND9}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
-;Source: {#APP_PATH}{#PLUGINS_BACKEND}{#PHONE_DS94}; DestDir: "{app}\{#PLUGINS_BACKEND}"; Flags: ignoreversion
+
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 

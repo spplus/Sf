@@ -8,7 +8,25 @@ using namespace std;
 
 FactoryLogin::FactoryLogin(QWidget* parent):QDialog(parent)
 {
+	m_rownum = 0;
+	m_factory = FACTORY_MEDIA;
+
+	initUi();
+	m_captTimer.setInterval(SF_CAPTCHA_INTERVAL);
+
+	setWindowTitle("ÇëÊäÈëÑéÖ¤Âë");
+	connect(&m_netMgr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
+	connect(m_captchaImg,SIGNAL(pressed()),this,SLOT(loadImg()));
+	connect(m_loginBtn,SIGNAL(pressed()),this,SLOT(longin()));
+	connect(&m_captTimer,SIGNAL(timeout()),this,SLOT(loadImg()));
+	loadImg();
+	setFixedSize(220,140);
+	setWindowFlags(Qt::WindowMaximizeButtonHint|Qt::Dialog);
 	
+}
+
+void FactoryLogin::initUi()
+{
 	QVBoxLayout*	mbox = new QVBoxLayout;
 	QVBoxLayout*	vbox = new QVBoxLayout;
 	QHBoxLayout*	hbox = new QHBoxLayout;
@@ -31,19 +49,13 @@ FactoryLogin::FactoryLogin(QWidget* parent):QDialog(parent)
 	mbox->addLayout(vbox);
 	mbox->addLayout(h2box);
 	setLayout(mbox);
-	setWindowTitle("ÇëÊäÈëÑéÖ¤Âë");
-	connect(&m_netMgr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
-	connect(m_captchaImg,SIGNAL(pressed()),this,SLOT(loadImg()));
-	connect(m_loginBtn,SIGNAL(pressed()),this,SLOT(longin()));
-	loadImg();
-	setFixedSize(220,140);
-	setWindowFlags(Qt::WindowMaximizeButtonHint|Qt::Dialog);
-	
 }
 
 void FactoryLogin::showDlg()
 {
-
+	loadImg();
+	show();
+	m_captTimer.start();
 }
 
 void FactoryLogin::longin()
@@ -55,9 +67,9 @@ void FactoryLogin::longin()
 		return;
 	}
 	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"xcode\":\"%4\",\"t\":\"%5\",\"sid\":\"%6\",\"mainServerHost\":\"%7\",\"statusReportHost\":\"%8\"}")
-		.arg(Configer::instance()->getUser())
-		.arg(Configer::instance()->getPwd())
-		.arg(Configer::instance()->getValue(KEY_FACTORY))
+		.arg(m_user)
+		.arg(m_pwd)
+		.arg(m_factory)
 		.arg(xcode)
 		.arg(m_timeStamp)
 		.arg(m_sessionId)
@@ -72,6 +84,7 @@ void FactoryLogin::longin()
 	m_netMgr.post(request,req);
 
 	this->accept();
+	m_captTimer.stop();
 }
 
 void FactoryLogin::loadImg()
@@ -79,7 +92,7 @@ void FactoryLogin::loadImg()
 	QNetworkRequest request;
 	request.setUrl(QUrl(URL_CAPTCHA));
 	m_netMgr.get(request);
-
+	m_capt->setText("");
 }
 
 void FactoryLogin::replyFinished(QNetworkReply *reply)
@@ -118,15 +131,14 @@ void FactoryLogin::parseCaptResp(Json::Value &jvalue)
 
 void FactoryLogin::pareLoginResp(Json::Value& jvalue)
 {
-	string sucess = jvalue["success"].asString();
-	if (sucess == "true")
-	{
-		//m_loginBtn->setEnabled(false);
-	}
-	else
-	{
-		// µÇÂ¼Ê§°Ü
-
-	}
+	emit loginResp(m_rownum,jvalue);
 }
 
+
+void FactoryLogin::setContext(int row,QString factory,QString user,QString pwd)
+{
+	m_rownum = row;
+	m_factory = factory;
+	m_user = user;
+	m_pwd = pwd;
+}
