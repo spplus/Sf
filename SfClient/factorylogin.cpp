@@ -19,7 +19,7 @@ FactoryLogin::FactoryLogin(QWidget* parent):QDialog(parent)
 	connect(m_captchaImg,SIGNAL(pressed()),this,SLOT(loadImg()));
 	connect(m_loginBtn,SIGNAL(pressed()),this,SLOT(longin()));
 	connect(&m_captTimer,SIGNAL(timeout()),this,SLOT(loadImg()));
-	loadImg();
+	//loadImg();
 	setFixedSize(220,140);
 	setWindowFlags(Qt::WindowMaximizeButtonHint|Qt::Dialog);
 	
@@ -93,12 +93,13 @@ void FactoryLogin::loadImg()
 	request.setUrl(QUrl(URL_CAPTCHA));
 	m_netMgr.get(request);
 	m_capt->setText("");
+	qDebug("loadImg:%s",URL_CAPTCHA);
 }
 
 void FactoryLogin::replyFinished(QNetworkReply *reply)
 {
 	QString msg = QString::fromUtf8(reply->readAll());
-	qDebug("%s",msg);
+	qDebug("capt:%s,length:%d",msg,msg.length());
 	Json::Reader reader;
 	Json::Value value;
 	
@@ -123,6 +124,7 @@ void FactoryLogin::parseCaptResp(Json::Value &jvalue)
 	string capt = jvalue["captcha"].asString();
 	m_sessionId = jvalue["sid"].asString().c_str();
 	m_timeStamp = jvalue["t"].asString().c_str();
+	qDebug("capt:%s,sid:%s,t:%s",capt.c_str(),m_sessionId,m_timeStamp);
 	QByteArray pixdata = QByteArray::fromBase64(capt.c_str());
 	QPixmap pixmap;
 	pixmap.loadFromData(pixdata);
