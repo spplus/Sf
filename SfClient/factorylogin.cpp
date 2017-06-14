@@ -20,7 +20,7 @@ FactoryLogin::FactoryLogin(QWidget* parent):QDialog(parent)
 	connect(m_loginBtn,SIGNAL(pressed()),this,SLOT(longin()));
 	connect(&m_captTimer,SIGNAL(timeout()),this,SLOT(loadImg()));
 	//loadImg();
-	setFixedSize(220,140);
+	setFixedSize(220,150);
 	setWindowFlags(Qt::WindowMaximizeButtonHint|Qt::Dialog);
 	
 }
@@ -51,11 +51,17 @@ void FactoryLogin::initUi()
 	setLayout(mbox);
 }
 
-void FactoryLogin::showDlg()
+int FactoryLogin::showDlg()
 {
 	loadImg();
-	show();
-	m_captTimer.start();
+	//m_captTimer.start();
+	//show();
+	int ret = exec();
+	if (ret == QDialog::Accepted)
+	{
+		m_captTimer.start();
+	}
+	return ret;
 }
 
 void FactoryLogin::longin()

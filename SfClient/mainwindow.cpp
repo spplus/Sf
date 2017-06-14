@@ -100,7 +100,9 @@ void MainWindow::initList()
 		int col = 0;
 		Vendors* vend = m_vendorList.at(i);
 
-		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorName));
+		QTableWidgetItem* item = new QTableWidgetItem(vend->vendorName);
+		item->setData(Qt::UserRole,vend->vendorFactory);
+		m_table->setItem(i,col++,item);
 		
 		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorLoginName));
 
@@ -130,6 +132,7 @@ void MainWindow::initList()
 void MainWindow::onLogin()
 {
 	QObject* obj = sender();
+	QTableWidgetItem* item = NULL;
 	if (obj != NULL)
 	{
 		int row = obj->property(PROPERTY_ROWNUM).toInt();
@@ -137,9 +140,21 @@ void MainWindow::onLogin()
 		QString user = obj->property(PROPERTY_USER).toString();
 		QString pwd = obj->property(PROPERTY_PWD).toString();
 		m_flogin.setContext(row,factory,user,pwd);
+		item = m_table->item(row,2);
+		if (item != NULL)
+		{
+			item->setText("登录中...");
+			item->setTextColor(Qt::green);
+		}
 	}
 	
-	m_flogin.showDlg();
+	if(m_flogin.showDlg() == QDialog::Rejected)
+	{
+		if (item != NULL)
+		{
+			item->setText("");
+		}
+	}
 	//m_flogin.exec();
 }
 
@@ -195,7 +210,7 @@ void MainWindow::replyData(QByteArray data)
 	Json::Reader reader;
 	Json::Value value;
 
-	m_vendorList.clear();
+	
 	if(reader.parse(msg.toStdString(),value))
 	{
 		
@@ -205,13 +220,14 @@ void MainWindow::replyData(QByteArray data)
 		if (status.length()>1)
 		{
 			parserSession(value);
+			return;
 		}
 		// 过滤非本类型消息
 		if (success.length()<=0)
 		{
 			return;
 		}
-
+		m_vendorList.clear();
 		int loginStatus;
 		if (success == "true")
 		{
@@ -496,11 +512,13 @@ void MainWindow::parserSession(Json::Value & jvalue)
 		{
 			QTableWidgetItem* itemFactory = m_table->item(i,0);
 			QTableWidgetItem* itemUser = m_table->item(i,1);
-			if (itemUser->text().toStdString() == user && itemFactory->text().toStdString() == factory)
+			string ftext = itemFactory->data(Qt::UserRole).toString().toStdString();
+			string fuser = itemUser->text().toStdString();
+			if (fuser == user && ftext == factory)
 			{
 				QTableWidgetItem* itemStatus = m_table->item(i,2);
 				itemStatus->setText("会话过期，请重新登录");
-				itemStatus->setBackgroundColor(Qt::red);
+				itemStatus->setTextColor(Qt::red);
 				m_table->cellWidget(i,3)->setEnabled(true);
 			}
 		}

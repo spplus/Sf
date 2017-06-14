@@ -10,7 +10,7 @@ class FactoryLogin	:public QDialog
 	Q_OBJECT
 public:
 	FactoryLogin(QWidget* parent);
-	void	showDlg();
+	int		showDlg();
 	void	setContext(int row,QString factory,QString user,QString pwd);
 
 signals:
