@@ -32,7 +32,7 @@ void FactoryLogin::initUi()
 	QHBoxLayout*	hbox = new QHBoxLayout;
 	QHBoxLayout*	h2box = new QHBoxLayout;
 	m_capt = new QLineEdit;
-
+	m_capt->setFont(QFont("Timers" , 15 ,  QFont::Bold));  
 	m_loginBtn = new QPushButton("µÇÂ½");
 	m_capt->setMinimumHeight(35);
 	m_capt->setPlaceholderText("ÇëÊäÈëÑéÖ¤Âë");
