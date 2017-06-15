@@ -150,3 +150,12 @@ void FactoryLogin::setContext(int row,QString factory,QString user,QString pwd)
 	m_user = user;
 	m_pwd = pwd;
 }
+
+void FactoryLogin::keyPressEvent( QKeyEvent * event )
+{
+	if (event->key() == Qt::Key_Enter)
+	{
+		longin();
+	}
+	QDialog::keyPressEvent(event);
+}

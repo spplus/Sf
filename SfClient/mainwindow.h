@@ -63,6 +63,7 @@ private:
 	void		initTray();
 	void		sendSessionChecker(Vendors *vender);
 	void		parseTcpResponse(const char* msg);
+	void		sendRmSessionTimeout(QString user);
 
 	// ·¢ËÍ×¢²áĞÅÏ¢
 	void		sendReg();

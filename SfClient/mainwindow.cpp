@@ -416,9 +416,12 @@ void MainWindow::loginResp(int row,Json::Value& jvalue)
 		item->setText("登录成功");
 		item->setTextColor(Qt::green);
 		
-		// 启动sestion过期检查
-		m_sesstionChecker.start();
-
+		if (!m_sesstionChecker.isActive())
+		{
+			// 启动sestion过期检查
+			m_sesstionChecker.start();
+		}
+		
 		if (btn != NULL)
 		{
 			btn->setEnabled(false);
@@ -522,6 +525,11 @@ void MainWindow::parserSession(Json::Value & jvalue)
 				m_table->cellWidget(i,3)->setEnabled(true);
 			}
 		}
+		if (factory == FACTORY_MEDIA)
+		{
+			// 清除sestion过期标志
+			sendRmSessionTimeout(user.c_str());
+		}
 	}
 
 }
@@ -534,4 +542,14 @@ void MainWindow::sendSessionChecker(Vendors *vender)
 	QByteArray req ;
 	req.append(json);
 	QhttpNetwork::instance()->post(URL_SESSION_CHECK,req);
+}
+
+void MainWindow::sendRmSessionTimeout(QString user)
+{
+	QString json = QString("{\"user\":\"%1\",\"factory\":\"%2\"}")
+		.arg(user)
+		.arg(FACTORY_MEDIA);
+	QByteArray req ;
+	req.append(json);
+	QhttpNetwork::instance()->post(URL_REMOVE_SESSION_TIMEOUT,req);
 }

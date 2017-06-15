@@ -12,7 +12,7 @@ public:
 	FactoryLogin(QWidget* parent);
 	int		showDlg();
 	void	setContext(int row,QString factory,QString user,QString pwd);
-
+	void	keyPressEvent ( QKeyEvent * event ) ;
 signals:
 	void	loginResp(int row,Json::Value &jvalue);	
 public slots:

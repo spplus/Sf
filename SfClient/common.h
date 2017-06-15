@@ -42,7 +42,7 @@ typedef struct Vendors{
 #define		SF_HEARTBEAT_INTERVAL		1000*60
 
 // 缓存检查周期
-#define		SF_SESSIONCHER_INTERVAL		1000
+#define		SF_SESSIONCHER_INTERVAL		1000*60
 
 // 验证码刷新间隔
 #define		SF_CAPTCHA_INTERVAL			1000*100
@@ -80,6 +80,10 @@ typedef struct Vendors{
 
 #define			URL_REPT				"http://local.b"
 
+// session 超时检查
 #define			URL_SESSION_CHECK		"http://localhost:8000/sessionValid"
+
+// 消除session过期
+#define			URL_REMOVE_SESSION_TIMEOUT	"http://localhost:8000/consumeInvalid"
 
 #endif
