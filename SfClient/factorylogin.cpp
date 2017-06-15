@@ -36,6 +36,7 @@ void FactoryLogin::initUi()
 	m_loginBtn = new QPushButton("µÇÂ½");
 	m_capt->setMinimumHeight(35);
 	m_capt->setPlaceholderText("ÇëÊäÈëÑéÖ¤Âë");
+	m_capt->setMaxLength(4);
 
 	m_captchaImg = new CaptLabel;
 	hbox->addStretch();

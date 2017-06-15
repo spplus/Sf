@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方工单助手"
-#define MyAppVersion "1.0.10.1"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
