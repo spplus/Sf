@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	QString appDirPath = QApplication::applicationDirPath();
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion("1.1.0");
+	QCoreApplication::setApplicationVersion("1.1.0.4");
 
 #ifdef WIN32
 	// 设置编码
@@ -105,7 +105,7 @@ run:
 	win.setVendorData(dlg.m_vendorList);
 	win.initList();
 	win.show();
-	win.close();
+	//win.close();
 
 
     return a.exec();

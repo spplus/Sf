@@ -14,7 +14,8 @@ public:
 	void	setContext(int row,QString factory,QString user,QString pwd);
 	void	keyPressEvent ( QKeyEvent * event ) ;
 signals:
-	void	loginResp(int row,Json::Value &jvalue);	
+	void	loginResp(Json::Value &jvalue);	
+	void	loging(int row);
 public slots:
 	void	replyFinished(QNetworkReply *reply);
 

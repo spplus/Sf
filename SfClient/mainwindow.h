@@ -35,14 +35,15 @@ public:
 signals:
 	void		finishPlay();
 public slots:
-
+	// 登录中
+	void		loging(int row);
 	void		uploadLog();
 	void		sysExit();
 	void		onLogin();
 	void		playSound(int id);
 
 	// WD登录接口返回
-	void		loginResp(int row,Json::Value& jvalue);
+	void		loginResp(Json::Value& jvalue);
 
 	// 数据返回
 	void		replyData(QByteArray data);

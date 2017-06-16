@@ -8,7 +8,11 @@ Configer::Configer()
 	m_url= m_setting->value("SF/url").toString();
 	m_user = m_setting->value("SF/usr").toString();
 	m_pwd = m_setting->value("SF/pwd").toString();
+	// 生成地址
 	m_url = "http://sifangerp.com/clsorder/main/redirect/assistantLogin";
+
+	// 测试地址
+	//m_url = "http://192.168.2.23:8080/order/a/main/redirect/assistantLogin";
 
 }
 

@@ -76,6 +76,7 @@ typedef struct Vendors{
 #define			URL_FACTORY_LONGIN		"http://localhost:8000/login"
 
 // 业务服务器地址
+//#define			URL_MAIN_SERVER			"http://192.168.2.23:8780/netDC/main/receiveOrders"
 #define			URL_MAIN_SERVER			"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
 
 #define			URL_REPT				"http://local.b"

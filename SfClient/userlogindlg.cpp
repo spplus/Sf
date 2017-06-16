@@ -128,6 +128,7 @@ void UserLogindlg::doLogin(QString usr,QString pwd)
 
 	QhttpNetwork::instance()->get(url);
 
+	m_vendorList.clear();
 }
 
 void UserLogindlg::login()
@@ -166,11 +167,11 @@ void UserLogindlg::loginResp(QByteArray resp)
 
 	// 暂时先填0，表示成功，待接口修改后再改回默认值
 	string status = "-1";
-	m_vendorList.clear();
+	//m_vendorList.clear();
 
 	string version = "";
-	string filenames;// = "woodpecker_windows_386.exe,conf.ini,SfClient.exe,style.qss";
-	string updateurl;//= "http://120.210.205.24/orderstres/sfAssistant/1.2.5/bin/";
+	string filenames;
+	string updateurl;
 
 	if(reader.parse(strrdata.toStdString(),value))
 	{

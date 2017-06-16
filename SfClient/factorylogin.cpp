@@ -73,13 +73,14 @@ void FactoryLogin::longin()
 		QMessageBox::warning(this,"系统提示","请输入验证码");
 		return;
 	}
-	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"xcode\":\"%4\",\"t\":\"%5\",\"sid\":\"%6\",\"mainServerHost\":\"%7\",\"statusReportHost\":\"%8\"}")
+	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"xcode\":\"%4\",\"t\":\"%5\",\"sid\":\"%6\",\"seqno\":\"%7\",\"mainServerHost\":\"%8\",\"statusReportHost\":\"%9\"}")
 		.arg(m_user)
 		.arg(m_pwd)
 		.arg(m_factory)
 		.arg(xcode)
 		.arg(m_timeStamp)
 		.arg(m_sessionId)
+		.arg(m_rownum)
 		.arg(URL_MAIN_SERVER)
 		.arg(URL_REPT);
 	QByteArray req ;
@@ -92,6 +93,7 @@ void FactoryLogin::longin()
 
 	this->accept();
 	m_captTimer.stop();
+	emit loging(m_rownum);
 }
 
 void FactoryLogin::loadImg()
@@ -140,7 +142,7 @@ void FactoryLogin::parseCaptResp(Json::Value &jvalue)
 
 void FactoryLogin::pareLoginResp(Json::Value& jvalue)
 {
-	emit loginResp(m_rownum,jvalue);
+	emit loginResp(jvalue);
 }
 
 
