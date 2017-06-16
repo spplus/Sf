@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),m_flogin(this)
 	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
 	connect(&m_sesstionChecker,SIGNAL(timeout()),this,SLOT(sesstionChecker()));
 	connect(&m_flogin,SIGNAL(loginResp(Json::Value&)),this,SLOT(loginResp(Json::Value&)));
-	connect(&m_flogin,SIGNAL(loging()),this,SLOT(loging()));
+	connect(&m_flogin,SIGNAL(loging(int)),this,SLOT(loging(int)));
 
 	// 启动语音队列线程
 	m_playThread.start();

@@ -55,13 +55,9 @@ void FactoryLogin::initUi()
 int FactoryLogin::showDlg()
 {
 	loadImg();
-	//m_captTimer.start();
-	//show();
+	m_captTimer.start();
 	int ret = exec();
-	if (ret == QDialog::Accepted)
-	{
-		m_captTimer.start();
-	}
+	m_captTimer.stop();
 	return ret;
 }
 
@@ -92,7 +88,6 @@ void FactoryLogin::longin()
 	m_netMgr.post(request,req);
 
 	this->accept();
-	m_captTimer.stop();
 	emit loging(m_rownum);
 }
 

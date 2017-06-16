@@ -182,6 +182,10 @@ void UserLogindlg::loginResp(QByteArray resp)
 			return;
 		}
 		string siteId = value["siteId"].asString();
+		if (siteId.length() <= 0)
+		{
+			return;
+		}
 		Configer::instance()->setSiteId(siteId.c_str());
 
 		string siteName = value["siteName"].asString();
