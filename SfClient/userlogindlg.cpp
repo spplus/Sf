@@ -21,6 +21,7 @@ UserLogindlg::UserLogindlg()
 
 	iniUi();
 	m_loginOk = false;
+	m_ndmd5 = true;
 	m_md5pwd = "";
 
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(loginResp(QByteArray)));
@@ -131,6 +132,13 @@ void UserLogindlg::doLogin(QString usr,QString pwd)
 	m_vendorList.clear();
 }
 
+void UserLogindlg::setUserInfo(QString usr,QString pwd)
+{
+	m_ndmd5 = false;
+	m_userAccount->setText(usr);
+	m_userPassword->setText(pwd);
+}
+
 void UserLogindlg::login()
 {
 	QString userAccount = m_userAccount->text();
@@ -147,12 +155,17 @@ void UserLogindlg::login()
 		QMessageBox::information(this,("用户登录提示:"),("登录密码为空,请输入密码!"));
 		return;
 	}
+	
+	QString strpwdmd5 = userPassword;
 
-	//对输入密码值进行Md5加密
-	QByteArray byte_array;
-	byte_array.append(userPassword);
-	QByteArray hash_byte_array = QCryptographicHash::hash(byte_array, QCryptographicHash::Md5);
-	QString strpwdmd5 = hash_byte_array.toHex();
+	if (m_ndmd5)
+	{
+		//对输入密码值进行Md5加密
+		QByteArray byte_array;
+		byte_array.append(userPassword);
+		QByteArray hash_byte_array = QCryptographicHash::hash(byte_array, QCryptographicHash::Md5);
+		strpwdmd5 = hash_byte_array.toHex();
+	}
 
 	doLogin(userAccount,strpwdmd5);
 

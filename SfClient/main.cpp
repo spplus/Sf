@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	QString appDirPath = QApplication::applicationDirPath();
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion("1.1.0.6");
+	QCoreApplication::setApplicationVersion("1.1.1");
 
 #ifdef WIN32
 	// 设置编码
@@ -76,12 +76,14 @@ int main(int argc, char *argv[])
 	if (usr.length()>0 && pwd.length()>0)
 	{
 		// 自动登录
-		dlg.doLogin(usr,pwd);
+		/*dlg.doLogin(usr,pwd);
 		if (dlg.isLogin())
 		{
 			goto run;
-		}
+		}*/
 
+		// 显示登录窗口
+		dlg.setUserInfo(usr,pwd);
 	}
 
 	

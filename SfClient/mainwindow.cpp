@@ -133,7 +133,6 @@ void MainWindow::initList()
 void MainWindow::onLogin()
 {
 	QObject* obj = sender();
-	//QTableWidgetItem* item = NULL;
 	if (obj != NULL)
 	{
 		int row = obj->property(PROPERTY_ROWNUM).toInt();
@@ -141,22 +140,11 @@ void MainWindow::onLogin()
 		QString user = obj->property(PROPERTY_USER).toString();
 		QString pwd = obj->property(PROPERTY_PWD).toString();
 		m_flogin.setContext(row,factory,user,pwd);
-		/*item = m_table->item(row,2);
-		if (item != NULL)
-		{
-			item->setText("登录中...");
-			item->setTextColor(Qt::green);
-		}*/
+		
 	}
 	
-	if(m_flogin.showDlg() == QDialog::Rejected)
-	{
-		/*if (item != NULL)
-		{
-			item->setText("");
-		}*/
-	}
-	//m_flogin.exec();
+	m_flogin.showDlg();
+
 }
 
 void MainWindow::loging(int row)

@@ -25,6 +25,7 @@ public:
 
 	void	doLogin(QString usr,QString pwd);
 	bool	isLogin();
+	void	setUserInfo(QString usr,QString pwd);
 public slots:
 	void	closeWin();
 	void	login();
@@ -40,6 +41,7 @@ protected:
 	void mouseReleaseEvent(QMouseEvent *event);		//鼠标释放响应事件
 	void mouseMoveEvent(QMouseEvent *event);		//鼠标移动响应事件
 private:
+	bool					m_ndmd5;
 	bool					m_loginOk;
 	QString					m_md5pwd;
 	QString					m_usrAcc;

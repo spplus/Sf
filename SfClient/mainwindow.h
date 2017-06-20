@@ -68,7 +68,7 @@ private:
 
 	// ·¢ËÍ×¢²áÐÅÏ¢
 	void		sendReg();
-	void		autoRun(bool bAutoRun = false);
+	void		autoRun(bool bAutoRun = true);
 	void		checkLogin(Vendors* vend);
 	void		updateLoginState(QString user,int status);
 	QToolButton*	tbFactory(QString btnName);
