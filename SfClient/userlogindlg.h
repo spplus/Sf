@@ -30,7 +30,7 @@ public slots:
 	void	closeWin();
 	void	login();
 	void	loginResp(QByteArray resp);
-
+	void	passwdChanged(const QString &text);
 private:
 	void	iniUi();
 	bool	versionCheck(QString version);

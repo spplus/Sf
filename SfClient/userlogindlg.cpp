@@ -25,7 +25,7 @@ UserLogindlg::UserLogindlg()
 	m_md5pwd = "";
 
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(loginResp(QByteArray)));
-
+	
 }
 
 UserLogindlg::~UserLogindlg()
@@ -131,12 +131,17 @@ void UserLogindlg::doLogin(QString usr,QString pwd)
 
 	m_vendorList.clear();
 }
-
+void UserLogindlg::passwdChanged(const QString &text)
+{
+	m_ndmd5 = true;	
+}
 void UserLogindlg::setUserInfo(QString usr,QString pwd)
 {
 	m_ndmd5 = false;
 	m_userAccount->setText(usr);
-	m_userPassword->setText(pwd);
+	m_userPassword->setText("1234567890");
+	m_userPassword->setProperty("pwd",pwd);
+	connect(m_userPassword,SIGNAL(textChanged(const QString &)),this,SLOT(passwdChanged(const QString &)));
 }
 
 void UserLogindlg::login()
@@ -160,11 +165,16 @@ void UserLogindlg::login()
 
 	if (m_ndmd5)
 	{
+
 		//对输入密码值进行Md5加密
 		QByteArray byte_array;
 		byte_array.append(userPassword);
 		QByteArray hash_byte_array = QCryptographicHash::hash(byte_array, QCryptographicHash::Md5);
 		strpwdmd5 = hash_byte_array.toHex();
+	}
+	else
+	{
+		strpwdmd5 = m_userPassword->property("pwd").toString();
 	}
 
 	doLogin(userAccount,strpwdmd5);
