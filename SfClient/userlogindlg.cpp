@@ -204,15 +204,16 @@ void UserLogindlg::loginResp(QByteArray resp)
 		{
 			return;
 		}
+		status = value["status"].asString();
 		string siteId = value["siteId"].asString();
-		if (siteId.length() <= 0)
+		if (siteId.length() <= 0 && status != "1")
 		{
 			return;
 		}
 		Configer::instance()->setSiteId(siteId.c_str());
 
 		string siteName = value["siteName"].asString();
-		status = value["status"].asString();
+		
 		updateurl = value["updateUrl"].asString();
 		version = value["version"].asString();
 		const Json::Value arrayObj = value["vendors"];
