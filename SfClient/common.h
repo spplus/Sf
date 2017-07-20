@@ -1,5 +1,6 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
+#include "configer.h"
 
 typedef struct Vendors{
 	QString vendorUrl ;
@@ -18,8 +19,8 @@ typedef struct Vendors{
 }Vendors;
 
 
-#define		SF_TCP_SERVER	"120.210.205.24"//"120.210.205.24"
-#define		SF_TCP_PORT		42710
+//#define		SF_TCP_SERVER	"120.210.205.24"//"120.210.205.24"
+//#define		SF_TCP_PORT		42710
 
 // 命令定义
 
@@ -76,8 +77,8 @@ typedef struct Vendors{
 #define			URL_FACTORY_LONGIN		"http://localhost:8000/login"
 
 // 业务服务器地址
-//#define			URL_MAIN_SERVER			"http://192.168.2.23:8780/netDC/main/receiveOrders"
-#define			URL_MAIN_SERVER			"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
+//#define			URL_MAIN_SERVER			"http://192.168.2.23:8080/netDC/main/receiveOrders"
+#define			URL_MAIN_SERVER			Configer::instance()->getValue(MAIN_SRV_KEY)//"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
 
 #define			URL_REPT				"http://local.b"
 

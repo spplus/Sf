@@ -3,8 +3,10 @@
 
 #include <QSettings>
 
-#define  ADDR_KEY "SF/addr"
-#define  PORT_KEY "SF/port"
+#define		ADDR_KEY		"SF/addr"
+#define		PORT_KEY		"SF/port"
+#define		MAIN_SRV_KEY	"SF/main_server"
+#define		INCODE_PWD		"&78ad697$"  
 
 class Configer
 {
@@ -23,6 +25,8 @@ public:
 	
 private:
 	Configer();
+
+	void		Encrypt(char *s_file , char *pwd ,char *c_file);
 private:
 	QString					m_url;
 	QString					m_user;
