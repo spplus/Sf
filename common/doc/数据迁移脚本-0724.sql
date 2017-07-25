@@ -237,3 +237,40 @@ left join `sf-erp-order-v1`.crm_site b on a.site_id=b.id;
 
 
 
+-- 2017-07-25 补充 ---------------------------------------------------------
+
+-- 更新签到表签到类型
+update crm_employe_daily_sign set sign_type=1 where sign_time is not null;
+update crm_employe_daily_sign set sign_type=2 where sign_type is null;
+
+-- 
+
+# 函数: func_get_smsNum
+DELIMITER $$
+DROP FUNCTION IF EXISTS func_get_smsNum $$
+CREATE FUNCTION func_get_smsNum
+(f_content varchar(500),f_sign varchar(200)) RETURNS int(11)
+BEGIN
+	DECLARE str varchar(700) default '';
+	DECLARE rlst int default 0;
+	declare len int default 0;
+	
+	set str = concat(f_content,"【",f_sign,"】");
+	set len = CHAR_LENGTH(str);
+	if len<=0
+	then set rlst=0;
+	elseif len<=70
+	then	set rlst=1;
+	elseif len>70 
+	then	set rlst = (len+64)/65;
+	end if;
+	
+   RETURN rlst;
+END$$
+DELIMITER $$
+
+-- 更新短信数量
+update crm_sended_sms set sms_num=func_get_smsNum(content,sign);
+
+
+

@@ -110,5 +110,5 @@ DELIMITER $$;
 
 call valinsert();
 
-select * from tmp_split;
+
 
