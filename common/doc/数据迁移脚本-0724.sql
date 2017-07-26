@@ -98,7 +98,7 @@ SELECT `site_id`, `category_id`, `brand_id`
 FROM `sf-erp-order-v1`.`crm_site_brand_rel`;
 
 -- 更新category_id为该服务商自己的category id,从category表中根据site_id更新。
-update crm_site_brand_rel a set category_id= (select id from crm_category b where b.site_id=a.site_id);
+update crm_site_brand_rel a set category_id= (select id from crm_category b where b.site_id=a.site_id and b.`sort` =a.`category_id` );
 
 -- 17. crm_site_common_setting --> crm_site_common_setting
 delete from crm_site_common_setting;
