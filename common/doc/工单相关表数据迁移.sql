@@ -104,8 +104,10 @@ FROM `sf-erp-order-v1`.`crm_order` a
 left join `sf-erp-order-v1`.crm_order_dispatch b on a.id=b.order_id and b.`status`=5
 left join `sf-erp-order-v1`.crm_order_callback c on b.id=c.dispatch_id and b.`status`=5
 
--- 更新callback_result 和callback_time 字段 没有这两个字段
---update crm_order set callback_result=(select result from `sf-erp-order-v1`.crm_order_callback order by create_time desc limit 1);
+-- 更新callback_result 和callback_time 字段 
+update crm_order set callback_result=(select result from `jojowonettest`.crm_order_callback order by create_time desc limit 1) where status in(2,3,4,5);
+update crm_order set callback_time=(select create_time from `jojowonettest`.crm_order_callback order by create_time desc limit 1) where status in(2,3,4,5);
+
 
 -- 2.crm_order_settlement
 delete from crm_order_settlement;
