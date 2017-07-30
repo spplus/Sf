@@ -44,8 +44,8 @@ bool NetClient::init()
 {
 
 	//赋值
-	m_IP = Configer::instance()->getValue(ADDR_KEY);//SF_TCP_SERVER;
-	m_Port = Configer::instance()->getValue(PORT_KEY).toInt();//SF_TCP_PORT;
+	m_IP = Configer::instance()->getTcpSvr();//SF_TCP_SERVER;
+	m_Port = Configer::instance()->getTcpPort();//SF_TCP_PORT;
 
 	if (m_IP.isEmpty() || m_Port <=0 || m_Port>65535)
 	{

@@ -1,6 +1,7 @@
 #include "configer.h"
 #include <QCoreApplication>
 #include <QFile>
+#include <QtGui>
 Configer* Configer::m_inst = NULL;
 
 Configer::Configer()
@@ -15,12 +16,10 @@ Configer::Configer()
 	m_url= m_setting->value("SF/url").toString();
 	m_user = m_setting->value("SF/usr").toString();
 	m_pwd = m_setting->value("SF/pwd").toString();
-	
-	// 生成地址
-	//m_url = "http://sifangerp.com/clsorder/main/redirect/assistantLogin";
+	m_tcpSrv = m_setting->value(ADDR_KEY).toString();
+	m_tcpPort = m_setting->value(PORT_KEY).toString().toInt();
+	m_mainSrv = m_setting->value(MAIN_SRV_KEY).toString();
 
-	// 测试地址
-	//m_url = "http://192.168.2.23:8080/order/a/main/redirect/assistantLogin";
 	QFile tempFile(csFileTemp);
 	bool ret = tempFile.remove();
 	tempFile.close();
@@ -39,6 +38,22 @@ Configer* Configer::instance()
 	}
 	return m_inst;
 }
+
+QString Configer::getMainSvr()
+{
+	return m_mainSrv;
+}
+
+QString Configer::getTcpSvr()
+{
+	return m_tcpSrv;
+}
+
+int Configer::getTcpPort()
+{
+	return m_tcpPort;
+}
+
 
 QString Configer::getPwd()
 {

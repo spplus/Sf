@@ -78,7 +78,7 @@ typedef struct Vendors{
 
 // 业务服务器地址
 //#define			URL_MAIN_SERVER			"http://192.168.2.23:8080/netDC/main/receiveOrders"
-#define			URL_MAIN_SERVER			Configer::instance()->getValue(MAIN_SRV_KEY)//"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
+#define			URL_MAIN_SERVER			Configer::instance()->getMainSvr()//"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
 
 #define			URL_REPT				"http://local.b"
 

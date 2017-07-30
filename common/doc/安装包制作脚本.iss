@@ -2,15 +2,15 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方工单助手"
-#define MyAppVersion "1.1.2"
+#define MyAppVersion "0.9.0"
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
-#define APP_PATH "F:\Project\src\Sf\bin\"
-#define DOC_PATH "F:\Project\src\Sf\common\doc\"
-#define OUT_PATH "F:\Project\src\Sf\common\doc"
+#define APP_PATH "D:\work\Sf\bin\"
+#define DOC_PATH "D:\work\Sf\common\doc\"
+#define OUT_PATH "D:\work\Sf\common\doc"
 #define SOUND_DIR "sound\"
-#define INSTALL_PATH "D:\Program Files (x86)\"
+#define INSTALL_PATH "D:\Program Files (x86)\SfErp\"
 #define JPEG_PLUGIN_PATH  "plugins\imageformats\"
 
 
@@ -50,7 +50,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={#INSTALL_PATH}{#MyAppName}
+DefaultDirName={#INSTALL_PATH}
 DefaultGroupName={#MyAppName}
 LicenseFile={#DOC_PATH}协议.txt
 OutputDir={#OUT_PATH}
