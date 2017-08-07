@@ -10,12 +10,17 @@ Configer::Configer()
 	QString strAppPath = QCoreApplication::applicationDirPath();
 	QString csFile = strAppPath + "/conf.ini";
 	QString csFileTemp = strAppPath + "/sf.d";
-	Encrypt((char*)csFile.toStdString().c_str(),INCODE_PWD,(char*)csFileTemp.toStdString().c_str());
+	QString csFileUser = strAppPath + "/us.d";
+	m_userSetting = new QSettings(csFileUser, QSettings::IniFormat);
 
+	Encrypt((char*)csFile.toStdString().c_str(),INCODE_PWD,(char*)csFileTemp.toStdString().c_str());
 	m_setting = new QSettings(csFileTemp, QSettings::IniFormat);
+	
+
 	m_url= m_setting->value("SF/url").toString();
-	m_user = m_setting->value("SF/usr").toString();
-	m_pwd = m_setting->value("SF/pwd").toString();
+	m_user = m_userSetting->value("SF/usr").toString();
+	m_pwd = m_userSetting->value("SF/pwd").toString();
+
 	m_tcpSrv = m_setting->value(ADDR_KEY).toString();
 	m_tcpPort = m_setting->value(PORT_KEY).toString().toInt();
 	m_mainSrv = m_setting->value(MAIN_SRV_KEY).toString();
@@ -29,6 +34,9 @@ Configer::~Configer()
 {
 	delete m_setting;
 	m_setting = NULL;
+
+	delete m_userSetting;
+	m_userSetting = NULL;
 }
 Configer* Configer::instance()
 {
@@ -72,22 +80,22 @@ QString Configer::getUser()
 
 void Configer::setPwd(QString pwd)
 {
-	m_setting->setValue("/SF/pwd",pwd);
+	m_userSetting->setValue("/SF/pwd",pwd);
 }
 
 void Configer::setUser(QString user)
 {
-	m_setting->setValue("/SF/usr",user);
+	m_userSetting->setValue("/SF/usr",user);
 }
 
 void Configer::setSiteId(QString siteid)
 {
-	m_setting->setValue("/SF/site",siteid);
+	m_userSetting->setValue("/SF/site",siteid);
 }
 
 QString Configer::getSiteId()
 {
-	return m_setting->value("SF/site").toString();
+	return m_userSetting->value("SF/site").toString();
 }
 
 QString Configer::getValue(QString key)

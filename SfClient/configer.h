@@ -40,6 +40,7 @@ private:
 	QString					m_mainSrv;
 
 	QSettings*				m_setting;
+	QSettings*				m_userSetting;
 	static  Configer*		m_inst;
 };
 #endif
