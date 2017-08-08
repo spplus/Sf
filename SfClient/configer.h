@@ -20,6 +20,7 @@ public:
 	QString		getTcpSvr();
 	QString		getMainSvr();
 	int			getTcpPort();
+	QString		getVersion();
 	void		setUser(QString user);
 	void		setPwd(QString pwd);
 	void		setSiteId(QString siteid);
@@ -37,6 +38,7 @@ private:
 	QString					m_pwd;
 	QString					m_tcpSrv;
 	int						m_tcpPort;
+	QString					m_version;
 	QString					m_mainSrv;
 
 	QSettings*				m_setting;

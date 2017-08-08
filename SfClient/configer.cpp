@@ -24,6 +24,7 @@ Configer::Configer()
 	m_tcpSrv = m_setting->value(ADDR_KEY).toString();
 	m_tcpPort = m_setting->value(PORT_KEY).toString().toInt();
 	m_mainSrv = m_setting->value(MAIN_SRV_KEY).toString();
+	m_version = m_setting->value(VER_KEY).toString();
 
 	QFile tempFile(csFileTemp);
 	bool ret = tempFile.remove();
@@ -51,7 +52,10 @@ QString Configer::getMainSvr()
 {
 	return m_mainSrv;
 }
-
+QString Configer::getVersion()
+{
+	return m_version;
+}
 QString Configer::getTcpSvr()
 {
 	return m_tcpSrv;

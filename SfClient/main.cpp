@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	QString appDirPath = QApplication::applicationDirPath();
 
 	// 设置程序版本号
-	QCoreApplication::setApplicationVersion(Configer::instance()->getValue(VER_KEY));
+	QCoreApplication::setApplicationVersion(Configer::instance()->getVersion());
 
 #ifdef WIN32
 	// 设置编码
