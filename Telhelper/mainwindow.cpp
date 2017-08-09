@@ -136,7 +136,7 @@ void MainWindow::initWidget()
 	QLabel* webname = new QLabel;
 	webname->setText("官网：");
 	QLabel* website = new QLabel;
-	website->setText(QString::fromLocal8Bit("<style> a {text-decoration: none};</style><a style='color: green;' href = www.sifangerp.com>www.sifangerp.com</a>"));
+	website->setText(QString::fromLocal8Bit("<style> a {text-decoration: none};</style><a style='color: green;' href = www.sifangerp.cn>www.sifangerp.cn</a>"));
 	
 	QToolButton * openAudioDirBtn = new QToolButton;
 	openAudioDirBtn->setText("打开录音文件目录");
