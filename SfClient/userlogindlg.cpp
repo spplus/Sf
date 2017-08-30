@@ -6,6 +6,7 @@
 #include "configer.h"
 #include "topwidget.h"
 #include "netclient.h"
+#include "gocontroller.h"
 
 using namespace std;
 
@@ -278,6 +279,8 @@ void UserLogindlg::loginResp(QByteArray resp)
 		if (versionCheck(version.c_str()))
 		{
 			QMessageBox::information(this,"系统提示","发现新版本，请立即升级");
+			// 退出go
+			GoController::instance()->goExit();
 
 			// 启动自动升级程序
 			QProcess pro;
