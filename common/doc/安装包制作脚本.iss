@@ -6,12 +6,13 @@
 #define MyAppPublisher "思方网络科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "SfClient.exe"
-#define APP_PATH "D:\work\Sf\bin\"
-#define DOC_PATH "D:\work\Sf\common\doc\"
-#define OUT_PATH "D:\work\Sf\common\doc"
+#define APP_PATH "F:\Project\src\Sf\bin\"
+#define DOC_PATH "F:\Project\src\Sf\common\doc\"
+#define OUT_PATH "F:\Project\src\Sf\common\doc"
 #define SOUND_DIR "sound\"
 #define INSTALL_PATH "D:\Program Files (x86)\SfErp\"
 #define JPEG_PLUGIN_PATH  "plugins\imageformats\"
+#define CODE_PLUGIN_PATH  "plugins\codecs\"
 
 
 #define SFCLIENT    "SfClient.exe"
@@ -35,7 +36,8 @@
 #define DEFALT_SOUND7  "tip7.wav"
 #define DEFALT_SOUND8  "tip8.wav"
 #define DEFALT_SOUND9  "tip9.wav"
-#define QJPEG         "qjpeg4.dll" 
+#define QJPEG          "qjpeg4.dll"
+#define QCNCODECS      "qcncodecs4.dll" 
 
 
 [Setup]
@@ -90,6 +92,7 @@ Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND7}; DestDir: "{app}\{#SOUND_DIR}"; 
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND8}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND9}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#JPEG_PLUGIN_PATH}{#QJPEG}; DestDir: "{app}\{#JPEG_PLUGIN_PATH}"; Flags: ignoreversion
+Source: {#APP_PATH}{#CODE_PLUGIN_PATH}{#QCNCODECS}; DestDir: "{app}\{#CODE_PLUGIN_PATH}"; Flags: ignoreversion
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 

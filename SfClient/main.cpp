@@ -30,12 +30,15 @@ int main(int argc, char *argv[])
 
 #ifdef WIN32
 	// 设置编码
-	QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+	QTextCodec *codec = QTextCodec::codecForName("gb2312");
 
 	QTextCodec::setCodecForTr(codec);
 
-	QTextCodec::setCodecForLocale(QTextCodec::codecForLocale());
-	QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
+	QTextCodec::setCodecForLocale(codec);
+	QTextCodec::setCodecForCStrings(codec);
+
+	//QTextCodec::setCodecForLocale(QTextCodec::codecForLocale());
+	//QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
 
 #else
 	// 设置编码
