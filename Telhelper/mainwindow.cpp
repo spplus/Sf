@@ -210,6 +210,11 @@ QString MainWindow::getCurDateTime(QString fmt/* ="yyyy-MM-dd hh:mm:ss" */)
 	return ctime;
 }
 
+void MainWindow::reStart()
+{
+	onClose();
+	onOpen();
+}
 void MainWindow::telOut(QString svalue)
 {
 	int idx = svalue.lastIndexOf("=");
@@ -550,11 +555,12 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 		case BriEvent_DevErr:
 			{
 				err = QString("通道%1: 设备发生错误！原因=%2(%3/%4) %5").arg(m_nChannelID+1).arg(getDevErrStr(pEvent->lResult)).arg((atol(pEvent->szData)&0xFF00)>>8).arg((atol(pEvent->szData)&0xFF)).arg(strValue);				
-				
+				reStart();
 			}break;
 		case BriEvent_PlugOut:
 			{
-				err = QString("通道%1: 设备被拔掉").arg(m_nChannelID+1);				
+				err = QString("通道%1: 设备被拔掉").arg(m_nChannelID+1);	
+				reStart();
 			}break;
 		
 		case BriEvent_PhoneDial:

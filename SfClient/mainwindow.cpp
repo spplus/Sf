@@ -124,6 +124,7 @@ void MainWindow::initList()
 		}
 		else
 		{
+			m_table->item(i,2)->setText("登录中...");
 			checkLogin(vend);
 		}
 		
@@ -354,6 +355,10 @@ void MainWindow::autoRun(bool bAutoRun)
 
 void MainWindow::playSound(int id)
 {
+	if (id>9)
+	{
+		id = 0;
+	}
 	QString sound = QString("sound/tip%1.wav").arg(id);
 	if (m_sound != NULL)
 	{
@@ -433,7 +438,7 @@ void MainWindow::loginResp(Json::Value& jvalue)
 		string code = jvalue["code"].asString();
 		if (code == "c4")
 		{
-			item->setText("用户名或者密码错误");
+			item->setText("系统设置下厂家资料的账号或密码不正确，请同步修改后重新登陆！");
 		}
 		else if (code == "m3")
 		{

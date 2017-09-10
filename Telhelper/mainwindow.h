@@ -51,6 +51,7 @@ public slots:
 	void		trayIconAction(QSystemTrayIcon::ActivationReason reason);
 private:
 	void		mkdir();
+	void		reStart();
 	void		telOut(QString svalue);
 	void		startRecAudio();
 	void		stopRecAudio();

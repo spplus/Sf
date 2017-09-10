@@ -52,7 +52,7 @@ public class BusConsumer {
         consumer.subscribe("CustNotification", "*");
         //广播
         consumer.setMessageModel(MessageModel.BROADCASTING);
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.registerMessageListener(new MqMessageListener(consumer));
 
 
