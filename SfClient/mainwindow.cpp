@@ -355,7 +355,7 @@ void MainWindow::autoRun(bool bAutoRun)
 
 void MainWindow::playSound(int id)
 {
-	if (id>9)
+	if (id>9 || id<0)
 	{
 		id = 0;
 	}
@@ -447,6 +447,10 @@ void MainWindow::loginResp(Json::Value& jvalue)
 		else if (code == "m4")
 		{
 			item->setText(" 验证码输入错误");
+		}
+		else if (code == "422")
+		{
+			item->setText("账号正在网页端登陆，请退出网页端后再重新登陆助手！");
 		}
 		else
 		{
