@@ -68,13 +68,16 @@ typedef struct Vendors{
 
 #define			RESULT_TRUE			"true"
 
+#define			ERROR_PWD						"系统设置下厂家资料的账号或密码不正确，请同步修改后重新登陆！"
+#define			ERROR_ALREADY_LONGIN			"账号正在网页端登陆，请退出网页端后再重新登陆助手！"
+
 // URL定义
 
 // 图片验证码请求地址20881
-#define			URL_CAPTCHA				"http://localhost:8000/captcha"
+#define			URL_CAPTCHA				"http://localhost:20081/captcha"
 
 // 厂家登录接口
-#define			URL_FACTORY_LONGIN		"http://localhost:8000/login"
+#define			URL_FACTORY_LONGIN		"http://localhost:20081/login"
 
 // 业务服务器地址
 //#define			URL_MAIN_SERVER			"http://192.168.2.23:8080/netDC/main/receiveOrders"
@@ -83,9 +86,9 @@ typedef struct Vendors{
 #define			URL_REPT				"http://local.b"
 
 // session 超时检查
-#define			URL_SESSION_CHECK		"http://localhost:8000/sessionValid"
+#define			URL_SESSION_CHECK		"http://localhost:20081/sessionValid"
 
 // 消除session过期
-#define			URL_REMOVE_SESSION_TIMEOUT	"http://localhost:8000/consumeInvalid"
+#define			URL_REMOVE_SESSION_TIMEOUT	"http://localhost:20081/consumeInvalid"
 
 #endif

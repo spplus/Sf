@@ -77,6 +77,11 @@ void MainWindow::initWidget()
 	m_table->setAlternatingRowColors(true);
 	m_table->setStyleSheet("QTableWidget{alternate-background-color:#BBFFFF}");
 
+	m_table->horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);
+	m_table->horizontalHeader()->setResizeMode(1, QHeaderView::Fixed);
+	m_table->horizontalHeader()->setResizeMode(2, QHeaderView::Stretch);
+	m_table->horizontalHeader()->setResizeMode(3, QHeaderView::Fixed);
+
 	vbox->addWidget(title);
 	vbox->addWidget(m_table);
 	
@@ -216,7 +221,8 @@ void MainWindow::replyData(QByteArray data)
 		
 		string success = value["success"].asString();
 		string status = value["status"].asString();
-		
+		int code = value["code"].asInt();
+
 		if (status.length()>1)
 		{
 			parserSession(value);
@@ -235,7 +241,7 @@ void MainWindow::replyData(QByteArray data)
 		}
 		else
 		{
-			loginStatus = 0;
+			loginStatus = code;
 		}
 
 		string user = value["user"].asString();
@@ -254,18 +260,25 @@ void MainWindow::updateLoginState(QString user,int status)
 		{
 			QTableWidgetItem* itemState = m_table->item(i,2);
 			
-			
-			if (status == 1)
+			switch (status)
 			{
+			case 1:
 				itemState->setText("登陆成功");
 				itemState->setTextColor(Qt::green);
-			}
-			else
-			{
+				break;
+			case 422:
+				itemState->setText(ERROR_ALREADY_LONGIN);
+				itemState->setTextColor(Qt::red);
+				break;
+			case 423:
+				itemState->setText(ERROR_PWD);
+				itemState->setTextColor(Qt::red);
+				break;
+			default:
 				itemState->setText("登陆失败");
 				itemState->setTextColor(Qt::red);
+				break;
 			}
-			
 		}
 	}
 }
@@ -438,7 +451,7 @@ void MainWindow::loginResp(Json::Value& jvalue)
 		string code = jvalue["code"].asString();
 		if (code == "c4")
 		{
-			item->setText("系统设置下厂家资料的账号或密码不正确，请同步修改后重新登陆！");
+			item->setText(ERROR_PWD);
 		}
 		else if (code == "m3")
 		{
@@ -450,7 +463,7 @@ void MainWindow::loginResp(Json::Value& jvalue)
 		}
 		else if (code == "422")
 		{
-			item->setText("账号正在网页端登陆，请退出网页端后再重新登陆助手！");
+			item->setText(ERROR_ALREADY_LONGIN);
 		}
 		else
 		{

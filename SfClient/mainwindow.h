@@ -59,6 +59,7 @@ public slots:
 	//对托盘图标操作的槽：本代码实现单机图标恢复窗口功能 
 	void		trayIconAction(QSystemTrayIcon::ActivationReason reason);
 private:
+	
 	void		parserSession(Json::Value & jvalue);
 	void		initWidget();
 	void		initTray();
