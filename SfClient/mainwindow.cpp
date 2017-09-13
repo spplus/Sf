@@ -221,7 +221,7 @@ void MainWindow::replyData(QByteArray data)
 		
 		string success = value["success"].asString();
 		string status = value["status"].asString();
-		int code = value["code"].asInt();
+		
 
 		if (status.length()>1)
 		{
@@ -233,6 +233,7 @@ void MainWindow::replyData(QByteArray data)
 		{
 			return;
 		}
+		
 		//m_vendorList.clear();
 		int loginStatus;
 		if (success == "true")
@@ -241,6 +242,12 @@ void MainWindow::replyData(QByteArray data)
 		}
 		else
 		{
+			int code = 0;
+			if (value["code"] != NULL)
+			{
+				code = value["code"].asInt();
+			}
+			
 			loginStatus = code;
 		}
 
