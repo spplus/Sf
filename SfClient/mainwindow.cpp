@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),m_flogin(this)
 	initTray();
 
 	autoRun();
-	int w = 800;
+	int w = 880;
 	int h = 500;
 	int x = (QApplication::desktop()->width() - w)/2;
 	int y = (QApplication::desktop()->height() - h)/2;
