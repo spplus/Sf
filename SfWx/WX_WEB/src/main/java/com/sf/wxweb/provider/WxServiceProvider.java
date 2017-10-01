@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sf.sfcm.bean.UserInfo;
 
 
-@FeignClient("wx_service")
+@FeignClient("wx-service")
 public interface WxServiceProvider {
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")

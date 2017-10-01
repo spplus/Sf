@@ -47,12 +47,12 @@
 
 		<dependency>
 			<groupId>com.sf</groupId>
-			<artifactId>sfcm</artifactId>
+			<artifactId>sf_cm</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sf</groupId>
-			<artifactId>sfdm</artifactId>
+			<artifactId>sf_dm</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

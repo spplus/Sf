@@ -29,6 +29,7 @@ public class ShiroConfig {
 		//拦截器.
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 		// 配置不会被拦截的链接 顺序判断
+		filterChainDefinitionMap.put("/wechat/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/templates/**", "anon");
 		filterChainDefinitionMap.put("/login", "anon");

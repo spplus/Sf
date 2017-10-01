@@ -16,6 +16,11 @@
     uid, name, password, salt,state,username
   </sql>
   
+  <sql id="App_Column_List">
+  	a.id,number,category,brand,model,invoice,barcode,machine_code,buy_time,customer_id,create_by,
+  	date_format(a.create_time,'%Y-%m-%d %H:%i:%S') as create_time,source_type,source,a.status
+  </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -38,6 +43,146 @@
   <update id="updateUser">
   	update person set age=555
   </update>
+  
+  <insert id="insertAppliance" parameterType="java.util.Map">
+  	insert into crm_appliance(id,number,brand
+  	
+  	<if test="model!=null and model!=''">
+  	,model
+  	</if>
+  	
+  	<if test="invoice!=null and invoice!=''">
+  	,invoice
+  	</if>
+  	<if test="barcode!=null and barcode!=''">
+  	,barcode
+  	</if>
+  	<if test="machine_code!=null and machine_code!=''">
+  	,machine_code
+  	</if>
+  	
+  	<if test="buy_time!=null and buy_time!=''">
+  	,buy_time
+  	</if>
+  	
+  	<if test="customer_id!=null and customer_id!=''">
+  	,customer_id
+  	</if>
+  	
+  	<if test="create_by!=null and create_by!=''">
+  	,create_by
+  	</if>
+  	,create_time
+  	<if test="source_type!=null and source_type!=''">
+  	,source_type
+  	</if>
+  	<if test="source!=null and source!=''">
+  	,source
+  	</if>
+  	,status
+  	)
+  	values
+  	(#{id},#{number},#{category},#{brand}
+  	<if test="model!=null and model!=''">
+  	,#{model}
+  	</if>
+  	
+  	<if test="invoice!=null and invoice!=''">
+  	,#{invoice}
+  	</if>
+  	<if test="barcode!=null and barcode!=''">
+  	,#{barcode}
+  	</if>
+  	<if test="machine_code!=null and machine_code!=''">
+  	,#{machine_code}
+  	</if>
+  	
+  	<if test="buy_time!=null and buy_time!=''">
+  	,#{buy_time}
+  	</if>
+  	
+  	<if test="customer_id!=null and customer_id!=''">
+  	,#{customer_id}
+  	</if>
+  	
+  	<if test="create_by!=null and create_by!=''">
+  	,#{create_by}
+  	</if>
+  	,now()
+  	<if test="source_type!=null and source_type!=''">
+  	,#{source_type}
+  	</if>
+  	<if test="source!=null and source!=''">
+  	,#{source}
+  	</if>
+  	,#{status}
+  	)
+  </insert>
+  
+  <update id="updateAppliance" parameterType="java.util.Map">
+  	update crm_appliance set category=#{category},brand=#{brand}
+  	<if test="model!=null and model!=''">
+  	,model=#{model}
+  	</if>
+  	
+  	<if test="invoice!=null and invoice!=''">
+  	,invoice=#{invoice}
+  	</if>
+  	<if test="barcode!=null and barcode!=''">
+  	,barcode=#{barcode}
+  	</if>
+  	<if test="machine_code!=null and machine_code!=''">
+  	,machine_code=#{machine_code}
+  	</if>
+  	
+  	<if test="buy_time!=null and buy_time!=''">
+  	,buy_time=#{buy_time}
+  	</if>
+  	
+  	<if test="customer_id!=null and customer_id!=''">
+  	,customer_id=#{customer_id}
+  	</if>
+  	 
+  	where id=#{id}
+  </update>
+  
+  <select id="queryAppliance" parameterType="java.util.Map" resultType="java.util.Map">
+  	select <include refid="App_Column_List" /> from crm_appliance a
+  	left join crm_code b on a.id=b.appliance_id 
+  	left join crm_customer c on a.customer_id=c.id
+  	where 1=1
+  	<if test="code!=null and code!=''">
+  	and b.code = #{code}
+  	</if>
+  	
+  	<if test="open_id!=null and open_id!=''">
+  	and c.open_id = #{open_id}
+  	</if>
+  	 
+  </select>
+  
+  <update id="updateCustomer" parameterType="java.util.Map">
+  	update crm_customer set site_id=#{site_id},update_time=now() where open_id=#{open_id}
+  </update>
+  
+  <insert id="insertCustomer" parameterType="java.util.Map">
+  	insert into crm_customer(id,number,status,create_time,open_id)values(#{id},#{number},#{status},now(),#{open_id})
+  </insert>
+  
+  <select id="queryCustomer" parameterType="String" resultType="java.util.Map">
+  	select * from crm_customer where open_id=#{open_id}
+  </select>
+  
+  
+  <select id="listPageQueryMyAppliance" parameterType="java.util.Map" resultType="java.util.Map">
+  	select <include refid="App_Column_List" /> from crm_appliance a
+  	left join crm_customer c on a.customer_id=c.id
+  	where 1=1
+  	<if test="open_id!=null and open_id!=''">
+  	and c.open_id = #{open_id}
+  	</if>
+  	 
+  </select>
   
   
 </mapper>
