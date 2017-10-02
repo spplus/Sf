@@ -29,11 +29,11 @@
         <property name="maxPoolSize"><value>${maxPoolSize}</value></property>
         <property name="maxIdleTime"><value>${maxIdleTime}</value></property>
     </bean>
-   <!--  
-    <bean id="dataSourceDb2" class="com.atomikos.jdbc.AtomikosDataSourceBean"
+     
+    <bean id="dataSourceWx" class="com.atomikos.jdbc.AtomikosDataSourceBean"
         init-method="init" destroy-method="close">
-        <description>mysql db2 xa datasource</description>
-        <property name="uniqueResourceName"><value>mysql_db2</value></property>
+        <description>mysql wx xa datasource</description>
+        <property name="uniqueResourceName"><value>mysql_wx</value></property>
         <property name="xaDataSourceClassName"><value>${driverClassNameMysql}</value></property>
         <property name="xaProperties">
             <props>
@@ -46,6 +46,6 @@
         <property name="minPoolSize"><value>${minPoolSize}</value></property>
         <property name="maxPoolSize"><value>${maxPoolSize}</value></property>
         <property name="maxIdleTime"><value>${maxIdleTime}</value></property>
-    </bean> -->
+    </bean> 
    
 </beans>

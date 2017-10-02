@@ -21,6 +21,12 @@ public class WxController {
         return "index";
     }
     
+    @RequestMapping({"/","/test"})
+    public String test(){
+    	
+        return "test";
+    }
+    
 
     @RequestMapping(value = "/login")
     public String loginCheck(HttpServletRequest request, String username,String password,Map<String,Object> map) throws Exception{

@@ -143,6 +143,7 @@ public class WxController {
 	 * @return
 	 * 
 	 */
+	@RequestMapping(value = "updatecustomer",method = RequestMethod.POST)
 	public Map<String,Object> updateCustomer(Map<String,Object> reqMap){
 		SFLogger.info("更新用户信息,参数为："+reqMap.toString());
 		
@@ -177,6 +178,8 @@ public class WxController {
 	 * id,number,status,open_id
 	 * @return
 	 */
+	
+	@RequestMapping(value = "addcustomer",method = RequestMethod.POST)
 	public Map<String,Object> addCustomer(Map<String,Object> reqMap){
 		SFLogger.info("新增用户,参数为："+reqMap.toString());
 		
@@ -207,6 +210,8 @@ public class WxController {
 	 * 用户表字段，小写
 	 * 
 	 */
+	
+	@RequestMapping(value = "querycustomer",method = RequestMethod.GET)
 	public Map<String,Object> queryCustomer(Map<String,Object> reqMap){
 		SFLogger.info("查看用户,参数为："+reqMap.toString());
 		
@@ -235,6 +240,8 @@ public class WxController {
 	 * showcount		每页显示条数
 	 * @return
 	 */
+	
+	@RequestMapping(value = "querymyappliance",method = RequestMethod.GET)
 	public Map<String,Object> queryMyApplianceList(Map<String, Object> reqMap){
 		SFLogger.info("查询我的家电列表,参数为："+reqMap);
 		
@@ -266,4 +273,42 @@ public class WxController {
 		}
 	}
 	
+	/**
+	 * 查询品类.
+	 * @param reqMaq
+	 * 
+	 * @return
+	 */
+	
+	@RequestMapping(value = "querycategorys",method = RequestMethod.GET)
+	public Map<String,Object> queryCategorys(){
+		try {
+			return wxService.queryCategorys();
+		} catch (Exception e) {
+			SFLogger.warn("查询品类失败:"+e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 查询品牌
+	 * @param reqMap
+	 * keys:
+	 * id,name 可以为空，为空查询所有。
+	 * @return
+	 * 查询的品牌列表只返回值map的data key中。
+	 * 
+	 */
+	
+	@RequestMapping(value = "querybrands",method = RequestMethod.GET)
+	public Map<String,Object> queryBrands(Map<String,Object> reqMap){
+		try {
+			return wxService.queryBrands(reqMap);
+		} catch (Exception e) {
+			SFLogger.warn("查询品牌失败:"+e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

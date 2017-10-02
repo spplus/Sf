@@ -184,5 +184,23 @@
   	 
   </select>
   
+  <select id="queryCategorys" resultType="java.util.Map">
+  	select id,name,img from crm_category where del_flag=0 order by sort asc
+  </select>
+  
+  <select id="queryBrands" resultType="java.util.Map" parameterType="java.util.Map" >
+  	select id,name,img,vendor,phone from crm_brand 
+  	where del_flag=0 
+  	<if test="id!=null and id!=''">
+  	and id = #{id}
+  	</if>
+  	
+  	<if test="name!=null and name!=''">
+  	and name = #{name}
+  	</if>
+  	
+  	order by sort asc
+  </select>
+  
   
 </mapper>

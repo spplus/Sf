@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.sf</groupId>
-	<artifactId>wxweb</artifactId>
+	<artifactId>wx_web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>WXWEB</name>
+	<name>WX_WEB</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>

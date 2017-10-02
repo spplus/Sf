@@ -14,7 +14,7 @@ urlMysql=jdbc:mysql://127.0.0.1:3300/ssb_test?useUnicode=true&amp;characterEncod
 #mariadb数据库用户密码
 #passwordMymssql=123456
 #mariadb数据库链接URL
-#urlMymssql=jdbc:mysql://192.168.0.231:3300/ssb_test2?useUnicode=true&amp;characterEncoding=UTF-8
+#urlMymssql=jdbc:mysql://192.168.0.231:3300/sf-customer?useUnicode=true&amp;characterEncoding=UTF-8
 
 #******************连接池中其他属性设置*********************#
 #Atomikos连接池的最小、最大连接数，默认全部1
