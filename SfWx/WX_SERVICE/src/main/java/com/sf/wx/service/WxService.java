@@ -167,5 +167,44 @@ public class WxService {
                 false);
 	}
 	
+	/**
+	 * 
+	 * @param reqMap
+	 * 无
+	 * @return
+	 * 数据在data key中。
+	 * @throws Exception
+	 */
+	public Map<String,Object> queryCategorys() throws Exception {
+		// 切换数据库导微信数据库
+		DataSourceSwitch.setDataSourceType(DataSourceSelect.DB_WX);
+		
+		List<Object>  reslist = baseDao.getList("WxServiceMapper.queryCategorys");
+		Map<String,Object> resMap = new HashMap<String, Object>();
+		resMap.put("data", reslist);
+		
+		return ResponseUtil.FormatResMsg(ResCode.SUCCESS, null, "查询执行成功", resMap,
+                false);
+	}
+	
+	/**
+	 * 查询品牌.
+	 * @param reqMap
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String,Object> queryBrands(Map<String,Object> reqMap) throws Exception {
+		// 切换数据库导微信数据库
+		DataSourceSwitch.setDataSourceType(DataSourceSelect.DB_WX);
+		
+		List<Object>  reslist = baseDao.getList("WxServiceMapper.queryBrands",reqMap);
+		Map<String,Object> resMap = new HashMap<String, Object>();
+		resMap.put("data", reslist);
+		
+		return ResponseUtil.FormatResMsg(ResCode.SUCCESS, null, "查询执行成功", resMap,
+                false);
+	}
+	
+	
 }
 
