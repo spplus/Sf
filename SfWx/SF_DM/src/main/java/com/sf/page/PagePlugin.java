@@ -32,8 +32,8 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
+import com.sf.sfcm.util.PageUtil;
 import com.sf.sfcm.util.ReflectHelper;
-
 
 
 @Intercepts({@Signature(type=StatementHandler.class,method="prepare",args={Connection.class})})

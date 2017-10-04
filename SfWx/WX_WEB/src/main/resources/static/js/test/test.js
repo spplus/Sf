@@ -1,20 +1,27 @@
 // 页面配置
 $(document).ready(function() {
-	alert('ok');
+	//alert('ok');
 });
 
 // 查询按钮押下
 function onAddUser() {
-	alert('add user');
+
+	addUser();
 }
 
-function search() {
-	var searchCondition = getSearchCondition();
-	// 清除无数据提示
-	$("#noDataDiv").remove();
-	var searchURL =  "getList";
+// 新增用户
+function addUser(){
+	var url = "adduser";
+	doPost(url);
+}
+
+
+function doPost(postUrl) {
+	var searchCondition = new Object() ;
+	searchCondition.id="1";
+
 	$.ajax({
-		url : searchURL,
+		url : postUrl,
 		data : JSON.stringify(searchCondition),
 		type : "POST",
 		contentType : "application/json; charset=UTF-8",

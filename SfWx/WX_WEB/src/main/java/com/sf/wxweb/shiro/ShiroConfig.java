@@ -28,7 +28,9 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		//拦截器.
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
+		
 		// 配置不会被拦截的链接 顺序判断
+		filterChainDefinitionMap.put("/test", "anon");
 		filterChainDefinitionMap.put("/wechat/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/css/**", "anon");
@@ -36,7 +38,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/templates/**", "anon");
 		filterChainDefinitionMap.put("/login", "anon");
 		filterChainDefinitionMap.put("/loginCheck", "anon");
-		filterChainDefinitionMap.put("/test", "anon");
+		
 		
 
 		

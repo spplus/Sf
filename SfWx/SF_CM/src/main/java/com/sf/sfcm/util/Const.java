@@ -10,4 +10,6 @@ public class Const {
 		return WEB_APP_CONTEXT.getBean(name);
 	}
 	
+	public static final String PACKETS_DATATYPE = "DATATYPE";
+
 }

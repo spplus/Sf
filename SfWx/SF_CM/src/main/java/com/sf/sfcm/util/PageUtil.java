@@ -1,4 +1,4 @@
-package com.sf.page;
+package com.sf.sfcm.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;

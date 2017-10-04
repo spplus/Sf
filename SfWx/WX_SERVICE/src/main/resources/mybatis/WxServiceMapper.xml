@@ -166,7 +166,7 @@
   </update>
   
   <insert id="insertCustomer" parameterType="java.util.Map">
-  	insert into crm_customer(id,number,status,create_time,open_id)values(#{id},#{number},#{status},now(),#{open_id})
+  	insert into crm_customer(id,number,status,create_time,open_id)values(#{id},#{number},0,now(),#{open_id})
   </insert>
   
   <select id="queryCustomer" parameterType="String" resultType="java.util.Map">
