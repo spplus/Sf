@@ -356,6 +356,7 @@ void MainWindow::onClose()
 void MainWindow::appendInfo(QString msg)
 {
 	m_msg->append(msg);
+	qDebug("%s",msg);
 }
 
 

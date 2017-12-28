@@ -8,6 +8,8 @@
 
 
 bool checkOnly();
+void customMessageHandler(QtMsgType type, const char *msg);
+void mkdir(QString name);
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +20,14 @@ int main(int argc, char *argv[])
 	{
 		return 0;  
 	}
+	mkdir("log");
+
+	// 创建日志目录
+	mkdir("log");
+
+	//先注册自己的MsgHandler    
+	qInstallMsgHandler(customMessageHandler);
+
 	QApplication::addLibraryPath("./plugins");
 
 	// 设置程序版本号
@@ -85,4 +95,54 @@ bool checkOnly()
 	}  
 	else  
 		return true;  
+}
+
+
+void mkdir(QString name)
+{
+	QString Dir = QCoreApplication::applicationDirPath()+"/"+name;
+	QDir directory( Dir );
+
+	if( !directory.exists() )//没有此文件夹，则创建
+	{
+		directory.mkpath( Dir );
+	}
+}
+
+void customMessageHandler(QtMsgType type, const char *msg)
+{
+	QString txt;
+	switch (type)
+	{
+		//调试信息提示
+	case QtDebugMsg:
+		txt = QString("Debug: %1").arg(msg);
+		break;
+
+		//一般的warning提示
+	case QtWarningMsg:
+		txt = QString("Warning: %1").arg(msg);
+		break;
+
+		//严重错误提示
+	case QtCriticalMsg:
+		txt = QString("Critical: %1").arg(msg);
+		break;
+
+		//致命错误提示
+	case QtFatalMsg:
+		txt = QString("Fatal: %1").arg(msg);
+		abort();
+	}
+
+	QDateTime dt;
+	QString ctime = dt.currentDateTime().toString("yyyyMMdd");
+
+
+	QString fname = "tel_"+ctime+".txt";
+	fname = "log/"+fname;
+	QFile outFile(fname);
+	outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+	QTextStream ts(&outFile);
+	ts << txt << endl;
 }
