@@ -86,6 +86,8 @@ void FactoryLogin::longin()
 	request.setUrl(QUrl(URL_FACTORY_LONGIN));
 	request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json; charset=UTF-8");
 	m_netMgr.post(request,req);
+	
+	qDebug("美的厂家账号登录:%s",json.toStdString().c_str());
 
 	this->accept();
 	emit loging(m_rownum);
@@ -97,13 +99,13 @@ void FactoryLogin::loadImg()
 	request.setUrl(QUrl(URL_CAPTCHA));
 	m_netMgr.get(request);
 	m_capt->setText("");
-	qDebug("loadImg:%s",URL_CAPTCHA);
+	qDebug("请求验证码，loadImg:%s",URL_CAPTCHA);
 }
 
 void FactoryLogin::replyFinished(QNetworkReply *reply)
 {
 	QString msg = QString::fromUtf8(reply->readAll());
-	qDebug("capt:%s,length:%d",msg,msg.length());
+	qDebug("接收验证码信息capt:%s,length:%d",msg.toStdString().c_str(),msg.length());
 	Json::Reader reader;
 	Json::Value value;
 	
@@ -128,7 +130,7 @@ void FactoryLogin::parseCaptResp(Json::Value &jvalue)
 	string capt = jvalue["captcha"].asString();
 	m_sessionId = jvalue["sid"].asString().c_str();
 	m_timeStamp = jvalue["t"].asString().c_str();
-	qDebug("capt:%s,sid:%s,t:%s",capt.c_str(),m_sessionId,m_timeStamp);
+	qDebug("解析验证码数据并显示验证码,capt:%s,sid:%s,t:%s",capt.c_str(),m_sessionId.toStdString().c_str(),m_timeStamp.toStdString().c_str());
 	QByteArray pixdata = QByteArray::fromBase64(capt.c_str());
 	QPixmap pixmap;
 	pixmap.loadFromData(pixdata);

@@ -211,6 +211,8 @@ void UserLogindlg::loginResp(QByteArray resp)
 		{
 			return;
 		}
+		qDebug("用户登录返回:%s",strrdata.toStdString().c_str());
+
 		Configer::instance()->setSiteId(siteId.c_str());
 
 		string siteName = value["siteName"].asString();

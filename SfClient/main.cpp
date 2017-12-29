@@ -156,32 +156,35 @@ void mkdir(QString name)
 
 void customMessageHandler(QtMsgType type, const char *msg)
 {
+	QDateTime dt;
+	QString ctime = dt.currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+	
 	QString txt;
 	switch (type)
 	{
 		//调试信息提示
 	case QtDebugMsg:
-		txt = QString("Debug: %1").arg(msg);
+		txt = QString("[%1]Debug: %2").arg(ctime).arg(msg);
 		break;
 
 		//一般的warning提示
 	case QtWarningMsg:
-		txt = QString("Warning: %1").arg(msg);
+		txt = QString("[%1]Warning: %2").arg(ctime).arg(msg);
 		break;
 
 		//严重错误提示
 	case QtCriticalMsg:
-		txt = QString("Critical: %1").arg(msg);
+		txt = QString("[%1]Critical: %2").arg(ctime).arg(msg);
 		break;
 
 		//致命错误提示
 	case QtFatalMsg:
-		txt = QString("Fatal: %1").arg(msg);
+		txt = QString("[%1]Fatal: %2").arg(ctime).arg(msg);
 		abort();
 	}
 
-	QDateTime dt;
-	QString ctime = dt.currentDateTime().toString("yyyyMMdd");
+	
+	ctime = dt.currentDateTime().toString("yyyyMMdd");
 	
 
 	QString fname = "sfclient_"+ctime+".txt";

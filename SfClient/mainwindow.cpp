@@ -130,7 +130,10 @@ void MainWindow::initList()
 		else
 		{
 			m_table->item(i,2)->setText("登录中...");
+			
+			Sleep(3000);
 			checkLogin(vend);
+			
 		}
 		
 	}
@@ -174,6 +177,7 @@ void MainWindow::checkLogin(Vendors* vend)
 	QByteArray req ;
 	req.append(json);
 	QhttpNetwork::instance()->post(URL_FACTORY_LONGIN,req);
+	qDebug("向自动登录接口发送内容:%s",json.toStdString().c_str());
 }
 
 void MainWindow::setVendorData(QList<Vendors*> vendorList)
@@ -210,7 +214,7 @@ void MainWindow::uploadLog()
 void MainWindow::replyData(QByteArray data)
 {
 	QString msg = QString::fromUtf8(data.data());
-	qDebug("%s",msg);
+	qDebug("[MainWindow->replyData] 接收返回: %s",msg.toStdString().c_str());
 
 	Json::Reader reader;
 	Json::Value value;
@@ -233,12 +237,13 @@ void MainWindow::replyData(QByteArray data)
 		{
 			return;
 		}
-		
+		qDebug("收到厂家自动登录返回消息:%s",msg.toStdString().c_str());
 		//m_vendorList.clear();
 		int loginStatus;
 		if (success == "true")
 		{
 			loginStatus = 1;
+			qDebug()<<"厂家账号自动登录成功";
 		}
 		else
 		{
@@ -249,6 +254,7 @@ void MainWindow::replyData(QByteArray data)
 			}
 			
 			loginStatus = code;
+			qDebug("厂家账号自动登录失败,错误码:%d",code);
 		}
 
 		string user = value["user"].asString();
@@ -575,6 +581,7 @@ void MainWindow::sendSessionChecker(Vendors *vender)
 	QByteArray req ;
 	req.append(json);
 	QhttpNetwork::instance()->post(URL_SESSION_CHECK,req);
+	qDebug("发送session过期检查命令:%s",json.toStdString().c_str());
 }
 
 void MainWindow::sendRmSessionTimeout(QString user)
@@ -585,4 +592,6 @@ void MainWindow::sendRmSessionTimeout(QString user)
 	QByteArray req ;
 	req.append(json);
 	QhttpNetwork::instance()->post(URL_REMOVE_SESSION_TIMEOUT,req);
+
+	qDebug("发送session过期命令:%s",json.toStdString().c_str());
 }
