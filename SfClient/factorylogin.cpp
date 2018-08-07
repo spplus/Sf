@@ -9,7 +9,7 @@ using namespace std;
 FactoryLogin::FactoryLogin(QWidget* parent):QDialog(parent)
 {
 	m_rownum = 0;
-	m_factory = FACTORY_MEDIA;
+	m_factory = FACTORY_TCL;
 
 	initUi();
 	m_captTimer.setInterval(SF_CAPTCHA_INTERVAL);
@@ -55,9 +55,10 @@ void FactoryLogin::initUi()
 int FactoryLogin::showDlg()
 {
 	loadImg();
-	m_captTimer.start();
+	// TCL 厂家不需要定时刷新验证码
+	//m_captTimer.start();
 	int ret = exec();
-	m_captTimer.stop();
+	//m_captTimer.stop();
 	return ret;
 }
 

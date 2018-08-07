@@ -584,7 +584,7 @@ long MainWindow::ProcessEvent(PBRI_EVENT pEvent)
 		{
 			appendInfo(err);
 		}
-		
+		appendInfo(str);
 		return 1;
 }
 

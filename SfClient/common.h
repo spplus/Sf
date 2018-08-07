@@ -58,7 +58,7 @@ typedef struct Vendors{
 #define 		DEV_TYPE_MICROWAVEOVEN 		 8	// 微波炉
 #define 		DEV_TYPE_SMALL		  		 9	// 小家电
 
-
+#define			FACTORY_TCL			"tcl"
 #define			FACTORY_MEDIA		"midea"
 #define			KEY_FACTORY			"/SF/factory"
 #define			PROPERTY_ROWNUM		"rownum"
@@ -74,7 +74,7 @@ typedef struct Vendors{
 // URL定义
 
 // 图片验证码请求地址20881
-#define			URL_CAPTCHA				"http://localhost:20081/captcha"
+#define			URL_CAPTCHA				"http://localhost:20081/captchaTCL"
 
 // 厂家登录接口
 #define			URL_FACTORY_LONGIN		"http://localhost:20081/login"

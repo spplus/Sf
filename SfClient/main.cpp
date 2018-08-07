@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 #ifdef WIN32
 
 	// 设置编码
-	QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+	QTextCodec *codec = QTextCodec::codecForName("gb2312");
 
 	QTextCodec::setCodecForTr(codec);
 

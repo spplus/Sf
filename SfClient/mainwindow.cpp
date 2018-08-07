@@ -114,8 +114,8 @@ void MainWindow::initList()
 
 		m_table->setItem(i,col++,new QTableWidgetItem(""));
 		
-		// 美的厂家，手动登陆
-		if (vend->vendorFactory == FACTORY_MEDIA)
+		// TCL厂家，手动登陆
+		if (vend->vendorFactory == FACTORY_TCL)
 		{
 			QPushButton *btn = new QPushButton();
 			btn->setProperty(PROPERTY_ROWNUM,i);
@@ -168,12 +168,13 @@ void MainWindow::loging(int row)
 
 void MainWindow::checkLogin(Vendors* vend)
 {
-	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"mainServerHost\":\"%4\",\"statusReportHost\":\"%5\"}")
+	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"mainServerHost\":\"%4\",\"statusReportHost\":\"%5\",\"seqno\":\"%6\"}")
 		.arg(vend->vendorLoginName)
 		.arg(vend->vendorPassword)
 		.arg(vend->vendorFactory)
 		.arg(URL_MAIN_SERVER)
-		.arg(URL_REPT);
+		.arg(URL_REPT)
+		.arg("1");
 	QByteArray req ;
 	req.append(json);
 	QhttpNetwork::instance()->post(URL_FACTORY_LONGIN,req);
@@ -285,6 +286,14 @@ void MainWindow::updateLoginState(QString user,int status)
 				break;
 			case 423:
 				itemState->setText(ERROR_PWD);
+				itemState->setTextColor(Qt::red);
+				break;
+			case 404:
+				itemState->setText("其他登录异常");
+				itemState->setTextColor(Qt::red);
+				break;
+			case 424:
+				itemState->setText("验证码错误");
 				itemState->setTextColor(Qt::red);
 				break;
 			default:
