@@ -57,3 +57,10 @@ release
 *.exe
 *.settings
 target
+*.txt
+*.rar
+*.md
+*.d
+*.exe
+commom\doc
+
