@@ -470,22 +470,14 @@ void MainWindow::loginResp(Json::Value& jvalue)
 	}
 	else
 	{
-		string code = jvalue["code"].asString();
-		if (code == "c4")
+		int code = jvalue["code"].asInt();
+		if (code == 423)
 		{
 			item->setText(ERROR_PWD);
 		}
-		else if (code == "m3")
+		else if (code == 424)
 		{
 			item->setText("验证码过期");
-		}
-		else if (code == "m4")
-		{
-			item->setText(" 验证码输入错误");
-		}
-		else if (code == "422")
-		{
-			item->setText(ERROR_ALREADY_LONGIN);
 		}
 		else
 		{
