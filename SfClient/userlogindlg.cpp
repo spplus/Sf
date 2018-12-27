@@ -7,15 +7,18 @@
 #include "topwidget.h"
 #include "netclient.h"
 #include "gocontroller.h"
+#include "factorydb.h"
 
 using namespace std;
 
 UserLogindlg::UserLogindlg()
-	: QDialog()
+	: QDialog(),
+	m_vendorList()
 {
 	setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 	this->resize(600,440);
 	setAutoFillBackground(true);
+	setWindowIcon(QIcon(":images/tray.png"));
 
 	//初始化为未按下鼠标左键
 	mouse_press = false;
@@ -132,10 +135,13 @@ void UserLogindlg::doLogin(QString usr,QString pwd)
 
 	m_vendorList.clear();
 }
+
 void UserLogindlg::passwdChanged(const QString &text)
 {
+	Q_UNUSED(text)
 	m_ndmd5 = true;	
 }
+
 void UserLogindlg::setUserInfo(QString usr,QString pwd)
 {
 	m_ndmd5 = false;
@@ -149,7 +155,7 @@ void UserLogindlg::login()
 {
 	QString userAccount = m_userAccount->text();
 	QString userPassword = m_userPassword->text();
-	
+
 	if (userAccount == "")
 	{
 		QMessageBox::information(this,("用户登录提示:"),("登录用户名为空,请输入用户名!"));
@@ -166,7 +172,6 @@ void UserLogindlg::login()
 
 	if (m_ndmd5)
 	{
-
 		//对输入密码值进行Md5加密
 		QByteArray byte_array;
 		byte_array.append(userPassword);
@@ -177,7 +182,7 @@ void UserLogindlg::login()
 	{
 		strpwdmd5 = m_userPassword->property("pwd").toString();
 	}
-
+	Configer::instance()->setUser(userAccount);
 	doLogin(userAccount,strpwdmd5);
 
 }
@@ -185,6 +190,7 @@ void UserLogindlg::login()
 void UserLogindlg::loginResp(QByteArray resp)
 {
 	QString strrdata = QString::fromUtf8(resp.data());
+	qDebug() << strrdata;
 
 	Json::Reader reader;
 	Json::Value value;
@@ -196,10 +202,9 @@ void UserLogindlg::loginResp(QByteArray resp)
 	string version = "";
 	string filenames;
 	string updateurl;
-
+	
 	if(reader.parse(strrdata.toStdString(),value))
 	{
-
 		string success = value["success"].asString();
 		if (success.length()>0)
 		{
@@ -207,35 +212,45 @@ void UserLogindlg::loginResp(QByteArray resp)
 		}
 		status = value["status"].asString();
 		string siteId = value["siteId"].asString();
+		string userType = value["userType"].asString();
 		if (siteId.length() <= 0 && status != "1")
 		{
 			return;
 		}
-		qDebug("用户登录返回:%s",strrdata.toStdString().c_str());
 
 		Configer::instance()->setSiteId(siteId.c_str());
+		Configer::instance()->setUserType(QString(userType.c_str()));
 
 		string siteName = value["siteName"].asString();
 		
 		updateurl = value["updateUrl"].asString();
 		version = value["version"].asString();
 		const Json::Value arrayObj = value["vendors"];
-		for (int i = 0;i<arrayObj.size();i++)
-		{
-			Vendors* vend = new Vendors;
 
+		auto *db = new FactoryDB;
+		db->clearFactory();
+		for (unsigned int i = 0; i < arrayObj.size();i++)
+		{
 			string vendorUrl = arrayObj[i]["vendorUrl"].asString();
 			string vendorName = arrayObj[i]["vendorName"].asString();
 			string vendorPassword = arrayObj[i]["vendorPassword"].asString();
 			string vendorLoginName = arrayObj[i]["vendorLoginName"].asString();
 			string factory = arrayObj[i]["factory"].asString();
-			vend->vendorUrl = vendorUrl.c_str();
-			vend->vendorName = vendorName.c_str();
-			vend->vendorPassword = vendorPassword.c_str();
-			vend->vendorLoginName = vendorLoginName.c_str();
-			vend->vendorFactory = factory.c_str();
-			m_vendorList.push_back(vend);
+			string id = arrayObj[i]["vendorAccountId"].asString();
+
+			Vendors* vendors = new Vendors;
+			vendors->sfAccount = Configer::instance()->getUser();
+			vendors->vendorFactory = QString(factory.c_str());
+			vendors->vendorLoginName = QString(vendorLoginName.c_str());
+			vendors->vendorName = QString(vendorName.c_str());
+			vendors->vendorPassword = QString(vendorPassword.c_str());
+			vendors->vendorUrl = QString(vendorUrl.c_str());
+			vendors->serverId = QString(id.c_str());
+			
+			db->insertFactory(vendors);
+			m_vendorList.append(vendors);
 		}
+		delete db;
 
 		// 组成完整的updateurl
 		const Json::Value arrayFiles = value["updateFiles"];
@@ -247,9 +262,8 @@ void UserLogindlg::loginResp(QByteArray resp)
 			path = path.substr(0,idx+1);
 			updateurl += path;
 		}
-		for (int i = 0;i<arrayFiles.size();i++)
+		for (uint i = 0;i < arrayFiles.size();i++)
 		{
-
 			filenames+=arrayFiles[i]["fileName"].asString();
 			filenames += ",";
 		}
@@ -260,6 +274,11 @@ void UserLogindlg::loginResp(QByteArray resp)
 			filenames = filenames.substr(0,filenames.length()-1);
 		}
 
+	}else{
+		QMessageBox::warning(this,"系统提示","解析登录报文错误");
+		qDebug() << "解析登录报文错误";
+		qDebug() << reader.getFormatedErrorMessages().c_str();
+	;
 	}
 	int rslt = atoi(status.c_str());
 	
@@ -268,9 +287,6 @@ void UserLogindlg::loginResp(QByteArray resp)
 	case 0:
 
 		m_loginOk = true;
-
-		// 登录成功
-		accept();
 
 		// 保存用户名密码
 		Configer::instance()->setPwd(m_md5pwd);
@@ -297,13 +313,16 @@ void UserLogindlg::loginResp(QByteArray resp)
 		}
 		// 连接TCP服务器
 		NetClient::instance()->init();
-
+		
+		// 登录成功
+		accept();
 		break;
 	case 1:
 		// 表示用户名或密码错误
 		QMessageBox::information(this,"系统提示","用户名或密码错误");
 		break;
-	case 2:
+	case 425:
+		QMessageBox::information(this,"系统提示","暂停支持");
 		break;
 	default:
 		break;
@@ -326,6 +345,7 @@ void UserLogindlg::mousePressEvent(QMouseEvent *event)
 
 void UserLogindlg::mouseReleaseEvent(QMouseEvent *event)
 {
+	Q_UNUSED(event)
 	mouse_press = false;
 }
 

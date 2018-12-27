@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	}
 	// 创建日志目录
 	mkdir("log");
-
+	
 	//先注册自己的MsgHandler    
 	qInstallMsgHandler(customMessageHandler);
 
@@ -113,11 +113,11 @@ go:
 	exit(0);
 
 run:
+	qDebug() << "Start Go Progress";
 	// 启动go
 	GoController::instance()->goRun(appDirPath);
 
 	win.setVendorData(dlg.m_vendorList);
-	win.initList();
 	win.show();
 	//win.close();
 
@@ -185,7 +185,6 @@ void customMessageHandler(QtMsgType type, const char *msg)
 
 	
 	ctime = dt.currentDateTime().toString("yyyyMMdd");
-	
 
 	QString fname = "sfclient_"+ctime+".txt";
 	fname = "log/"+fname;

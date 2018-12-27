@@ -91,7 +91,7 @@ void FactoryLogin::longin()
 	qDebug("美的厂家账号登录:%s",json.toStdString().c_str());
 
 	this->accept();
-	emit loging(m_rownum);
+	emit loging(m_user.toStdString(),m_factory.toStdString());
 }
 
 void FactoryLogin::loadImg()

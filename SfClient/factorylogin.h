@@ -3,8 +3,12 @@
 
 #include <QNetworkAccessManager>
 #include <QtGui>
+#include <string>
 #include "captlabel.h"
 #include "jsoncpp/json.h"
+
+using namespace std;
+
 class FactoryLogin	:public QDialog
 {
 	Q_OBJECT
@@ -15,7 +19,7 @@ public:
 	void	keyPressEvent ( QKeyEvent * event ) ;
 signals:
 	void	loginResp(Json::Value &jvalue);	
-	void	loging(int row);
+	void	loging(string, string);
 public slots:
 	void	replyFinished(QNetworkReply *reply);
 

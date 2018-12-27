@@ -1,12 +1,12 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "configer.h"
 #include <QCoreApplication>
 #include <QFile>
 #include <QtGui>
-Configer* Configer::m_inst = NULL;
+Configer* Configer::m_inst = nullptr;
 
-Configer::Configer()
+Configer::Configer():m_usertype(-1)
 {
-	
 	QString strAppPath = QCoreApplication::applicationDirPath();
 	QString csFile = strAppPath + "/conf.ini";
 	QString csFileTemp = strAppPath + "/sf.d";
@@ -27,7 +27,7 @@ Configer::Configer()
 	m_version = m_setting->value(VER_KEY).toString();
 
 	QFile tempFile(csFileTemp);
-	bool ret = tempFile.remove();
+	tempFile.remove();
 	tempFile.close();
 }
 
@@ -66,6 +66,13 @@ int Configer::getTcpPort()
 	return m_tcpPort;
 }
 
+QString Configer::getUserType() {
+	return m_usertype;
+}
+
+void Configer::setUserType(QString type) {
+	m_usertype = type;
+}
 
 QString Configer::getPwd()
 {
@@ -89,6 +96,7 @@ void Configer::setPwd(QString pwd)
 
 void Configer::setUser(QString user)
 {
+	m_user = user;
 	m_userSetting->setValue("/SF/usr",user);
 }
 

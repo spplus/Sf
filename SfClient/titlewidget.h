@@ -11,12 +11,19 @@ class TitleWidget	:public QDialog
 	Q_OBJECT
 public:
 	TitleWidget(QWidget* parent = NULL);
+	void		setSettingActionName(QString);
+	QString		getSettingActionName(); 
+
+signals:
+	void		settingsActionClickedSignal();
 
 public slots:
 	void		sysExit();
 	void		uploadFile();
 	void		onlineHelp();
 	void		proMgr();
+	void		settingsActionClicked();
+	
 private:
 	void		initActions();
 	void		initConnections();
@@ -26,6 +33,7 @@ private:
 	QMenu*							m_fileMenu;
 	QMenu*							m_helpMenu;
 	QAction*						m_uploadLog;
+	QAction*						m_settings;
 	QAction*						m_exitAct;
 	QAction*						m_onlineHelpAct;
 	QAction*						m_authProAct;

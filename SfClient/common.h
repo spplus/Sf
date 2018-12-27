@@ -3,20 +3,42 @@
 #include "configer.h"
 
 typedef struct Vendors{
+	int		id;
+	QString sfAccount;
 	QString vendorUrl ;
 	QString vendorName;
 	QString vendorPassword;
 	QString vendorLoginName;
 	QString	vendorFactory;
+	QString serverId;
 	Vendors()
 	{	
+		id = 0;
+		sfAccount = "";
 		vendorUrl = "";
 		vendorName = "";
 		vendorPassword = "";
 		vendorLoginName = "";
 		vendorFactory = "midea";
+		serverId = "";
 	}
 }Vendors;
+
+typedef enum Factory {
+	GREE,
+	TCL,
+	Midea,
+	Haier,
+	Hisense,
+	Whirlpool,
+	MeiLing,
+	Aux,
+	Old_Haier,
+	Suning,
+	GoMe,
+	JD
+
+}Factory;
 
 
 //#define		SF_TCP_SERVER	"120.210.205.24"//"120.210.205.24"
@@ -65,11 +87,12 @@ typedef struct Vendors{
 #define			PROPERTY_FACTORY	"factory"
 #define			PROPERTY_USER		"user"
 #define			PROPERTY_PWD		"pwd"
+#define			PROPERTY_ID			"id"
 
 #define			RESULT_TRUE			"true"
 
-#define			ERROR_PWD						"系统设置下厂家资料的账号或密码不正确，请同步修改后重新登陆！"
-#define			ERROR_ALREADY_LONGIN			"账号正在网页端登陆，请退出网页端后再重新登陆助手！"
+#define			ERROR_PWD						"厂家资料的账号或密码不正确，请修改后重新登录！"
+#define			ERROR_ALREADY_LONGIN			"账号正在网页端登陆，请退出网页端后再重新登录助手！"
 
 // URL定义
 
@@ -80,7 +103,7 @@ typedef struct Vendors{
 #define			URL_FACTORY_LONGIN		"http://localhost:20081/login"
 
 // 业务服务器地址
-//#define			URL_MAIN_SERVER			"http://192.168.2.23:8080/netDC/main/receiveOrders"
+// #define			URL_MAIN_SERVER			"http://192.168.2.23:8780/netDC/main/receiveOrders"
 #define			URL_MAIN_SERVER			Configer::instance()->getMainSvr()//"http://www.sifangerp.com/mainserver/sfm/main/receiveOrders"
 
 #define			URL_REPT				"http://local.b"
@@ -90,5 +113,17 @@ typedef struct Vendors{
 
 // 消除session过期
 #define			URL_REMOVE_SESSION_TIMEOUT	"http://localhost:20081/consumeInvalid"
+
+// 添加厂家
+#define			URL_ADD_FACTORY				"http://www.sifangerp.cn/order2.0/a/main/redirect/addFactoryAccount"
+
+// 编辑厂家
+#define			URL_EDIT_FACTORY			"http://www.sifangerp.cn/order2.0/a/main/redirect/modFactoryAccount"
+
+// #define			URL_ADD_FACTORY				"http://192.168.2.58:8080/order/a/main/redirect/addFactoryAccount"
+
+// 删除厂家
+// #define			URL_DEL_FACTORY				"http://192.168.2.58:8080/order/a/main/redirect/delFactoryAccount?id=%1"
+#define			URL_DEL_FACTORY				"http://www.sifangerp.cn/order2.0/a/main/redirect/delFactoryAccount?id=%1"
 
 #endif

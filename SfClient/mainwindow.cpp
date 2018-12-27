@@ -7,6 +7,8 @@
 #include <QCoreApplication>
 #include <QTextCodec>
 #include <QSettings>
+#include <QPalette>
+#include <QColor>
 #include "qhttp/QhttpNetwork.h"
 #include "jsoncpp/json.h"
 #include "gocontroller.h"
@@ -16,24 +18,21 @@
 
 #include <Windows.h>
 
-
 using namespace std;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),m_flogin(this)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-	m_title = "思方工单助手";
+	m_title = "工单助手";
 	//m_audioOutput = NULL;
-	m_sound = NULL;
+	m_sound = nullptr;
 
 	// 一分钟一次心跳
 	m_heartBeatTimer.setInterval(SF_HEARTBEAT_INTERVAL);
 
-	m_sesstionChecker.setInterval(SF_SESSIONCHER_INTERVAL);
-
 	initWidget();
 	initTray();
 
-	autoRun();
+	//autoRun(false);
 	int w = 880;
 	int h = 500;
 	int x = (QApplication::desktop()->width() - w)/2;
@@ -44,148 +43,51 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),m_flogin(this)
 	setWindowTitle(m_title+"-v"+QCoreApplication::applicationVersion());
 
 	connect(NetClient::instance(),SIGNAL(recvdata(int ,const char* ,int )),this,SLOT(recvdata(int ,const char* ,int )));
-	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 	connect(this,SIGNAL(finishPlay()),&m_playThread,SLOT(beginPlay()));
 	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
 	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
-	connect(&m_sesstionChecker,SIGNAL(timeout()),this,SLOT(sesstionChecker()));
-	connect(&m_flogin,SIGNAL(loginResp(Json::Value&)),this,SLOT(loginResp(Json::Value&)));
-	connect(&m_flogin,SIGNAL(loging(int)),this,SLOT(loging(int)));
 
 	// 启动语音队列线程
 	m_playThread.start();
-
 }
 
 
 void MainWindow::initWidget()
 {
+	QWidget * centralWdg = new QWidget;
+	m_pLayout = new QVBoxLayout;
+	m_pStackWdg = new QStackedWidget;
+	m_pTitleWdg = new TitleWidget;
+	m_pMainWdg = new MainWdg;
+	centralWdg->setLayout(m_pLayout);
+	m_pLayout->addWidget(m_pTitleWdg);
+	m_pLayout->addWidget(m_pStackWdg);
+	m_pStackWdg->addWidget(m_pMainWdg);
+	m_pLayout->setMargin(0);
+	setCentralWidget(centralWdg);
 
-	QVBoxLayout* vbox = new QVBoxLayout;
-	
-	TitleWidget * title = new TitleWidget();
-
-	m_table = new QTableWidget;
-	m_table->setEditTriggers ( QAbstractItemView::NoEditTriggers );
-	m_table->setColumnCount(4);
-	QStringList headers;
-	headers<<"厂家"<<"账号"<<"状态"<<"操作";
-	m_table->setHorizontalHeaderLabels(headers);
-	m_table->setFrameShape(QFrame::NoFrame);
-	m_table->setSelectionBehavior(QAbstractItemView::SelectRows);
-	m_table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-	m_table->setAlternatingRowColors(true);
-	m_table->setStyleSheet("QTableWidget{alternate-background-color:#BBFFFF}");
-
-	m_table->horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);
-	m_table->horizontalHeader()->setResizeMode(1, QHeaderView::Fixed);
-	m_table->horizontalHeader()->setResizeMode(2, QHeaderView::Stretch);
-	m_table->horizontalHeader()->setResizeMode(3, QHeaderView::Fixed);
-
-	vbox->addWidget(title);
-	vbox->addWidget(m_table);
-	
-	vbox->setMargin(0);
-	QWidget *centralWidget = new QWidget;
-	centralWidget->setLayout(vbox);
-	setCentralWidget(centralWidget);
 	m_status = new QLabel;
-	
+	QPalette statusPalette = m_status->palette();
+	statusPalette.setColor(QPalette::WindowText,QColor(200,200,200));
+	m_status->setPalette(statusPalette);
+	QFont font;
+	font.setPixelSize(12);
+	m_status->setFont(font);
 	m_status->setFrameStyle( QFrame::NoFrame); // 无边框
 	m_status->setLineWidth(0);
-	m_status->setText("未知");
+	m_status->setStyleSheet("margin-left:8px;");
+	m_status->setText(QString::fromLocal8Bit("就绪"));
 	statusBar()->addWidget(m_status);
+	statusBar()->setStyleSheet(QString("QStatusBar::item{border: 0px}"));
 	this->statusBar()->show();
-}
-
-void MainWindow::initList()
-{
-	m_table->setRowCount(m_vendorList.size());
-	for (int i = 0;i<m_vendorList.size();i++)
-	{
-		int col = 0;
-		Vendors* vend = m_vendorList.at(i);
-
-		QTableWidgetItem* item = new QTableWidgetItem(vend->vendorName);
-		item->setData(Qt::UserRole,vend->vendorFactory);
-		m_table->setItem(i,col++,item);
-		
-		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorLoginName));
-
-		m_table->setItem(i,col++,new QTableWidgetItem(""));
-		
-		// TCL厂家，手动登陆
-		if (vend->vendorFactory == FACTORY_TCL)
-		{
-			QPushButton *btn = new QPushButton();
-			btn->setProperty(PROPERTY_ROWNUM,i);
-			btn->setProperty(PROPERTY_FACTORY,vend->vendorFactory);
-			btn->setProperty(PROPERTY_USER,vend->vendorLoginName);
-			btn->setProperty(PROPERTY_PWD,vend->vendorPassword);
-
-			btn->setText("登陆");
-			m_table->setCellWidget(i,col,btn);
-			connect(btn,SIGNAL(pressed()),this,SLOT(onLogin()));
-		}
-		else
-		{
-			m_table->item(i,2)->setText("登录中...");
-			
-			Sleep(3000);
-			checkLogin(vend);
-			
-		}
-		
-	}
-}
-
-void MainWindow::onLogin()
-{
-	QObject* obj = sender();
-	if (obj != NULL)
-	{
-		int row = obj->property(PROPERTY_ROWNUM).toInt();
-		QString factory = obj->property(PROPERTY_FACTORY).toString();
-		QString user = obj->property(PROPERTY_USER).toString();
-		QString pwd = obj->property(PROPERTY_PWD).toString();
-		m_flogin.setContext(row,factory,user,pwd);
-		
-	}
-	
-	m_flogin.showDlg();
-
-}
-
-void MainWindow::loging(int row)
-{
-	QTableWidgetItem* item = m_table->item(row,2);
-	if (item != NULL)
-	{
-		item->setText("登录中...");
-		item->setTextColor(Qt::green);
-	}
-}
-
-void MainWindow::checkLogin(Vendors* vend)
-{
-	QString json = QString("{\"user\":\"%1\",\"pwd\":\"%2\",\"factory\":\"%3\",\"mainServerHost\":\"%4\",\"statusReportHost\":\"%5\",\"seqno\":\"%6\"}")
-		.arg(vend->vendorLoginName)
-		.arg(vend->vendorPassword)
-		.arg(vend->vendorFactory)
-		.arg(URL_MAIN_SERVER)
-		.arg(URL_REPT)
-		.arg("1");
-	QByteArray req ;
-	req.append(json);
-	QhttpNetwork::instance()->post(URL_FACTORY_LONGIN,req);
-	qDebug("向自动登录接口发送内容:%s",json.toStdString().c_str());
 }
 
 void MainWindow::setVendorData(QList<Vendors*> vendorList)
 {
-	m_vendorList = vendorList;
+	if(m_pMainWdg) {
+		m_pMainWdg->setVendorList(vendorList);
+	}
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -209,101 +111,8 @@ void MainWindow::uploadLog()
 	QString url = "http://localhost:9100/CP_TEST/login.shtml";
 	QByteArray req("{\"userid\":\"1538822184@qq.com\"}");
 	QhttpNetwork::instance()->post(url,req);
-
 }
 
-void MainWindow::replyData(QByteArray data)
-{
-	QString msg = QString::fromUtf8(data.data());
-	qDebug("[MainWindow->replyData] 接收返回: %s",msg.toStdString().c_str());
-
-	Json::Reader reader;
-	Json::Value value;
-
-	
-	if(reader.parse(msg.toStdString(),value))
-	{
-		
-		string success = value["success"].asString();
-		string status = value["status"].asString();
-		
-
-		if (status.length()>1)
-		{
-			parserSession(value);
-			return;
-		}
-		// 过滤非本类型消息
-		if (success.length()<=0)
-		{
-			return;
-		}
-		qDebug("收到厂家自动登录返回消息:%s",msg.toStdString().c_str());
-		//m_vendorList.clear();
-		int loginStatus;
-		if (success == "true")
-		{
-			loginStatus = 1;
-			qDebug()<<"厂家账号自动登录成功";
-		}
-		else
-		{
-			int code = 0;
-			if (value["code"] != NULL)
-			{
-				code = value["code"].asInt();
-			}
-			
-			loginStatus = code;
-			qDebug("厂家账号自动登录失败,错误码:%d",code);
-		}
-
-		string user = value["user"].asString();
-		updateLoginState(user.c_str(),loginStatus);
-
-	}
-}
-
-void MainWindow::updateLoginState(QString user,int status)
-{
-
-	for (int i = 0;i<m_table->rowCount();i++)
-	{
-		QTableWidgetItem* itemUser = m_table->item(i,1);
-		if (itemUser->text() == user)
-		{
-			QTableWidgetItem* itemState = m_table->item(i,2);
-			
-			switch (status)
-			{
-			case 1:
-				itemState->setText("登陆成功");
-				itemState->setTextColor(Qt::green);
-				break;
-			case 422:
-				itemState->setText(ERROR_ALREADY_LONGIN);
-				itemState->setTextColor(Qt::red);
-				break;
-			case 423:
-				itemState->setText(ERROR_PWD);
-				itemState->setTextColor(Qt::red);
-				break;
-			case 404:
-				itemState->setText("其他登录异常");
-				itemState->setTextColor(Qt::red);
-				break;
-			case 424:
-				itemState->setText("验证码错误");
-				itemState->setTextColor(Qt::red);
-				break;
-			default:
-				itemState->setText("登陆失败");
-				itemState->setTextColor(Qt::red);
-				break;
-			}
-		}
-	}
-}
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
@@ -313,7 +122,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::sysExit()
 {
-	int  ret = QMessageBox::question(this,"思方工单助手","是否确定退出思方工单助手?",QMessageBox::Yes|QMessageBox::No);
+	int  ret = QMessageBox::question(this,"工单助手","是否确定退出工单助手?",QMessageBox::Yes|QMessageBox::No);
 	if (ret == QMessageBox::Yes)
 	{
 		NetClient::instance()->close();
@@ -379,7 +188,7 @@ void MainWindow::autoRun(bool bAutoRun)
 	if (bAutoRun)
 	{
 		QString strAppPath=QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
-		reg.setValue("sfclient",strAppPath);
+		reg.setValue("sfclient","\"" + strAppPath + "\"");
 	}
 	else
 	{
@@ -395,10 +204,10 @@ void MainWindow::playSound(int id)
 		id = 0;
 	}
 	QString sound = QString("sound/tip%1.wav").arg(id);
-	if (m_sound != NULL)
+	if (m_sound != nullptr)
 	{
 		delete m_sound;
-		m_sound = NULL;
+		m_sound = nullptr;
 	}
 	m_sound = new QSound(sound);
 	if (m_sound->isAvailable())
@@ -439,69 +248,20 @@ void MainWindow::sendReg()
 		
 }
 
-void MainWindow::loginResp(Json::Value& jvalue)
-{
-	string strRow = jvalue["seqno"].asString();
-	int row = atoi(strRow.c_str());
-	QTableWidgetItem* item = m_table->item(row,2);
-	if (item == NULL)
-	{
-		return;
-	}
-	QWidget* btn = m_table->cellWidget(row,3);
-	string sucess = jvalue["success"].asString();
-	if (sucess == RESULT_TRUE)
-	{
-		// 登录成功
-		
-		item->setText("登录成功");
-		item->setTextColor(Qt::green);
-		
-		if (!m_sesstionChecker.isActive())
-		{
-			// 启动sestion过期检查
-			m_sesstionChecker.start();
-		}
-		
-		if (btn != NULL)
-		{
-			btn->setEnabled(false);
-		}
-	}
-	else
-	{
-		int code = jvalue["code"].asInt();
-		if (code == 423)
-		{
-			item->setText(ERROR_PWD);
-		}
-		else if (code == 424)
-		{
-			item->setText("验证码过期");
-		}
-		else
-		{
-			item->setText("登录失败");
-		}
-		item->setTextColor(Qt::red);
-
-	}
-}
 
 void MainWindow::recvdata(int msgtype,const char* msg,int msglength)
 {
-
+	Q_UNUSED(msglength)
 	switch (msgtype)
 	{
 	case SF_CMD_CONNECTED:
-		m_status->setText("成功连接服务器");
+		m_status->setText(QString::fromLocal8Bit("成功连接服务器"));
 		sendReg();
 		m_heartBeatTimer.start();
 		break;
 	case SF_CMD_DISCONNECTED:
 		m_status->setText("服务器连接中断");
 		break;
-
 	case SF_CMD_PLAY_SOUND:
 		parseTcpResponse(msg);
 		qDebug(msg);
@@ -526,73 +286,4 @@ void MainWindow::parseTcpResponse(const char* msg)
 		m_playThread.enqueue(atoi(id.c_str()));
 		
 	}
-}
-
-void MainWindow::sesstionChecker()
-{
-	for (int i = 0;i<m_vendorList.size();i++)
-	{
-		Vendors * vend = m_vendorList.at(i);
-		if (vend->vendorFactory == FACTORY_MEDIA)
-		{
-			sendSessionChecker(vend);
-		}
-	}
-}
-
-void MainWindow::parserSession(Json::Value & jvalue)
-{
-	string status = jvalue["status"].asString();
-	if (!(status == RESULT_TRUE))
-	{
-		string user = jvalue["user"].asString();
-		string factory = jvalue["factory"].asString();
-		int row = m_table->rowCount();
-		for (int i = 0;i<row;i++)
-		{
-			QTableWidgetItem* itemFactory = m_table->item(i,0);
-			QTableWidgetItem* itemUser = m_table->item(i,1);
-			string ftext = itemFactory->data(Qt::UserRole).toString().toStdString();
-			string fuser = itemUser->text().toStdString();
-			if (fuser == user && ftext == factory)
-			{
-				QTableWidgetItem* itemStatus = m_table->item(i,2);
-				itemStatus->setText("会话过期，请重新登录");
-				itemStatus->setTextColor(Qt::red);
-				m_table->cellWidget(i,3)->setEnabled(true);
-				
-				// 显示窗口
-				showNormal();
-			}
-		}
-		if (factory == FACTORY_MEDIA)
-		{
-			// 清除sestion过期标志
-			sendRmSessionTimeout(user.c_str());
-		}
-	}
-
-}
-
-void MainWindow::sendSessionChecker(Vendors *vender)
-{
-	QString json = QString("{\"user\":\"%1\",\"factory\":\"%2\"}")
-		.arg(vender->vendorLoginName)
-		.arg(vender->vendorFactory);
-	QByteArray req ;
-	req.append(json);
-	QhttpNetwork::instance()->post(URL_SESSION_CHECK,req);
-	qDebug("发送session过期检查命令:%s",json.toStdString().c_str());
-}
-
-void MainWindow::sendRmSessionTimeout(QString user)
-{
-	QString json = QString("{\"user\":\"%1\",\"factory\":\"%2\"}")
-		.arg(user)
-		.arg(FACTORY_MEDIA);
-	QByteArray req ;
-	req.append(json);
-	QhttpNetwork::instance()->post(URL_REMOVE_SESSION_TIMEOUT,req);
-
-	qDebug("发送session过期命令:%s",json.toStdString().c_str());
 }

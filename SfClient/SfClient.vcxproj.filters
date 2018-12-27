@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Generated Files">
@@ -43,6 +43,12 @@
     <ClCompile Include="configer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="factorydb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factorydlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="factorylogin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,7 +64,13 @@
     <ClCompile Include="..\common\include\jsoncpp\json_writer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loginhelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwdg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mainwindow.cpp">
@@ -99,6 +111,12 @@
     <ClInclude Include="configer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="factorydb.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="factorydlg.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="factorylogin.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -117,6 +135,12 @@
     <ClInclude Include="..\common\include\jsoncpp\json_batchallocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="loginhelper.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwdg.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -155,10 +179,34 @@
     <ClCompile Include="release\moc_captlabel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="debug\moc_factorydb.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_factorydb.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_factorydlg.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_factorydlg.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="debug\moc_factorylogin.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_factorylogin.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_loginhelper.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_loginhelper.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_mainwdg.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_mainwdg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_mainwindow.cpp">

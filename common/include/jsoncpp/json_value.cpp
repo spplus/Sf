@@ -1145,7 +1145,7 @@ Value::removeMember( const char* key )
       return null;
 #ifndef JSON_VALUE_USE_INTERNAL_MAP
    CZString actualKey( key, CZString::noDuplication );
-   ObjectValues::iterator it = value_.map_->find( actualKey );
+   auto it = value_.map_->find( actualKey );
    if ( it == value_.map_->end() )
       return null;
    Value old(it->second);
@@ -1632,7 +1632,7 @@ const Value &
 Path::resolve( const Value &root ) const
 {
    const Value *node = &root;
-   for ( Args::const_iterator it = args_.begin(); it != args_.end(); ++it )
+   for ( auto it = args_.begin(); it != args_.end(); ++it )
    {
       const PathArgument &arg = *it;
       if ( arg.kind_ == PathArgument::kindIndex )

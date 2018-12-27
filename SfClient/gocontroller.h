@@ -1,7 +1,9 @@
 #ifndef __GOCONTROLLER_H__
 #define __GOCONTROLLER_H__
 
- #include <QProcess>
+#include <QProcess>
+#include <QDebug>
+#include <QStringList>
 
 class GoController
 {
@@ -11,6 +13,7 @@ public:
 	void						goExit();
 private:
 	GoController();
+	bool						getProcess(QString);
 
 private:
 	QProcess					m_pro;

@@ -1,12 +1,9 @@
-
 #include <QtGui>
 #include "topwidget.h"
-
 
 TopWidget::TopWidget(QWidget* parent/* =NULL */)
 	:QDialog(parent)
 {
-	
 	QHBoxLayout * hbox = new QHBoxLayout;
 	QToolButton *closeBtn = new QToolButton;
 	closeBtn->setAutoRaise(true);

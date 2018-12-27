@@ -1,3 +1,6 @@
+#ifndef __QHTTPNETWORK_H__ 
+#define __QHTTPNETWORK_H__
+
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 
@@ -6,6 +9,7 @@ class QhttpNetwork : public QObject
 	Q_OBJECT
 
 public:
+	QhttpNetwork(QObject *parent = 0);
 	static	QhttpNetwork* instance();
 signals:
 		
@@ -16,9 +20,7 @@ public slots:
 		void get(QString strUrl);
 		void replyFinished(QNetworkReply* reply);
 private:
-	QhttpNetwork(QObject *parent = 0);
-
-private:
 	static QhttpNetwork*	m_inst;
 	QNetworkAccessManager*	m_manager;
 };
+#endif

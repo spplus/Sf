@@ -15,7 +15,7 @@ QMAKE_RCC=$$(QTDIR)/bin/rcc.exe
 
 INCLUDEPATH += ../common/include
 
-QT += core gui widgets network 
+QT += core gui widgets network sql
 #CONFIG += console
 
 TARGET = ../../bin/SfClient
@@ -34,6 +34,10 @@ SOURCES += main.cpp\
 	playthread.cpp \
 	factorylogin.cpp \
 	captlabel.cpp \
+	mainwdg.cpp \
+	factorydb.cpp \
+	loginhelper.cpp \
+	factorydlg.cpp\
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
 	../common/include/jsoncpp/json_reader.cpp \
@@ -55,6 +59,10 @@ HEADERS  += mainwindow.h \
 			playthread.h \
 			factorylogin.h \
 			captlabel.h \
+			mainwdg.h \
+			factorydb.h \
+			loginhelper.h \
+			factorydlg.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \
 			../common/include/jsoncpp/features.h \
