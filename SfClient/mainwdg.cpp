@@ -353,6 +353,9 @@ void MainWdg::factoryReplyData(QByteArray data) {
 					if (itemName != NULL)
 					{
 						itemName->setText(m_pVendors.vendorLoginName);
+						Vendors *ven = this->m_vendorList.at(m_currentRow);
+						ven->vendorLoginName = m_pVendors.vendorLoginName;
+						ven->vendorPassword = m_pVendors.vendorPassword;
 					}
 				}
 				QMessageBox::information(this,"工单助手","修改成功");
