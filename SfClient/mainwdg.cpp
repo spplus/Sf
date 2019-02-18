@@ -407,6 +407,11 @@ void MainWdg::onLoginBack(string user,string factory,int status)
 		itemState->setTextColor(Qt::red);
 		this->addReLoginButton(index,3);
 		break;
+	case 425:
+		itemState->setText("ÔÝÍ£Ö§³Ö");
+		itemState->setTextColor(Qt::red);
+		this->addReLoginButton(index,3);
+		break;
 	default:
 		itemState->setText("µÇÂ½Ê§°Ü");
 		itemState->setTextColor(Qt::red);
