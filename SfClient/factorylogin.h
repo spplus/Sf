@@ -15,6 +15,7 @@ class FactoryLogin	:public QDialog
 public:
 	FactoryLogin(QWidget* parent);
 	int		showDlg();
+	void	setFactory(QString factory);
 	void	setContext(int row,QString factory,QString user,QString pwd);
 	void	keyPressEvent ( QKeyEvent * event ) ;
 signals:

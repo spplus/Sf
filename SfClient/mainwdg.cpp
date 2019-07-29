@@ -231,10 +231,13 @@ void MainWdg::setVendorList(QList<Vendors*> list) {
 		m_table->setItem(i,col++,item);
 		m_table->setItem(i,col++,new QTableWidgetItem(vend->vendorLoginName));
 		m_table->setItem(i,col++,new QTableWidgetItem(""));
+		
+		m_flogin.setFactory(vend->vendorFactory);
 
 		// TCL厂家，手动登陆
-		if (vend->vendorFactory == FACTORY_TCL)
-		{
+		if (vend->vendorFactory == FACTORY_TCL
+			|| vend->vendorFactory == FACTORY_HAIERCDK)
+		{	
 			auto *btn = new QPushButton();
 			btn->setProperty(PROPERTY_ID,vend->serverId);
 			btn->setStyleSheet("QPushButton { \

@@ -11,6 +11,7 @@ public:
 	static GoController*		instance();
 	void						goRun(QString path);
 	void						goExit();
+	QProcess::ProcessState		getState();
 private:
 	GoController();
 	bool						getProcess(QString);

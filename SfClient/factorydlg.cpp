@@ -24,6 +24,9 @@ FactoryDlg::FactoryDlg(QWidget *parent)
 	m_pComboBox->addItem(QString::fromLocal8Bit("苏宁"),Suning);
 	m_pComboBox->addItem(QString::fromLocal8Bit("国美"),GoMe);
 	m_pComboBox->addItem(QString::fromLocal8Bit("京东"),JD);
+	m_pComboBox->addItem(QString::fromLocal8Bit("苏泊尔"),Supor);
+	m_pComboBox->addItem(QString::fromLocal8Bit("创维"),ChuangWei);
+	m_pComboBox->addItem(QString::fromLocal8Bit("海尔CDK"),Haiercdk);
 
 	m_pComboBox->setItemText(0,QString::fromLocal8Bit("格力"));
 	m_pComboBox->setItemText(1,QString::fromLocal8Bit("TCL"));
@@ -37,6 +40,9 @@ FactoryDlg::FactoryDlg(QWidget *parent)
 	m_pComboBox->setItemText(9,QString::fromLocal8Bit("苏宁"));
 	m_pComboBox->setItemText(10,QString::fromLocal8Bit("国美"));
 	m_pComboBox->setItemText(11,QString::fromLocal8Bit("京东"));
+	m_pComboBox->setItemText(12,QString::fromLocal8Bit("苏泊尔"));
+	m_pComboBox->setItemText(13,QString::fromLocal8Bit("创维"));
+	m_pComboBox->setItemText(14,QString::fromLocal8Bit("海尔CDK"));
 
 	m_oFactoryName->addWidget(m_pComboBox,1,Qt::AlignLeft);
 
@@ -149,6 +155,18 @@ void FactoryDlg::onConfirm() {
 		factoryName = QString::fromLocal8Bit("惠而浦");
 		m_vendors.vendorFactory = "whirlpool";
 		break;
+	case Supor:
+		factoryName = QString::fromLocal8Bit("苏泊尔");
+		m_vendors.vendorFactory = "supor";
+		break;
+	case ChuangWei:
+		factoryName = QString::fromLocal8Bit("创维");
+		m_vendors.vendorFactory = "chuangwei";
+		break;
+	case Haiercdk:
+		factoryName = QString::fromLocal8Bit("海尔CDK");
+		m_vendors.vendorFactory = "haiercdk";
+		break;
 	}
 	if(factoryName.isEmpty()) {
 		QMessageBox::information(this,QString::fromLocal8Bit("错误"),QString::fromLocal8Bit("请选择厂家"));
@@ -215,7 +233,15 @@ void FactoryDlg::setData(Vendors vendors) {
 	if(m_vendors.vendorName == "京东") {
 		m_pComboBox->setCurrentIndex(11);
 	}
-
+	if(m_vendors.vendorName == "苏泊尔") {
+		m_pComboBox->setCurrentIndex(12);
+	}
+	if(m_vendors.vendorName == "创维") {
+		m_pComboBox->setCurrentIndex(13);
+	}
+	if(m_vendors.vendorName == "海尔CDK") {
+		m_pComboBox->setCurrentIndex(14);
+	}
 
 	m_pUsername->setText(m_vendors.vendorLoginName);
 	m_pPassword->setText(m_vendors.vendorPassword);

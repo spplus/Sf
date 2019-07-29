@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	// 一分钟一次心跳
 	m_heartBeatTimer.setInterval(SF_HEARTBEAT_INTERVAL);
+	m_woodpackerTimer.setInterval(SF_HEARTBEAT_INTERVAL);
 
 	initWidget();
 	initTray();
@@ -46,9 +47,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(this,SIGNAL(finishPlay()),&m_playThread,SLOT(beginPlay()));
 	connect(&m_playThread,SIGNAL(play(int)),this,SLOT(playSound(int)));
 	connect(&m_heartBeatTimer,SIGNAL(timeout()),this,SLOT(sendHearBeat()));
+	connect(&m_woodpackerTimer,SIGNAL(timeout()),this,SLOT(checkWoodPackerAlive()));
 
 	// 启动语音队列线程
 	m_playThread.start();
+	m_woodpackerTimer.start();
 }
 
 
@@ -125,11 +128,20 @@ void MainWindow::sysExit()
 	int  ret = QMessageBox::question(this,"工单助手","是否确定退出工单助手?",QMessageBox::Yes|QMessageBox::No);
 	if (ret == QMessageBox::Yes)
 	{
+		sendExit2WoodPack();
 		NetClient::instance()->close();
 		GoController::instance()->goExit();
 		exit(0);
 	}
 	
+}
+
+void MainWindow::sendExit2WoodPack()
+{
+	QString json = "exit";
+	QByteArray req ;
+	req.append(json.toUtf8());
+	QhttpNetwork::instance()->post(URL_EXIT,req);
 }
 
 void MainWindow::initTray()
@@ -219,6 +231,20 @@ void MainWindow::playSound(int id)
 	emit finishPlay();
 	
 }
+
+void MainWindow::checkWoodPackerAlive()
+{
+	QProcess::ProcessState state = GoController::instance()->getState();
+	if (state == QProcess::ProcessState::NotRunning)
+	{
+		this->showNormal();
+		QMessageBox::warning(this,"系统提示","工单助手发生网络错误，请重新登录");
+		NetClient::instance()->close();
+		GoController::instance()->goExit();
+		exit(0);
+	}
+}
+
 void MainWindow::sendHearBeat()
 {
 	Json::Value root;

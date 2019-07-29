@@ -36,8 +36,10 @@ typedef enum Factory {
 	Old_Haier,
 	Suning,
 	GoMe,
-	JD
-
+	JD,
+	Supor,
+	ChuangWei,
+	Haiercdk
 }Factory;
 
 
@@ -82,6 +84,9 @@ typedef enum Factory {
 
 #define			FACTORY_TCL			"tcl"
 #define			FACTORY_MEDIA		"midea"
+#define			FACTORY_HAIERCDK	"haiercdk"
+
+
 #define			KEY_FACTORY			"/SF/factory"
 #define			PROPERTY_ROWNUM		"rownum"
 #define			PROPERTY_FACTORY	"factory"
@@ -97,10 +102,14 @@ typedef enum Factory {
 // URL定义
 
 // 图片验证码请求地址20881
-#define			URL_CAPTCHA				"http://localhost:20081/captchaTCL"
+#define			URL_CAPTCHA				"http://localhost:20081/captcha/"
 
 // 厂家登录接口
 #define			URL_FACTORY_LONGIN		"http://localhost:20081/login"
+
+// 系统退出
+#define			URL_EXIT				"http://localhost:20081/exit"
+
 
 // 业务服务器地址
 // #define			URL_MAIN_SERVER			"http://192.168.2.23:8780/netDC/main/receiveOrders"

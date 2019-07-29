@@ -93,8 +93,35 @@ Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND8}; DestDir: "{app}\{#SOUND_DIR}"; 
 Source: {#APP_PATH}{#SOUND_DIR}{#DEFALT_SOUND9}; DestDir: "{app}\{#SOUND_DIR}"; Flags: ignoreversion
 Source: {#APP_PATH}{#JPEG_PLUGIN_PATH}{#QJPEG}; DestDir: "{app}\{#JPEG_PLUGIN_PATH}"; Flags: ignoreversion
 Source: {#APP_PATH}{#CODE_PLUGIN_PATH}{#QCNCODECS}; DestDir: "{app}\{#CODE_PLUGIN_PATH}"; Flags: ignoreversion
+Source: compiler:IsTask.dll; Flags: dontcopy noencryption
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
+
+[Code]
+//安装前判断是否有进程正在运行，istask.dll文件与打包的exe文件一起
+function RunTask(FileName: string; bFullpath: Boolean): Boolean;
+external 'RunTask@files:ISTask.dll stdcall delayload';
+function KillTask(ExeFileName: string): Integer;
+external 'KillTask@files:ISTask.dll stdcall delayload';
+
+function InitializeSetup(): Boolean;
+begin
+  Result:= true;
+  if RunTask('woodpeckerdn.exe', false) then
+      begin
+           if MsgBox('安装程序检测到woodpeckerdn正在运行!'#13''#13'点击 "是" 按钮将停止进程然后继续安装;'#13''#13'点击"否" 按钮将终止安装程序!', mbConfirmation, MB_YESNO) = IDYES then
+              begin
+              KillTask('woodpeckerdn.exe');
+              KillTask('woodpeckerdn.exe');
+              Result:= true;
+              end
+           else
+              Result:= false;
+      end
+  else
+  Result:= true;
+end;
+
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

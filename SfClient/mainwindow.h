@@ -44,7 +44,7 @@ public slots:
 	void		sysExit();
 	void		playSound(int id);
 	void		sendHearBeat();
-
+	void		checkWoodPackerAlive();
 	// TCP服务器数据返回
 	void		recvdata(int msgtype,const char* msg,int msglength);
 
@@ -53,6 +53,7 @@ public slots:
 private:
 	void		initWidget();
 	void		initTray();
+	void		sendExit2WoodPack();
 	void		parseTcpResponse(const char* msg);
 
 	// 发送注册信息
@@ -75,6 +76,7 @@ private:
 	QAction *						m_reset;	//菜单实现功能：恢复窗口  
 	QAction *						m_quit;		//菜单实现功能：退出程序  
 	QTimer							m_heartBeatTimer;
+	QTimer							m_woodpackerTimer;
 	QList<Vendors*>					m_vendorList;
 	PlayThread						m_playThread;
 };

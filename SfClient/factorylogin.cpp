@@ -25,6 +25,10 @@ FactoryLogin::FactoryLogin(QWidget* parent):QDialog(parent)
 	
 }
 
+void FactoryLogin::setFactory(QString factory){
+	m_factory = factory;
+}
+
 void FactoryLogin::initUi()
 {
 	QVBoxLayout*	mbox = new QVBoxLayout;
@@ -96,8 +100,22 @@ void FactoryLogin::longin()
 
 void FactoryLogin::loadImg()
 {
+	QString capturl = "";
+	if (m_factory == FACTORY_TCL)
+	{
+		capturl = QString("%1%2").arg(URL_CAPTCHA,"tcl");
+	}
+	else if (m_factory == FACTORY_HAIERCDK)
+	{
+		capturl = QString("%1%2").arg(URL_CAPTCHA,"cdk");
+	}
+	else if (m_factory == FACTORY_MEDIA)
+	{
+		capturl = QString("%1%2").arg(URL_CAPTCHA,"midea");
+	}
+
 	QNetworkRequest request;
-	request.setUrl(QUrl(URL_CAPTCHA));
+	request.setUrl(QUrl(capturl));
 	m_netMgr.get(request);
 	m_capt->setText("");
 	qDebug("ÇëÇóÑéÖ¤Âë£¬loadImg:%s",URL_CAPTCHA);

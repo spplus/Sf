@@ -19,11 +19,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-	//检查程序是否 已经启动过  
-	if(checkOnly()==false) 
-	{
-		return 0;  
-	}
+
 	// 创建日志目录
 	mkdir("log");
 	
@@ -76,6 +72,13 @@ int main(int argc, char *argv[])
 	qss.open(QFile::ReadOnly);
 	a.setStyleSheet(qss.readAll());
 	qss.close();
+
+	//检查程序是否 已经启动过  
+	if(checkOnly()==false) 
+	{
+		QMessageBox::information(NULL,"系统提示","工单助手已经运行，请通过右下角托盘打开");
+		return 0;  
+	}
 
 	// 登录
 	UserLogindlg dlg;

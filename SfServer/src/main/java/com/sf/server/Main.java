@@ -14,7 +14,7 @@ import net.sf.json.JSONObject;
 
 public class Main {
 		
-	private static String nameserver = "120.210.205.24:9876";
+	private static String nameserver = "192.168.0.96:9876";
 	private static DefaultMQProducer producer = null;
 	
 
@@ -34,10 +34,10 @@ public class Main {
 			producer.start();
 			String key = UUID.randomUUID().toString();
 			JSONObject js = new JSONObject();
-			js.put("category", "0");
-			js.put("siteId", "ff808081586cc3d701586ce8bef50003");
-			js.put("sendtime", sendtime);
-			Message msg = new Message("topic_audio", "tag_default_new_order_audio", key, (js.toString()).getBytes("UTF-8"));
+			js.put("ORGID", "30");
+			js.put("MSG", "新债权上市，请注意查看");
+			
+			Message msg = new Message("TC", "webMsg", key, (js.toString()).getBytes("UTF-8"));
 			
 			SendResult sendResult = producer.send(msg);
 			SpLogger.info("发送同步消息, key:" + key + "发送结果：" + sendResult);

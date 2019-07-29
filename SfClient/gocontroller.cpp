@@ -31,6 +31,11 @@ void GoController::goRun(QString path)
 	m_pro.start(program, arguments);
 }
 
+QProcess::ProcessState GoController::getState()
+{
+	return m_pro.state();
+}
+
 void GoController::goExit()
 {
 	m_pro.close();
