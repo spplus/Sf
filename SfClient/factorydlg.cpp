@@ -27,6 +27,7 @@ FactoryDlg::FactoryDlg(QWidget *parent)
 	m_pComboBox->addItem(QString::fromLocal8Bit("苏泊尔"),Supor);
 	m_pComboBox->addItem(QString::fromLocal8Bit("创维"),ChuangWei);
 	m_pComboBox->addItem(QString::fromLocal8Bit("海尔CDK"),Haiercdk);
+	m_pComboBox->addItem(QString::fromLocal8Bit("京东配送"),Jddeliver);
 
 	m_pComboBox->setItemText(0,QString::fromLocal8Bit("格力"));
 	m_pComboBox->setItemText(1,QString::fromLocal8Bit("TCL"));
@@ -43,6 +44,7 @@ FactoryDlg::FactoryDlg(QWidget *parent)
 	m_pComboBox->setItemText(12,QString::fromLocal8Bit("苏泊尔"));
 	m_pComboBox->setItemText(13,QString::fromLocal8Bit("创维"));
 	m_pComboBox->setItemText(14,QString::fromLocal8Bit("海尔CDK"));
+	m_pComboBox->setItemText(15,QString::fromLocal8Bit("京东配送"));
 
 	m_oFactoryName->addWidget(m_pComboBox,1,Qt::AlignLeft);
 
@@ -167,6 +169,10 @@ void FactoryDlg::onConfirm() {
 		factoryName = QString::fromLocal8Bit("海尔CDK");
 		m_vendors.vendorFactory = "haiercdk";
 		break;
+	case Jddeliver:
+		factoryName = QString::fromLocal8Bit("京东配送");
+		m_vendors.vendorFactory = "jddeliver";
+		break;
 	}
 	if(factoryName.isEmpty()) {
 		QMessageBox::information(this,QString::fromLocal8Bit("错误"),QString::fromLocal8Bit("请选择厂家"));
@@ -242,7 +248,9 @@ void FactoryDlg::setData(Vendors vendors) {
 	if(m_vendors.vendorName == "海尔CDK") {
 		m_pComboBox->setCurrentIndex(14);
 	}
-
+	if(m_vendors.vendorName == "京东配送") {
+		m_pComboBox->setCurrentIndex(15);
+	}
 	m_pUsername->setText(m_vendors.vendorLoginName);
 	m_pPassword->setText(m_vendors.vendorPassword);
 	m_pUrl->setText(m_vendors.vendorUrl);

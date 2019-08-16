@@ -39,7 +39,8 @@ typedef enum Factory {
 	JD,
 	Supor,
 	ChuangWei,
-	Haiercdk
+	Haiercdk,
+	Jddeliver
 }Factory;
 
 
