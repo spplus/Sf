@@ -12,7 +12,7 @@ QMAKE_UIC=$$(QTDIR)/bin/uic.exe
 QMAKE_IDC=$$(QTDIR)/bin/idc.exe 
 QMAKE_RCC=$$(QTDIR)/bin/rcc.exe
 
-LIBS += -lqnviccub -L../common/lib
+LIBS += -lqnviccub -lphonic_ubox  -L../common/lib
 } 
 
 INCLUDEPATH += ../common/include
@@ -30,6 +30,8 @@ SOURCES += main.cpp\
 	titlewidget.cpp \
 	widget.cpp \
 	spwebview.cpp \
+	maincontroller.cpp \
+	settingwidget.cpp \
 	../common/include/qhttp/qhttpnetwork.cpp \
 	../common/include/jsoncpp/json_internalarray.inl \
 	../common/include/jsoncpp/json_internalmap.inl \
@@ -46,6 +48,8 @@ HEADERS  += mainwindow.h \
 			titlewidget.h \
 			widget.h \
 			spwebview.h \
+			maincontroller.h \
+			settingwidget.h \
 			../common/include/qhttp/qhttpnetwork.h \
 			../common/include/jsoncpp/autolink.h \
 			../common/include/jsoncpp/config.h \

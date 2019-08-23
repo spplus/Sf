@@ -10,6 +10,7 @@
 #include <QUrl>
 #include "qhttp/qhttpnetwork.h"
 #include "jsoncpp/json.h"
+#include "settingwidget.h"
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
@@ -18,12 +19,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	m_telType = 2;
 
 	m_title = "思方来电助手";
-
+	m_devnum = 201900048;
 	initWidget();
 	initTray();
 	autoRun();
-	int w = 450;
-	int h = 380;
+	int w = 550;
+	int h = 480;
 	int x = (QApplication::desktop()->width() - w)/2;
 	int y = (QApplication::desktop()->height() - h)/2;
 	
@@ -33,7 +34,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	setWindowIcon(QIcon(":images/tray.png"));
 	setWindowTitle(m_title+"-v"+QCoreApplication::applicationVersion());
 
-	connect(this,SIGNAL(telephoneIn(QString)),this,SLOT(dealIn(QString)));
+	//connect(this,SIGNAL(telephoneIn(QString)),this,SLOT(dealIn(QString)));
+	connect(&m_mainControler,SIGNAL(startRing(QString)),this,SLOT(dealIn(QString)));
+	connect(&m_mainControler,SIGNAL(sendToTextArea(QString)),this,SLOT(appendInfo(QString)));
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 	appendInfo("*******欢迎使用"+m_title+"*******");
 	//m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
@@ -43,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	requestVersion();
 
 	mkdir();
-
+	menuBar()->show();
 	onOpen();
 	m_webView.setWindowTitle(m_title);
 	m_webView.setWindowIcon(QIcon(":images/tray.png"));
@@ -178,6 +181,14 @@ void MainWindow::initWidget()
 	centralWidget->setLayout(vbox);
 	setCentralWidget(centralWidget);
 
+	m_setting = new QAction(this);
+	m_setting->setText("设置");
+	QMenu *settingMenu = new QMenu(this);
+	settingMenu->setTitle("文件");
+	settingMenu->addAction(m_setting);
+	menuBar()->addMenu(settingMenu);
+
+	connect(m_setting,SIGNAL(triggered()),this,SLOT(showSetting()));
 	connect(website,SIGNAL(linkActivated(QString)),this,SLOT(openUrl(QString))); 
 	connect(openBtn,SIGNAL(pressed()),this,SLOT(onOpen()));
 	connect(closeBtn,SIGNAL(pressed()),this,SLOT(onClose()));
@@ -203,6 +214,13 @@ void MainWindow::openUrl(QString url)
 {
 	QDesktopServices::openUrl(QUrl(url));
 }
+
+void MainWindow::showSetting()
+{
+	SettingWidget set;
+	set.exec();
+}
+
 QString MainWindow::getCurDateTime(QString fmt/* ="yyyy-MM-dd hh:mm:ss" */)
 {
 	QDateTime dt;
@@ -319,6 +337,9 @@ void MainWindow::replyData(QByteArray data)
 
 void MainWindow::onOpen()
 {
+	m_mainControler.openDevice();
+	//m_mainControler.getDeviceInfo();
+	/*
 	long lRet = QNV_OpenDevice(ODT_LBRIDGE,0,0);
 	if(lRet == ERROR_INVALIDDLL)
 	{
@@ -339,10 +360,13 @@ void MainWindow::onOpen()
 
 		initDevinfo();
 	}
+	*/
 }
 
 void MainWindow::onClose()
 {
+	m_mainControler.closeDevice();
+	/*
 	if(QNV_CloseDevice(ODT_ALL,0) != 0)
 	{
 		appendInfo("关闭设备成功");
@@ -351,6 +375,7 @@ void MainWindow::onClose()
 	{
 		appendInfo("关闭设备失败");
 	}
+	*/
 }
 
 void MainWindow::appendInfo(QString msg)

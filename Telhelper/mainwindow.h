@@ -15,6 +15,7 @@
 #include "bri/quviccub.h"
 #include "bri/BriChipErr.h"
 #include "bri/BriSDKLib.h"
+#include "maincontroller.h"
 
 
 class MainWindow : public QMainWindow
@@ -38,8 +39,9 @@ public slots:
 	void		onClose();
 	void		openUrl(QString url);
 	void		sysExit();
-
+	void		showSetting();
 	void		openAudioDir();
+	void		appendInfo(QString msg);
 
 	// 数据返回
 	void		replyData(QByteArray data);
@@ -63,7 +65,8 @@ private:
 	void		needUpdate(QString version,QString updateUrl,QString fileList);
 	bool		versionCheck(QString version);
 	void		initChannel(int chID);
-	void		appendInfo(QString msg);
+	
+	
 	QString		getCurDateTime(QString fmt="yyyy-MM-dd hh:mm:ss");
 	QString		getModule(int chID);
 	QString		getDevType(long devtype);
@@ -106,6 +109,8 @@ private:
 	QMenu *							m_tryMenu;	//托盘菜单  
 	QAction *						m_reset;	//菜单实现功能：恢复窗口  
 	QAction *						m_quit;		//菜单实现功能：退出程序  
+	QAction*						m_setting;	// 设置
+	MainController					m_mainControler;
 };
 
 #endif // MAINWINDOW_H
