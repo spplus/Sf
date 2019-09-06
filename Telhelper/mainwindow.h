@@ -10,6 +10,7 @@
 #include <qtimer.h>
 #include <QtGui>
 #include <QWebView>
+#include <QSettings>
 #include "widget.h"
 #include "spwebview.h"
 #include "bri/quviccub.h"
@@ -89,13 +90,14 @@ private:
 	QString							m_telnum;
 
 	// 设备序列号
-	BRIINT32						m_devnum;
+	QString							m_devnum;
 
 	// 当前通道
 	int								m_nChannelID;
 
 	// 录音文件名称
 	QString							m_audioName;
+	QSettings*						m_iniSetting;
 
 	// 录音文件句柄
 	long							m_lRecFileHandle;

@@ -5,8 +5,8 @@
 #include <QPainter>
 #include <QLinearGradient>
 #include <QIcon>
-#include <QCheckBox>
-#include <QLineEdit>
+#include <QMessageBox>
+#include <QFileDialog>
 
 SettingWidget::SettingWidget(QDialog *parent) :
     QDialog(parent)
@@ -20,12 +20,12 @@ SettingWidget::SettingWidget(QDialog *parent) :
 
 	// 序列号
 	QLabel *numtitle = new QLabel("设备序列号");
-	QLineEdit* numbEdit = new QLineEdit(this);
+	numbEdit = new QLineEdit(this);
 	hboxnum->addWidget(numtitle);
 	hboxnum->addWidget(numbEdit);
 
 	QLabel *filetile = new QLabel("录音保存路径");
-	QLineEdit *pathEdit = new QLineEdit(this);
+	pathEdit = new QLineEdit(this);
 	QPushButton* btn = new QPushButton("...");
 	btn->setFixedWidth(30);
 	hboxfile->addWidget(filetile);
@@ -39,8 +39,9 @@ SettingWidget::SettingWidget(QDialog *parent) :
 	hboxmsg->addStretch();
 
 
-	QCheckBox* ispopup = new QCheckBox(this);
+	ispopup = new QCheckBox(this);
 	ispopup->setText("去电是否弹屏");
+	ispopup->setChecked(true);
 	hboxcheck->addStretch();
 	hboxcheck->addWidget(ispopup);
 	hboxcheck->addStretch();
@@ -61,6 +62,53 @@ SettingWidget::SettingWidget(QDialog *parent) :
 
     setLayout(layout);
     //setFixedHeight(22);
+
+	setWindowIcon(QIcon(":images/tray.png"));
+
+	connect(savebtn,SIGNAL(pressed()),this,SLOT(save()));
+	connect(canclebtn,SIGNAL(pressed()),this,SLOT(cancel()));
+	connect(btn,SIGNAL(pressed()),this,SLOT(opendir()));
+
 }
 
+void SettingWidget::save(){
+	
+	QString num = numbEdit->text();
+	QString path = pathEdit->text();
+	int state = ispopup->checkState();
+	if (num.isEmpty() || path.isEmpty())
+	{
+		QMessageBox::warning(this,"温馨提示","请填写完整后再保存");
+		return;
+	}
+	QString strAppPath = QCoreApplication::applicationDirPath();
+	QString csFile = strAppPath + "/conf.ini";
+	QSettings* Setting = new QSettings(csFile, QSettings::IniFormat);
+	Setting->setValue("num",num);
+	Setting->setValue("path",path);
+	Setting->setValue("pop",state);
+
+}
+
+void SettingWidget::cancel(){
+	this->accept();
+}
+
+void SettingWidget::opendir()
+{
+	//文件夹路径
+	QString srcDirPath = QFileDialog::getExistingDirectory(
+		this, "请选择目录",
+		"/");
+
+	if (srcDirPath.isEmpty())
+	{
+		return;
+	}
+	else
+	{
+		pathEdit->setText(srcDirPath);
+
+	}
+}
 

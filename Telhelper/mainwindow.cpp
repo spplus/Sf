@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	m_telType = 2;
 
 	m_title = "思方来电助手";
-	m_devnum = 201900048;
+	
 	initWidget();
 	initTray();
 	autoRun();
@@ -45,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	// 请求版本号
 	requestVersion();
 
+	QString csFile = QCoreApplication::applicationDirPath(); + "/conf.ini";
+	m_iniSetting = new QSettings(csFile, QSettings::IniFormat);
+	
 	mkdir();
 	menuBar()->show();
 	onOpen();
@@ -241,6 +244,13 @@ void MainWindow::telOut(QString svalue)
 
 void MainWindow::dealIn(QString telnum)
 {
+	m_devnum = m_iniSetting->value("num").toString();
+	if (m_devnum.isEmpty())
+	{
+		QMessageBox::warning(this,"温馨提示","设备序列号为空，请先设置设备序列号");
+		return;
+	}
+
 	// 通话类型设置为来电
 	m_telType = 1;
 
@@ -256,7 +266,11 @@ void MainWindow::dealIn(QString telnum)
 		.arg(m_devnum);
 	QByteArray req ;
 	req.append(json);
-	QhttpNetwork::instance()->post(url,req);
+
+	if (m_iniSetting->value("pop").toInt() == 1)
+	{
+		QhttpNetwork::instance()->post(url,req);
+	}
 	
 	QDateTime dt;
 	QString ctime = getCurDateTime();
@@ -655,7 +669,16 @@ void MainWindow::autoRun(bool bAutoRun)
 
 void MainWindow::mkdir()
 {
-	m_audioDir = QCoreApplication::applicationDirPath()+"/recordfile";
+	QString path = m_iniSetting->value("path").toString();
+	if (!path.isEmpty())
+	{
+		m_audioDir = path;
+	}
+	else
+	{
+		m_audioDir = QCoreApplication::applicationDirPath()+"/recordfile";
+	}
+	
 	QDir directory( m_audioDir );
 
 	if( !directory.exists() )//没有此文件夹，则创建
