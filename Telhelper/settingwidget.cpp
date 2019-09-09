@@ -4,6 +4,7 @@
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QLinearGradient>
+#include <QWindowsXPStyle>
 #include <QIcon>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -42,6 +43,7 @@ SettingWidget::SettingWidget(QDialog *parent) :
 	ispopup = new QCheckBox(this);
 	ispopup->setText("去电是否弹屏");
 	ispopup->setChecked(true);
+	ispopup->setStyle(new QWindowsXPStyle);
 	hboxcheck->addStretch();
 	hboxcheck->addWidget(ispopup);
 	hboxcheck->addStretch();
@@ -69,6 +71,14 @@ SettingWidget::SettingWidget(QDialog *parent) :
 	connect(canclebtn,SIGNAL(pressed()),this,SLOT(cancel()));
 	connect(btn,SIGNAL(pressed()),this,SLOT(opendir()));
 
+	// 初始化界面
+	QString strAppPath = QCoreApplication::applicationDirPath();
+	QString csFile = strAppPath + "/conf.ini";
+	Setting = new QSettings(csFile, QSettings::IniFormat);
+	numbEdit->setText(Setting->value("num").toString());
+	pathEdit->setText(Setting->value("path").toString());
+	ispopup->setCheckState((Qt::CheckState)Setting->value("pop").toInt());
+
 }
 
 void SettingWidget::save(){
@@ -81,12 +91,11 @@ void SettingWidget::save(){
 		QMessageBox::warning(this,"温馨提示","请填写完整后再保存");
 		return;
 	}
-	QString strAppPath = QCoreApplication::applicationDirPath();
-	QString csFile = strAppPath + "/conf.ini";
-	QSettings* Setting = new QSettings(csFile, QSettings::IniFormat);
+	
 	Setting->setValue("num",num);
 	Setting->setValue("path",path);
 	Setting->setValue("pop",state);
+	accept();
 
 }
 

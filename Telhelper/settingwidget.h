@@ -23,6 +23,7 @@ private:
 	QLineEdit* numbEdit;
 	QLineEdit *pathEdit;
 	QCheckBox* ispopup;
+	QSettings* Setting;
     
 };
 
