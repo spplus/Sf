@@ -40,8 +40,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(QhttpNetwork::instance(),SIGNAL(response(QByteArray)),this,SLOT(replyData(QByteArray)));
 	appendInfo("*******欢迎使用"+m_title+"*******");
 	//m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
-	m_queryUrl = "http://www.sifangerp.cn/order2.0/a/main/redirect/ajaxTelephoneOrder?";
-	
+	//m_queryUrl = "http://www.sifangerp.cn/order2.0/a/main/redirect/ajaxTelephoneOrder?";
+	m_queryUrl = "https://sunhomemanager.sungrowpower.com/sunshine-web/a/main/redirect/ajaxTelephoneOrder?";
 	// 请求版本号
 	requestVersion();
 
@@ -757,7 +757,7 @@ void MainWindow::stopRecAudio()
 void MainWindow::requestVersion()
 {
 	//QString url = "http://sifangerp.com/clsorder/main/redirect/assistantLogin?appId=7";
-	QString url = "http://www.sifangerp.cn/order2.0/a/main/redirect/assistantLogin?appId=7";
+	QString url = "http://www.sifangerp.vip/bcErp/a/main/redirect/assistantLogin?appId=7";
 	QhttpNetwork::instance()->get(url);
 }
 

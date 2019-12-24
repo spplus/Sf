@@ -19,8 +19,7 @@
 #define GUI         "QtGui4.dll"
 #define NETWORK     "QtNetwork4.dll"
 #define ZHCN        "qt_zh_CN.qm"
-#define BRIDGE      "bridge.dll"
-#define QNVICCUB    "qnviccub.dll"
+#define BRIDGE      "phonic_ubox.dll"
 #define WEBKIT      "QtWebKit4.dll"
 
 
@@ -56,7 +55,6 @@ Name: "DesktopIcon"; Description: "创建桌面快捷方式"
 Source: {#APP_PATH}{#MAINAPP}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#BRIDGE}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#STYLE}; DestDir: "{app}"; Flags: ignoreversion
-Source: {#APP_PATH}{#QNVICCUB}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#MSVCP}; DestDir: "{app}"; Flags: ignoreversion              
 Source: {#APP_PATH}{#MSVCR}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#CORE}; DestDir: "{app}"; Flags: ignoreversion
