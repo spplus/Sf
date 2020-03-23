@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "思方来电助手"
-#define MyAppVersion "1.0.3.2"
+#define MyAppVersion "1.0.3.3"
 #define MyAppPublisher "思方软件科技有限公司"
 #define MyAppURL "http://www.sifangerp.com/"
 #define MyAppExeName "telhelper.exe"
@@ -20,6 +20,7 @@
 #define NETWORK     "QtNetwork4.dll"
 #define ZHCN        "qt_zh_CN.qm"
 #define BRIDGE      "phonic_ubox.dll"
+#define UTOOL      "phonic_utool.dll"
 #define WEBKIT      "QtWebKit4.dll"
 
 
@@ -54,6 +55,7 @@ Name: "DesktopIcon"; Description: "创建桌面快捷方式"
 
 Source: {#APP_PATH}{#MAINAPP}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#BRIDGE}; DestDir: "{app}"; Flags: ignoreversion
+Source: {#APP_PATH}{#UTOOL}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#STYLE}; DestDir: "{app}"; Flags: ignoreversion
 Source: {#APP_PATH}{#MSVCP}; DestDir: "{app}"; Flags: ignoreversion              
 Source: {#APP_PATH}{#MSVCR}; DestDir: "{app}"; Flags: ignoreversion

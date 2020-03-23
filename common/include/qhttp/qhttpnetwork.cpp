@@ -1,4 +1,5 @@
 #include "QhttpNetwork.h"
+#include <QSslConfiguration>
 
 QhttpNetwork* QhttpNetwork::m_inst = NULL;
 
@@ -37,7 +38,6 @@ void QhttpNetwork::post(QString strUrl,QByteArray& data)
 	QNetworkRequest request;
 	request.setUrl(QUrl(strUrl));
 	request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json; charset=UTF-8");
-
 	m_manager->post(request,data);
 }
 

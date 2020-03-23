@@ -65,7 +65,7 @@ void MainWdg::initView() {
 								}\
 								");
 	auto *mLayout = new QHBoxLayout;
-	mLayout->addWidget(m_pAddButton);
+	//mLayout->addWidget(m_pAddButton);
 	mLayout->addStretch();
 	vbox->addLayout(mLayout);
 

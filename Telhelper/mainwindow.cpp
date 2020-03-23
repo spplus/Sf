@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	// 默认去电状态
 	m_telType = 2;
 
-	m_title = "思方来电助手";
+	m_title = "来电助手";
 	
 	initWidget();
 	initTray();
@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	appendInfo("*******欢迎使用"+m_title+"*******");
 	//m_queryUrl = "http://www.sifangerp.com/clsorder/main/redirect/ajaxTelephoneOrder?";
 	//m_queryUrl = "http://www.sifangerp.cn/order2.0/a/main/redirect/ajaxTelephoneOrder?";
-	m_queryUrl = "https://sunhomemanager.sungrowpower.com/sunshine-web/a/main/redirect/ajaxTelephoneOrder?";
+	m_queryUrl = "http://www.dianjiangyuan.com/djyweb/a/main/order/ajaxTelephoneOrder?";
 	// 请求版本号
 	requestVersion();
 
@@ -151,17 +151,17 @@ void MainWindow::initWidget()
 	openAudioDirBtn->setAutoRaise(true);
 	QLabel* qq = new QLabel;
 	qq->setText("QQ:387808217 或者 2997231847");
-	qqhbox->addWidget(qq);
+	//qqhbox->addWidget(qq);
 	qqhbox->addStretch();
 	qqhbox->addWidget(openAudioDirBtn);
 	
-	hbox->addStretch();
-	hbox->addWidget(bk);
-	hbox->addStretch();
+	//hbox->addStretch();
+	//hbox->addWidget(bk);
+	//hbox->addStretch();
 	
-	webhbox->addWidget(webname);
-	webhbox->addWidget(website);
-	webhbox->addStretch();
+	//webhbox->addWidget(webname);
+	//webhbox->addWidget(website);
+	//webhbox->addStretch();
 	
 
 	m_msg = new QTextEdit;
@@ -247,8 +247,8 @@ void MainWindow::dealIn(QString telnum)
 	m_devnum = m_iniSetting->value("num").toString();
 	if (m_devnum.isEmpty())
 	{
-		QMessageBox::warning(this,"温馨提示","设备序列号为空，请先设置设备序列号");
-		return;
+		//QMessageBox::warning(this,"温馨提示","设备序列号为空，请先设置设备序列号");
+		//return;
 	}
 
 	// 通话类型设置为来电
@@ -266,8 +266,8 @@ void MainWindow::dealIn(QString telnum)
 		.arg(m_devnum);
 	QByteArray req ;
 	req.append(json);
-
-	if (m_iniSetting->value("pop").toInt() == 1)
+	//QMessageBox::warning(this,"发送接口地址",url);
+	//if (m_iniSetting->value("pop").toInt() == 1)
 	{
 		QhttpNetwork::instance()->post(url,req);
 	}
@@ -302,13 +302,13 @@ void MainWindow::replyData(QByteArray data)
 		string detailUrl = value["p"].asString();
 		if (detailUrl.length()>0)
 		{
+			/*
 			SpWebView* spview = new SpWebView;
 			spview->load(QUrl(detailUrl.c_str()));
 			spview->showWindow();
-			/*spview->show();
-			spview->activateWindow();*/
+			*/
 
-			
+			QDesktopServices::openUrl(QUrl(detailUrl.c_str()));
 			return;
 		}
 
